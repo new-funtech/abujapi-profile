@@ -1,0 +1,51 @@
+{
+  "home": {
+    "title": "Next.js Modern Starter Kit",
+    "description": "A sleek, powerful, and scalable boilerplate to kickstart your Next.js app with best practices.",
+    "features": {
+      "typescript": {
+        "title": "TypeScript",
+        "desc": "Strongly typed support for scalable code."
+      },
+      "eslint": {
+        "title": "ESLint + Prettier",
+        "desc": "Lint and auto-format your code for consistency."
+      },
+      "jwt": {
+        "title": "JWT Auth",
+        "desc": "Secure authentication using JSON Web Tokens."
+      },
+      "rtk": {
+        "title": "RTK Query",
+        "desc": "Efficient data fetching & caching with Redux Toolkit."
+      },
+      "husky": {
+        "title": "Husky + Lint-Staged",
+        "desc": "Prevent bad commits with Git hooks."
+      }
+    },
+    "button": "Get Started →"
+  },
+  "signup": {
+    "title": "Create an Account ✨",
+    "name": "Full Name",
+    "namePlaceholder": "Your name",
+    "email": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "button": "Sign Up",
+    "hasAccount": "Already have an account?",
+    "signin": "Sign in"
+  },
+  "signin": {
+    "welcome": "Welcome Back 👋",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "button": "Sign In",
+    "noAccount": "Don’t have an account?",
+    "signup": "Sign up"
+  }
+}

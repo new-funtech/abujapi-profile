@@ -1,0 +1,51 @@
+{
+  "home": {
+    "title": "Kit Starter Modern Next.js",
+    "description": "Boilerplate yang ramping, kuat, dan dapat diskalakan untuk memulai aplikasi Next.js Anda dengan praktik terbaik.",
+    "features": {
+      "typescript": {
+        "title": "TypeScript",
+        "desc": "Dukungan strongly typed untuk kode yang dapat diskalakan."
+      },
+      "eslint": {
+        "title": "ESLint + Prettier",
+        "desc": "Lint dan format otomatis kode Anda untuk konsistensi."
+      },
+      "jwt": {
+        "title": "Autentikasi JWT",
+        "desc": "Autentikasi aman menggunakan JSON Web Tokens."
+      },
+      "rtk": {
+        "title": "RTK Query",
+        "desc": "Pengambilan data dan caching yang efisien dengan Redux Toolkit."
+      },
+      "husky": {
+        "title": "Husky + Lint-Staged",
+        "desc": "Cegah commit buruk dengan Git hooks."
+      }
+    },
+    "button": "Mulai Sekarang →"
+  },
+  "signup": {
+    "title": "Buat Akun ✨",
+    "name": "Nama Lengkap",
+    "namePlaceholder": "Nama Anda",
+    "email": "Alamat Email",
+    "emailPlaceholder": "anda@contoh.com",
+    "password": "Kata Sandi",
+    "passwordPlaceholder": "Kata sandi Anda",
+    "button": "Daftar",
+    "hasAccount": "Sudah punya akun?",
+    "signin": "Masuk"
+  },
+  "signin": {
+    "welcome": "Selamat Datang Kembali 👋",
+    "email": "Email",
+    "emailPlaceholder": "Masukkan email Anda",
+    "password": "Kata Sandi",
+    "passwordPlaceholder": "Masukkan kata sandi Anda",
+    "button": "Masuk",
+    "noAccount": "Belum punya akun?",
+    "signup": "Daftar"
+  }
+}

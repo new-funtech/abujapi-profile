@@ -1,42 +1,44 @@
+"use client";
+
 import Button from "@/components/Button";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation("common");
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-white to-gray-100 text-gray-800">
       <div className="max-w-2xl w-full text-center">
         <h1 className="text-5xl font-extrabold tracking-tight mb-4">
-          🚀 Next.js Modern Starter Kit
+          🚀 {t("home.title")}
         </h1>
-        <p className="text-lg text-gray-600 mb-8">
-          A sleek, powerful, and scalable boilerplate to kickstart your Next.js
-          app with best practices.
-        </p>
+        <p className="text-lg text-gray-600 mb-8">{t("home.description")}</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left mb-10">
           <FeatureItem
-            title="TypeScript"
-            desc="Strongly typed support for scalable code."
+            title={t("home.features.typescript.title")}
+            desc={t("home.features.typescript.desc")}
           />
           <FeatureItem
-            title="ESLint + Prettier"
-            desc="Lint and auto-format your code for consistency."
+            title={t("home.features.eslint.title")}
+            desc={t("home.features.eslint.desc")}
           />
           <FeatureItem
-            title="JWT Auth"
-            desc="Secure authentication using JSON Web Tokens."
+            title={t("home.features.jwt.title")}
+            desc={t("home.features.jwt.desc")}
           />
           <FeatureItem
-            title="RTK Query"
-            desc="Efficient data fetching & caching with Redux Toolkit."
+            title={t("home.features.rtk.title")}
+            desc={t("home.features.rtk.desc")}
           />
           <FeatureItem
-            title="Husky + Lint-Staged"
-            desc="Prevent bad commits with Git hooks."
+            title={t("home.features.husky.title")}
+            desc={t("home.features.husky.desc")}
           />
         </div>
 
         <Button href="/login" variant="primary" size="md">
-          Get Started →
+          {t("home.button")}
         </Button>
       </div>
     </main>
