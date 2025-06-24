@@ -1,6 +1,6 @@
 # 🚀 Next.js Starter Kit
 
-A modern, clean, and scalable starter template built with Next.js 14+, TypeScript, Tailwind CSS, and best development practices.
+A modern, clean, and scalable starter template built with Next.js 15+, TypeScript, Tailwind CSS, and best development practices.
 
 ## ✨ Features
 
