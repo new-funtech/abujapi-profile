@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+
 export default function HomePage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-sky-50 to-sky-100 px-6">
@@ -10,20 +12,17 @@ export default function HomePage() {
           powerful defaults. Ready to scale from day one.
         </p>
         <div className="flex justify-center gap-4">
-          <a
-            href="/docs"
-            className="bg-blue-600 text-white px-5 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
-          >
+          <Button href="/docs" variant="primary" size="md">
             Get Started
-          </a>
-          <a
+          </Button>
+          <Button
             href="https://github.com/Ganiramadhan/nextjs-starter"
             target="_blank"
-            rel="noopener noreferrer"
-            className="border border-gray-300 px-5 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition"
+            variant="outline"
+            size="md"
           >
             View on GitHub
-          </a>
+          </Button>
         </div>
       </div>
     </main>

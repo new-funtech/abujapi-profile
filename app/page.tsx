@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Button from "@/components/Button";
 
 export default function Home() {
   return (
@@ -35,12 +35,9 @@ export default function Home() {
           />
         </div>
 
-        <Link
-          href="/login"
-          className="inline-block px-6 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all shadow"
-        >
+        <Button href="/login" variant="primary" size="md">
           Get Started →
-        </Link>
+        </Button>
       </div>
     </main>
   );
