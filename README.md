@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Next.js Starter Kit
 
-## Getting Started
+A modern, clean, and scalable starter template built with Next.js 14+, TypeScript, Tailwind CSS, and best development practices.
 
-First, run the development server:
+## ✨ Features
+
+- ⚛️ **Next.js App Router** — App directory & routing ready
+- 🟦 **TypeScript & Tailwind CSS** — Strong typing & utility-first styling
+- 🧹 **ESLint + Prettier + Husky + Lint-Staged** — Code quality & formatting enforced
+- 🧾 **Conventional Commits** — Commitlint with Husky pre-commit hook
+- 🔐 **JWT Authentication Ready** — Secure token-based structure
+- 🌐 **next-i18next i18n** — Internationalization support (EN/ID)
+- 🧩 **Reusable UI Components** — Button, Input, etc.
+- ☀️ **Light UI Design** — Modern and clean by default
+
+---
+
+## 📦 Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [next-i18next](https://github.com/i18next/next-i18next)
+- [ESLint + Prettier](https://eslint.org/)
+- [Husky](https://typicode.github.io/husky/#/)
+- [Commitlint](https://commitlint.js.org/) for conventional commit rules
+- [clsx](https://github.com/lukeed/clsx) for conditional classNames
+
+---
+
+## 🚀 Getting Started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/Ganiramadhan/nextjs-starter.git
+cd nextjs-starter
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌍 Internationalization (i18n)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Translation files are stored in `public/locales/{lang}/common.json`
+- Default locale: `en`
+- Supported locales: `en`, `id`
 
-## Learn More
+Change language via routing:
+```
+/en/auth/sign-in
+/id/auth/sign-in
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Development Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command           | Description                     |
+| ---------------- | ------------------------------- |
+| `pnpm dev`        | Start development server        |
+| `pnpm lint`       | Run ESLint                      |
+| `pnpm format`     | Format code with Prettier       |
+| `pnpm build`      | Build for production            |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧹 Git Hooks (Husky + Commitlint)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pre-commit hook runs:
+
+- Linting & formatting (via `lint-staged`)
+- Commit message validation (via `commitlint` with Conventional Commits)
+
+To skip hooks: `git commit --no-verify`
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+  auth/
+    sign-in/
+    sign-up/
+  layout.tsx
+  page.tsx
+components/
+  Button.tsx
+  Input.tsx
+lib/
+  (utilities & helpers)
+hooks/
+  useTheme.ts
+public/
+  locales/
+    en/
+    id/
+styles/
+  globals.css
+```
+
+---
+
+## 📄 License
+
+MIT License © 2025 [Gani Ramadhan](https://github.com/Ganiramadhan)
