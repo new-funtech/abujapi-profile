@@ -81,22 +81,28 @@ To skip hooks: `git commit --no-verify`
 app/
   auth/
     sign-in/
+      page.tsx
     sign-up/
+      page.tsx
   layout.tsx
   page.tsx
 components/
   Button.tsx
   Input.tsx
-lib/
-  (utilities & helpers)
+  i18n-provider.tsx
 hooks/
   useTheme.ts
+lib/
+  i18n.ts
 public/
   locales/
     en/
+      common.json
     id/
+      common.json
 styles/
   globals.css
+
 ```
 
 ---
