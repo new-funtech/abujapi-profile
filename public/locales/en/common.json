@@ -35,8 +35,11 @@
     "password": "Password",
     "passwordPlaceholder": "Your password",
     "button": "Sign Up",
+    "loading": "Processing...",
     "hasAccount": "Already have an account?",
-    "signin": "Sign in"
+    "signin": "Sign in",
+    "success": "Registration successful!",
+    "failed": "Registration failed"
   },
   "signin": {
     "welcome": "Welcome Back 👋",
@@ -45,7 +48,17 @@
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
     "button": "Sign In",
+    "loading": "Signing in...",
     "noAccount": "Don’t have an account?",
-    "signup": "Sign up"
+    "signup": "Sign up",
+    "success": "Login successful!",
+    "failed": "Login failed"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "nameTooShort": "Name must be at least 2 characters",
+    "default": "Invalid input"
   }
 }

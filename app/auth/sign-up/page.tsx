@@ -7,23 +7,43 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRegisterMutation } from "@/services/authApi";
 import { toast } from "react-toastify";
+import { registerSchema } from "@/schemas/authSchema";
 
 export default function SignUpPage() {
   const { t } = useTranslation("common");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [register, { isLoading }] = useRegisterMutation();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const result = registerSchema.safeParse({ name, email, password });
+    if (!result.success) {
+      const firstError = result.error.errors[0];
+      const translatedMsg = t(firstError?.message || "validation.default");
+      toast.error(translatedMsg);
+      return;
+    }
+
     try {
-      const response = await register({ name, email, password }).unwrap();
-      toast.success(response.message || "Registrasi berhasil!");
-    } catch (error: unknown) {
-      const err = error as { data?: { message?: string } };
-      toast.error(err?.data?.message || "Registrasi gagal");
+      const response = await register(result.data).unwrap();
+      toast.success(response.message || t("signup.success"));
+    } catch (err) {
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "data" in err &&
+        typeof err.data === "object" &&
+        err.data !== null &&
+        "message" in err.data
+      ) {
+        toast.error(t(String(err.data.message)));
+      } else {
+        toast.error(t("signup.failed"));
+      }
     }
   };
 

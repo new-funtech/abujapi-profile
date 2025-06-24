@@ -35,8 +35,11 @@
     "password": "Kata Sandi",
     "passwordPlaceholder": "Kata sandi Anda",
     "button": "Daftar",
+    "loading": "Sedang memproses...",
     "hasAccount": "Sudah punya akun?",
-    "signin": "Masuk"
+    "signin": "Masuk",
+    "success": "Pendaftaran berhasil!",
+    "failed": "Pendaftaran gagal"
   },
   "signin": {
     "welcome": "Selamat Datang Kembali 👋",
@@ -45,7 +48,17 @@
     "password": "Kata Sandi",
     "passwordPlaceholder": "Masukkan kata sandi Anda",
     "button": "Masuk",
+    "loading": "Sedang masuk...",
     "noAccount": "Belum punya akun?",
-    "signup": "Daftar"
+    "signup": "Daftar",
+    "success": "Login berhasil!",
+    "failed": "Login gagal"
+  },
+  "validation": {
+    "required": "Field ini wajib diisi",
+    "invalidEmail": "Email tidak valid",
+    "passwordTooShort": "Kata sandi minimal 6 karakter",
+    "nameTooShort": "Nama minimal 2 karakter",
+    "default": "Input tidak valid"
   }
 }

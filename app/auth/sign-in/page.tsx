@@ -7,24 +7,43 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useLoginMutation } from "@/services/authApi";
+import { loginSchema } from "@/schemas/authSchema";
 
 export default function SignInPage() {
   const { t } = useTranslation("common");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [login, { isLoading }] = useLoginMutation(); // ← RTK Query hook
+  const [login, { isLoading }] = useLoginMutation();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const result = loginSchema.safeParse({ email, password });
+
+    if (!result.success) {
+      const firstError = result.error.errors[0];
+      const translatedMsg = t(firstError?.message || "validation.default");
+      toast.error(translatedMsg);
+      return;
+    }
+
     try {
-      const data = await login({ email, password }).unwrap();
-      toast.success("Login berhasil!");
-      console.log("Login response:", data);
-    } catch (error: unknown) {
-      const err = error as { data?: { message?: string } };
-      toast.error(err?.data?.message || "Login gagal");
+      await login(result.data).unwrap();
+      toast.success(t("signin.success"));
+    } catch (err) {
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "data" in err &&
+        typeof err.data === "object" &&
+        err.data !== null &&
+        "message" in err.data
+      ) {
+        toast.error(t(String(err.data.message)));
+      } else {
+        toast.error(t("signin.failed"));
+      }
     }
   };
 
