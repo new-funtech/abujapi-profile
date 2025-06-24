@@ -10,6 +10,7 @@ interface ButtonProps {
   className?: string;
   target?: "_blank" | "_self";
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -18,18 +19,21 @@ export default function Button({
   variant = "primary",
   size = "md",
   className = "",
-  target = "_self",
+  target,
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center rounded-lg font-medium transition";
+    "inline-flex items-center justify-center rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2";
 
   const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    outline: "border border-gray-300 text-gray-700 hover:bg-gray-100",
-    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
-    danger: "bg-red-600 text-white hover:bg-red-700",
-    ghost: "bg-transparent text-gray-700 hover:bg-gray-100",
+    primary: "bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-300",
+    outline:
+      "border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50",
+    secondary:
+      "bg-gray-200 text-gray-800 hover:bg-gray-300 disabled:opacity-50",
+    danger: "bg-red-600 text-white hover:bg-red-700 disabled:bg-red-300",
+    ghost: "bg-transparent text-gray-700 hover:bg-gray-100 disabled:opacity-50",
   };
 
   const sizes = {
@@ -46,6 +50,7 @@ export default function Button({
         href={href}
         target={target === "_blank" ? "_blank" : undefined}
         className={classes}
+        aria-disabled={disabled}
       >
         {children}
       </Link>
@@ -53,7 +58,7 @@ export default function Button({
   }
 
   return (
-    <button type={type} className={classes}>
+    <button type={type} className={classes} disabled={disabled}>
       {children}
     </button>
   );
