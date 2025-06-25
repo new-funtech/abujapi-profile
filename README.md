@@ -1,14 +1,14 @@
 # 🚀 Next.js Starter Kit
 
-A modern, clean, and scalable starter template built with Next.js 15+, TypeScript, Tailwind CSS, and best development practices.
+A modern, clean, and scalable starter template built with Next.js 15+, TypeScript, Tailwind CSS, and NextAuth — designed for fast development with best practices.
 
 ## ✨ Features
 
 - ⚛️ **Next.js App Router** — App directory & routing ready
+- 🔐 **NextAuth.js Authentication** — Secure credential-based login using JWT
 - 🟦 **TypeScript & Tailwind CSS** — Strong typing & utility-first styling
 - 🧹 **ESLint + Prettier + Husky + Lint-Staged** — Code quality & formatting enforced
 - 🧾 **Conventional Commits** — Commitlint with Husky pre-commit hook
-- 🔐 **JWT Authentication Ready** — Secure token-based structure
 - 🌐 **next-i18next i18n** — Internationalization support (EN/ID)
 - 🧩 **Reusable UI Components** — Button, Input, etc.
 - ☀️ **Light UI Design** — Modern and clean by default
@@ -18,13 +18,14 @@ A modern, clean, and scalable starter template built with Next.js 15+, TypeScrip
 ## 📦 Tech Stack
 
 - [Next.js](https://nextjs.org/)
+- [NextAuth.js](https://next-auth.js.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [next-i18next](https://github.com/i18next/next-i18next)
 - [ESLint + Prettier](https://eslint.org/)
 - [Husky](https://typicode.github.io/husky/#/)
-- [Commitlint](https://commitlint.js.org/) for conventional commit rules
-- [clsx](https://github.com/lukeed/clsx) for conditional classNames
+- [Commitlint](https://commitlint.js.org/)
+- [clsx](https://github.com/lukeed/clsx)
 
 ---
 
@@ -102,7 +103,6 @@ public/
       common.json
 styles/
   globals.css
-
 ```
 
 ---
