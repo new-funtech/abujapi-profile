@@ -23,7 +23,7 @@ export default function SignUpPage() {
     const result = registerSchema.safeParse({ name, email, password });
     if (!result.success) {
       const firstError = result.error.errors[0];
-      const translatedMsg = t(firstError?.message || "validation.default");
+      const translatedMsg = t(firstError?.message);
       toast.error(translatedMsg);
       return;
     }
