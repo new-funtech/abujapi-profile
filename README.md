@@ -9,7 +9,6 @@ A modern, clean, and scalable starter template built with Next.js 15+, TypeScrip
 - 🟦 **TypeScript & Tailwind CSS** — Strong typing & utility-first styling
 - 🧹 **ESLint + Prettier + Husky + Lint-Staged** — Code quality & formatting enforced
 - 🧾 **Conventional Commits** — Commitlint with Husky pre-commit hook
-- 🌐 **next-i18next i18n** — Internationalization support (EN/ID)
 - 🧩 **Reusable UI Components** — Button, Input, etc.
 - ☀️ **Light UI Design** — Modern and clean by default
 
@@ -21,7 +20,6 @@ A modern, clean, and scalable starter template built with Next.js 15+, TypeScrip
 - [NextAuth.js](https://next-auth.js.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [next-i18next](https://github.com/i18next/next-i18next)
 - [ESLint + Prettier](https://eslint.org/)
 - [Husky](https://typicode.github.io/husky/#/)
 - [Commitlint](https://commitlint.js.org/)
