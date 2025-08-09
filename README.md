@@ -1,76 +1,63 @@
-# 🚀 Next.js Starter Kit
+# 🏢 BPD Abujapi Jabar — Official Landing Page
 
-A modern, clean, and scalable starter template built with Next.js 15+, TypeScript, Tailwind CSS, and NextAuth — designed for fast development with best practices.
+This is the official website for **Badan Pengurus Daerah Asosiasi Badan Usaha Jasa Pengamanan Indonesia Provinsi Jawa Barat**.  
+Built with **Next.js 15+, TypeScript, and Tailwind CSS** to showcase the organization's profile, programs, news, and services in a modern and professional way.
+
+---
 
 ## ✨ Features
 
-- ⚛️ **Next.js App Router** — App directory & routing ready
-- 🔐 **NextAuth.js Authentication** — Secure credential-based login using JWT
-- 🟦 **TypeScript & Tailwind CSS** — Strong typing & utility-first styling
-- 🧹 **ESLint + Prettier + Husky + Lint-Staged** — Code quality & formatting enforced
-- 🧾 **Conventional Commits** — Commitlint with Husky pre-commit hook
-- 🧩 **Reusable UI Components** — Button, Input, etc.
-- ☀️ **Light UI Design** — Modern and clean by default
+- 🎯 **Organization Profile** — Displays vision, mission, and objectives
+- 📅 **Programs** — Information on activities, training, and strategic plans
+- 📰 **News & Events** — Latest updates from the organization and industry
+- 👥 **Membership** — Registration info and member benefits
+- 📞 **Contact** — Easy communication with BPD Abujapi Jabar
+- 🌐 **Responsive Design** — Optimized for all devices
+- ⚡ **High Performance** — Powered by Next.js and Tailwind CSS
 
 ---
 
 ## 📦 Tech Stack
 
-- [Next.js](https://nextjs.org/)
-- [NextAuth.js](https://next-auth.js.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [ESLint + Prettier](https://eslint.org/)
-- [Husky](https://typicode.github.io/husky/#/)
-- [Commitlint](https://commitlint.js.org/)
-- [clsx](https://github.com/lukeed/clsx)
+- [Next.js](https://nextjs.org/) — Modern React framework
+- [TypeScript](https://www.typescriptlang.org/) — Strongly typed JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) — Utility-first styling
+- [ESLint + Prettier](https://eslint.org/) — Code quality and formatting
+- [Husky](https://typicode.github.io/husky/#/) — Git hooks automation
 
 ---
 
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/Ganiramadhan/nextjs-starter.git
-cd nextjs-starter
+git clone https://github.com/new-funtech/landing-page.git
+cd landing-page
 pnpm install
 pnpm dev
 ```
 
+Access in your browser: **http://localhost:3000**
+
 ---
 
-## 🌍 Internationalization (i18n)
+## 🌍 Page Structure
 
-- Translation files are stored in `public/locales/{lang}/common.json`
-- Default locale: `en`
-- Supported locales: `en`, `id`
-
-Change language via routing:
-```
-/en/auth/sign-in
-/id/auth/sign-in
-```
+- `/` — Home (Landing Page)
+- `/login` — Member Login
+- `/news` — News & Events
+- `/about` — About Us
+- `/contact` — Contact
 
 ---
 
 ## 🛠️ Development Commands
 
-| Command           | Description                     |
-| ---------------- | ------------------------------- |
-| `pnpm dev`        | Start development server        |
-| `pnpm lint`       | Run ESLint                      |
-| `pnpm format`     | Format code with Prettier       |
-| `pnpm build`      | Build for production            |
-
----
-
-## 🧹 Git Hooks (Husky + Commitlint)
-
-Pre-commit hook runs:
-
-- Linting & formatting (via `lint-staged`)
-- Commit message validation (via `commitlint` with Conventional Commits)
-
-To skip hooks: `git commit --no-verify`
+| Command       | Description                     |
+|--------------|---------------------------------|
+| `pnpm dev`   | Start development server        |
+| `pnpm lint`  | Run ESLint for code quality     |
+| `pnpm format`| Format code using Prettier      |
+| `pnpm build` | Build for production            |
 
 ---
 
@@ -78,27 +65,18 @@ To skip hooks: `git commit --no-verify`
 
 ```
 app/
-  auth/
-    sign-in/
-      page.tsx
-    sign-up/
-      page.tsx
-  layout.tsx
-  page.tsx
+  page.tsx              # Landing Page
+  login/
+    page.tsx            # Login Page
+  news/
+    page.tsx            # News Page
 components/
   Button.tsx
-  Input.tsx
-  i18n-provider.tsx
-hooks/
-  useTheme.ts
-lib/
-  i18n.ts
+  Navbar.tsx
+  Footer.tsx
 public/
-  locales/
-    en/
-      common.json
-    id/
-      common.json
+  images/
+    logo-abujapi.png
 styles/
   globals.css
 ```
@@ -107,4 +85,4 @@ styles/
 
 ## 📄 License
 
-MIT License © 2025 [Gani Ramadhan](https://github.com/Ganiramadhan)
+MIT License © 2025 **BPD Abujapi Jabar**
