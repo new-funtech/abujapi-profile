@@ -28,7 +28,7 @@ jobs:
           command_timeout: 10m
           script: |
             git config --global --add safe.directory /home/ganiramadhan/abujapi/abujapi-profile
-            cd /home/ganiramadhan/abujapi-profile
+            cd /home/ganiramadhan/abujapi/abujapi-profile
             git fetch --all
             git reset --hard origin/main
             sudo docker compose down
