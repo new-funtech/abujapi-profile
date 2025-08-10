@@ -28,16 +28,7 @@ export default function Home() {
             </Button>
           </div>
 
-          {/* Hero Image */}
-          <div className="flex-1 flex justify-center">
-            <Image
-              src="https://i.pinimg.com/736x/88/c5/54/88c5548281b71c1632dd69b0e6274171.jpg"
-              alt="Logo BPD Abujapi Jabar"
-              width={300}
-              height={300}
-              className="rounded-full shadow-2xl border-4 border-white"
-            />
-          </div>
+          
         </div>
       </section>
 
