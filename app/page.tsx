@@ -1,20 +1,19 @@
 "use client";
 
 import Button from "@/components/Button";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-gray-800 font-sans">
+    <main className="min-h-screen bg-gray-50 text-gray-900 font-sans">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-900 to-blue-700 text-white py-20 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+      <section className="bg-gradient-to-b from-indigo-900 via-blue-900 to-blue-800 text-white py-28 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Text Content */}
           <div className="flex-1 text-center md:text-left animate-fadeIn">
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
-              🏢 BPD Abujapi Jabar
+            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 drop-shadow-xl">
+              🛡️ BPD Abujapi Jabar
             </h1>
-            <p className="text-lg md:text-xl text-blue-100 mb-8">
+            <p className="text-xl md:text-2xl text-blue-200 mb-10 max-w-lg mx-auto md:mx-0">
               Meningkatkan profesionalisme dan kolaborasi badan usaha jasa
               pengamanan di Jawa Barat.
             </p>
@@ -22,29 +21,28 @@ export default function Home() {
               href="/login"
               variant="primary"
               size="lg"
-              className="bg-yellow-400 text-blue-900 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-300 transition"
+              className="bg-yellow-400 text-blue-900 font-semibold px-8 py-4 rounded-xl shadow-2xl hover:bg-yellow-300 transition duration-300"
             >
               Masuk Member Area
             </Button>
           </div>
-
-          
+          {/* Optional Image or Illustration could go here */}
         </div>
       </section>
 
       {/* Feature Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-wide">
             Layanan & Informasi
           </h2>
-          <p className="text-gray-600 mt-3">
+          <p className="text-gray-600 mt-4 max-w-xl mx-auto">
             Akses informasi, program, dan layanan yang kami sediakan untuk anggota.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
           <FeatureItem
-            icon="📄"
+            icon="🛡️"
             title="Tentang Kami"
             desc="Visi, misi, dan tujuan organisasi dalam memajukan jasa pengamanan."
           />
@@ -77,8 +75,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white py-8 text-center">
-        <p className="text-sm opacity-80">
+      <footer className="bg-indigo-900 text-white py-8 text-center">
+        <p className="text-sm opacity-80 select-none">
           © {new Date().getFullYear()} BPD Abujapi Jabar. All Rights Reserved.
         </p>
       </footer>
@@ -96,10 +94,10 @@ function FeatureItem({
   desc: string;
 }) {
   return (
-    <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 text-center animate-fadeInUp">
-      <div className="text-4xl mb-3">{icon}</div>
-      <h3 className="font-semibold text-lg mb-2 text-blue-700">{title}</h3>
-      <p className="text-sm text-gray-600">{desc}</p>
+    <div className="p-8 bg-gradient-to-tr from-blue-50 to-indigo-50 border border-indigo-200 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.05] transition-transform duration-300 text-center cursor-default">
+      <div className="text-5xl mb-5 text-indigo-700">{icon}</div>
+      <h3 className="font-semibold text-xl mb-3 text-indigo-900">{title}</h3>
+      <p className="text-gray-700 text-base">{desc}</p>
     </div>
   );
 }
