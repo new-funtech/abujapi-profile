@@ -21,7 +21,7 @@ export default function Home() {
               href="/login"
               variant="primary"
               size="lg"
-              className="bg-yellow-400 text-blue-900 font-semibold px-8 py-4 rounded-xl shadow-2xl hover:bg-yellow-300 transition duration-300"
+              className="bg-green-400 text-blue-900 font-semibold px-8 py-4 rounded-xl shadow-2xl hover:bg-green-300 transition duration-300"
             >
               Masuk Member Area
             </Button>
