@@ -1,25 +1,22 @@
-name: Deploy Next.js to Docker Server
-
+name: Deploy Abujapi Profile to Docker Server
+# deployment
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'  
-
-      - name: 🔧 Install pnpm
-        run: npm install -g pnpm
+      - name: Add known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
       - name: 🚀 Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
@@ -27,8 +24,14 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          script_stop: true
+          command_timeout: 10m
           script: |
-            cd /home/ganiramadhan/next-app
-            git pull origin main
-            docker compose down
-            docker compose up -d --build
+            git config --global --add safe.directory /home/ganiramadhan/abujapi/abujapi-profile
+            cd /home/ganiramadhan/abujapi-profile
+            git fetch --all
+            git reset --hard origin/main
+            sudo docker compose down
+            sudo docker compose up -d --build --remove-orphans --pull always
+
+
