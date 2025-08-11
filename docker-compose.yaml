@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   app:
-    image: yourdockerhubuser/abujapi-profile:${APP_VERSION}
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: abujapi-profile
     ports:
       - "3007:3007"

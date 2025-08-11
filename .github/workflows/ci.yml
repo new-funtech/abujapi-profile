@@ -10,38 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup git config
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-
-      - name: Generate version tag
-        id: version
-        run: |
-          NEW_TAG=$(./scripts/increment_version.sh)
-          echo "New tag is $NEW_TAG"
-          echo "::set-output name=tag::$NEW_TAG"
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        run: |
-          docker build -t yourdockerhubuser/abujapi-profile:${{ steps.version.outputs.tag }} .
-          docker push yourdockerhubuser/abujapi-profile:${{ steps.version.outputs.tag }}
 
       - name: Add SSH host to known_hosts
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Deploy to server via SSH
+      - name: 🚀 Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -50,12 +27,18 @@ jobs:
           script_stop: true
           command_timeout: 10m
           script: |
-            bash -l -c "
-              set -e
-              echo 'Deploying version ${{ steps.version.outputs.tag }}'
-              # Jalankan docker compose pull untuk update image terbaru
+            echo "User: $(whoami)"
+            echo "Working dir: $(pwd)"
+            echo "Check git repo ownership and permissions:"
+            ls -la /home/ganiramadhan/abujapi/abujapi-profile/.git
+
+            bash -lc "
+              git config --global --add safe.directory /home/ganiramadhan/abujapi/abujapi-profile
               cd /home/ganiramadhan/abujapi/abujapi-profile
-              sudo docker compose pull
+              echo 'Check ssh keys loaded:'
+              ssh-add -l || echo 'No ssh keys loaded'
+              git fetch --all
+              git reset --hard origin/main
               sudo docker compose down
-              sudo docker compose up -d --remove-orphans
+              sudo docker compose up -d --build --remove-orphans --pull always
             "
