@@ -1,24 +1,73 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Providers } from "@/store/provider";
-import AuthSessionProvider from "@/components/SessionProvider";
 import "@/styles/globals.css";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Kit",
-  description: "A modern Next.js starter with TypeScript and JWT auth.",
+  title: {
+    default: "BPD Abujapi Jabar",
+    template: "%s | BPD Abujapi Jabar",
+  },
+  description:
+    "BPD Abujapi Jabar - Asosiasi Perusahaan Jasa Pengamanan Indonesia wilayah Jawa Barat. Informasi terbaru, program, dan layanan kami.",
+  keywords: [
+    "BPD Abujapi Jabar",
+    "Abujapi",
+    "Jasa Pengamanan",
+    "Security",
+    "Jawa Barat",
+  ],
+  authors: [
+    {
+      name: "BPD Abujapi Jabar",
+      url: "https://bpdabujapijabar.or.id/",
+    },
+  ],
+  creator: "BPD Abujapi Jabar",
+  publisher: "BPD Abujapi Jabar",
+  metadataBase: new URL("https://bpdabujapijabar.or.id/"),
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: "https://bpdabujapijabar.or.id/",
+    siteName: "BPD Abujapi Jabar",
+    title: "BPD Abujapi Jabar",
+    description:
+      "Asosiasi Perusahaan Jasa Pengamanan Indonesia wilayah Jawa Barat.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "BPD Abujapi Jabar",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BPD Abujapi Jabar",
+    description:
+      "Asosiasi Perusahaan Jasa Pengamanan Indonesia wilayah Jawa Barat.",
+    images: ["/og-image.jpg"],
+    creator: "@usernameTwitter",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -27,26 +76,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="id" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
-        <AuthSessionProvider>
-          <Providers>
-            {children}
-            <ToastContainer
-              position="top-center"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={true}
-              closeOnClick
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="colored"
-              toastClassName="rounded-xl shadow-lg text-sm"
-              className="z-[9999] !top-6"
-            />
-          </Providers>
-        </AuthSessionProvider>
+        {children}
       </body>
     </html>
   );
