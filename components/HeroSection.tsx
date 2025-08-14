@@ -8,7 +8,7 @@ export default function HeroSection() {
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug mb-6">
             Membangun Sinergi & <br />
-            Profesionalisme <br />
+            Profesionalitas <br />
             <span className="text-green-600">ABUJAPI Jabar</span>
           </h1>
           <p className="text-gray-600 mb-8 text-lg md:pr-10">
