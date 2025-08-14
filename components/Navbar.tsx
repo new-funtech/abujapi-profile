@@ -1,23 +1,29 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import logoImage from "@/public/images/logo.png";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const menuItems = ["Home", "About Us", "Services", "Gallery", "News"];
+  const menuItems = [
+    { name: "Home", href: "#home" },
+    { name: "About Us", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "News", href: "#news" },
+  ];
 
   return (
     <header className="backdrop-blur-md bg-white/80 shadow-sm sticky top-0 z-50 transition-all duration-300">
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
-        
         {/* Logo */}
         <div className="flex items-center space-x-3">
           <Image
             src={logoImage}
-            alt="Logo"
+            alt="ABUJAPI Logo"
             width={40}
             height={40}
             className="object-contain"
@@ -31,33 +37,34 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-gray-700 font-medium">
           {menuItems.map((item) => (
-            <a
-              key={item}
-              href="#"
+            <Link
+              key={item.name}
+              href={item.href}
               className="relative hover:text-green-600 transition-colors duration-300 
                          after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-green-600 after:left-0 after:-bottom-1 
                          hover:after:w-full after:transition-all after:duration-300"
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
         </nav>
 
         {/* Contact Us - Desktop */}
         <div className="hidden md:block">
-          <a
-            href="#"
+          <Link
+            href="#contact"
             className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 
                        shadow-md transition-transform duration-300 hover:scale-105"
           >
             Contact Us →
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-2xl text-gray-700 focus:outline-none"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -71,22 +78,22 @@ export default function Navbar() {
       >
         <nav className="flex flex-col space-y-4 px-6 py-4 text-gray-700 font-medium">
           {menuItems.map((item) => (
-            <a
-              key={item}
-              href="#"
+            <Link
+              key={item.name}
+              href={item.href}
               className="hover:text-green-600 transition-colors duration-300"
               onClick={() => setMenuOpen(false)}
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
-          <a
-            href="#"
+          <Link
+            href="#contact"
             className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-all duration-300 text-center shadow-md"
             onClick={() => setMenuOpen(false)}
           >
             Contact Us →
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

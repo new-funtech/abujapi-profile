@@ -2,7 +2,7 @@ import HeroCarousel from "@components/HeroCarousel";
 
 export default function HeroSection() {
   return (
-    <section>
+    <section id="home" role="banner" className="bg-gray-50">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center px-6 py-16 md:py-24">
         {/* Left Content */}
         <div className="flex-1 text-center md:text-left">
