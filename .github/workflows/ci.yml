@@ -6,19 +6,32 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Add SSH host to known_hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+      - name: Set version
+        id: vars
+        run: echo "VERSION=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
-      - name: 🚀 Deploy to server via SSH
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & Push Docker image
+        run: |
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/abujapi-profile
+          VERSION=${{ env.VERSION }}
+          docker build -t $IMAGE_NAME:$VERSION -t $IMAGE_NAME:latest .
+          docker push $IMAGE_NAME:$VERSION
+          docker push $IMAGE_NAME:latest
+
+      - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -27,18 +40,23 @@ jobs:
           script_stop: true
           command_timeout: 10m
           script: |
-            echo "User: $(whoami)"
-            echo "Working dir: $(pwd)"
-            echo "Check git repo ownership and permissions:"
-            ls -la /home/ganiramadhan/abujapi/abujapi-profile/.git
+            IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/abujapi-profile
+            VERSION=${{ env.VERSION }}
 
-            bash -lc "
-              git config --global --add safe.directory /home/ganiramadhan/abujapi/abujapi-profile
-              cd /home/ganiramadhan/abujapi/abujapi-profile
-              echo 'Check ssh keys loaded:'
-              ssh-add -l || echo 'No ssh keys loaded'
-              git fetch --all
-              git reset --hard origin/main
-              sudo docker compose down
-              sudo docker compose up -d --build --remove-orphans --pull always
-            "
+            echo "Pull image versi $VERSION"
+            docker pull $IMAGE_NAME:$VERSION
+
+            echo "Stop container lama"
+            docker stop abujapi-profile || true
+            docker rm abujapi-profile || true
+
+            echo "Simpan versi lama untuk rollback"
+            if [ -f /home/${{ secrets.SSH_USER }}/abujapi-profile.version ]; then
+              echo "Versi sebelumnya: $(cat /home/${{ secrets.SSH_USER }}/abujapi-profile.version)"
+            fi
+            echo $VERSION > /home/${{ secrets.SSH_USER }}/abujapi-profile.version
+
+            echo "Run container baru"
+            docker run -d --name abujapi-profile \
+              -p 3000:3000 \
+              $IMAGE_NAME:$VERSION
