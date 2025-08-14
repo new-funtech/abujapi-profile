@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -13,9 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set version
+      # Set versi auto increment
+      - name: Set version (auto increment)
         id: vars
-        run: echo "VERSION=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+        run: |
+          VERSION_FILE=".version"
+          if git ls-remote --exit-code origin refs/tags/version &>/dev/null; then
+            git fetch origin refs/tags/version:refs/tags/version
+            VERSION=$(($(cat $VERSION_FILE 2>/dev/null || echo 0) + 1))
+          else
+            VERSION=1
+          fi
+          echo $VERSION > $VERSION_FILE
+          echo "VERSION=v$VERSION" >> $GITHUB_ENV
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -27,6 +38,7 @@ jobs:
         run: |
           IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/abujapi-profile
           VERSION=${{ env.VERSION }}
+          echo "Building image: $IMAGE_NAME:$VERSION"
           docker build -t $IMAGE_NAME:$VERSION -t $IMAGE_NAME:latest .
           docker push $IMAGE_NAME:$VERSION
           docker push $IMAGE_NAME:latest
@@ -46,7 +58,7 @@ jobs:
             echo "Pull image versi $VERSION"
             docker pull $IMAGE_NAME:$VERSION
 
-            echo "Stop container lama"
+            echo "Stop & remove container lama (jika ada)"
             docker stop abujapi-profile || true
             docker rm abujapi-profile || true
 
@@ -56,7 +68,7 @@ jobs:
             fi
             echo $VERSION > /home/${{ secrets.SSH_USER }}/abujapi-profile.version
 
-            echo "Run container baru"
+            echo "Run container baru di port 3007"
             docker run -d --name abujapi-profile \
-              -p 3000:3000 \
+              -p 3007:3000 \
               $IMAGE_NAME:$VERSION
