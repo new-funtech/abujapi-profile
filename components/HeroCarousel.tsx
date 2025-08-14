@@ -7,13 +7,12 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import carousel1 from "@/public/images/carouselItem1.png";
-import carousel2 from "@/public/images/carouselItem2.png";
-import carousel3 from "@/public/images/carouselItem3.png";
-
-
 export default function HeroCarousel() {
-  const carouselImages = [carousel1, carousel2, carousel3];
+  const carouselImages = [
+    "/images/carouselItem1.png",
+    "/images/carouselItem2.png",
+    "/images/carouselItem3.png",
+  ];
 
   return (
     <div className="w-full max-w-md">
@@ -28,6 +27,8 @@ export default function HeroCarousel() {
             <Image
               src={img}
               alt={`Carousel ${index + 1}`}
+              width={500} 
+              height={300}
               priority={index === 0}
             />
           </SwiperSlide>
