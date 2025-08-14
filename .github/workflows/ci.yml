@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      increment:
+        description: "Increment level (major / minor / patch)"
+        required: false
+        default: "patch"
 
 jobs:
   build-and-deploy:
@@ -20,34 +25,62 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set version from Docker Hub
+      - name: Set semantic version from Docker Hub
         id: vars
         run: |
           IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/abujapi-profile
-          # Ambil list tag, filter hanya yang format v<number>, urutkan desc, ambil yg pertama
+          
+          # Ambil tag terakhir format vMAJOR.MINOR.PATCH
           LAST_VERSION=$(curl -s "https://hub.docker.com/v2/repositories/${IMAGE_NAME}/tags?page_size=100" \
             | jq -r '.results[].name' \
-            | grep -E '^v[0-9]+$' \
+            | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' \
             | sed 's/v//' \
-            | sort -nr \
-            | head -n1)
+            | sort -V \
+            | tail -n 1)
 
           if [ -z "$LAST_VERSION" ]; then
-            LAST_VERSION=0
+            LAST_VERSION="0.0.0"
           fi
 
-          VERSION=$((LAST_VERSION + 1))
-          echo "VERSION=v$VERSION" >> $GITHUB_ENV
-          echo "Naik versi dari v$LAST_VERSION ke v$VERSION"
+          echo "Versi terakhir: v$LAST_VERSION"
+
+          # Pisahkan jadi MAJOR, MINOR, PATCH
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$LAST_VERSION"
+
+          # Tentukan increment: manual pakai input, push/merge default minor
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            INCREMENT="${{ github.event.inputs.increment }}"
+          else
+            INCREMENT="minor"
+          fi
+
+          echo "Increment level: $INCREMENT"
+
+          if [ "$INCREMENT" = "major" ]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+            PATCH=0
+          elif [ "$INCREMENT" = "minor" ]; then
+            MINOR=$((MINOR + 1))
+            PATCH=0
+          else
+            PATCH=$((PATCH + 1))
+          fi
+
+          VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Naik versi menjadi $VERSION"
 
       - name: Build & Push Docker image
         run: |
           IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/abujapi-profile
           VERSION=${{ env.VERSION }}
-          echo "Building image: $IMAGE_NAME:$VERSION"
+          echo "Building Docker image: $IMAGE_NAME:$VERSION"
           docker build --label version="$VERSION" -t $IMAGE_NAME:$VERSION -t $IMAGE_NAME:latest .
+          echo "Pushing Docker image..."
           docker push $IMAGE_NAME:$VERSION
           docker push $IMAGE_NAME:latest
+          echo "Docker image pushed successfully."
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
@@ -61,20 +94,22 @@ jobs:
             IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/abujapi-profile
             VERSION=${{ env.VERSION }}
 
-            echo "Pull image versi $VERSION"
+            echo "Pulling Docker image version $VERSION..."
             docker pull $IMAGE_NAME:$VERSION
 
-            echo "Stop & remove container lama (jika ada)"
+            echo "Stopping and removing old container..."
             docker stop abujapi-profile || true
             docker rm abujapi-profile || true
 
-            echo "Simpan versi lama untuk rollback"
+            echo "Saving previous version for rollback..."
             if [ -f /home/${{ secrets.SSH_USER }}/abujapi-profile.version ]; then
-              echo "Versi sebelumnya: $(cat /home/${{ secrets.SSH_USER }}/abujapi-profile.version)"
+              echo "Previous version: $(cat /home/${{ secrets.SSH_USER }}/abujapi-profile.version)"
             fi
             echo $VERSION > /home/${{ secrets.SSH_USER }}/abujapi-profile.version
 
-            echo "Run container baru di port 3007"
+            echo "Starting new container on port 3007..."
             docker run -d --name abujapi-profile \
               -p 3007:3000 \
               $IMAGE_NAME:$VERSION
+
+            echo "Deployment completed successfully."
