@@ -25,7 +25,7 @@ export default function AboutSection() {
     >
       <div className="max-w-screen-xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-6">
-          Mitra & <span className="text-green-600">Kolaborator</span>
+          Mitra & Kolaborator
         </h2>
         <p className="text-gray-600 text-lg text-center mb-12 max-w-2xl mx-auto">
           Kami bekerja sama dengan instansi pemerintah, perusahaan swasta, dan

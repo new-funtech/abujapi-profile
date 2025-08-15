@@ -28,12 +28,11 @@ export default function NewsSection() {
       id="news"
       role="region"
       aria-label="Berita dan Informasi BPD Abujapi Jabar"
-      className="bg-transparent py-16 md:py-24"
+      className="bg-white py-16 md:py-24"
     >
       <div className="max-w-screen-xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-6">
-          Berita & <span className="text-green-600">Informasi Terbaru</span> BPD
-          Abujapi Jabar
+          Berita & Informasi Terbaru BPD Abujapi Jabar
         </h2>
         <p className="text-gray-600 text-lg text-center mb-12 max-w-2xl mx-auto">
           Dapatkan berita terbaru, agenda kegiatan, dan informasi penting
@@ -62,7 +61,7 @@ export default function NewsSection() {
                   href="#"
                   className="inline-flex items-center text-green-600 hover:text-green-700 transition-colors text-sm"
                 >
-                  Selengkapnya
+                  Detail Berita
                   <FaArrowRight className="ml-1" />
                 </a>
               </div>
