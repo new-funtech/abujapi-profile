@@ -10,10 +10,10 @@ import galleryImage2 from "@/public/images/carouselItem2.png";
 
 export default function GallerySection() {
   const infoItems = [
-    { icon: <FaUsers />, title: "Anggota", count: "500+" },
-    { icon: <FaUserFriends />, title: "Komunitas", count: "20+" },
-    { icon: <FaCalendarAlt />, title: "Agenda Acara", count: "50+" },
-    { icon: <FaCreditCard />, title: "Pembayaran Online", count: "1000+" },
+    { icon: <FaUsers />, title: "Anggota", count: "2,245" },
+    { icon: <FaUserFriends />, title: "Komunitas", count: "45" },
+    { icon: <FaCalendarAlt />, title: "Agenda Acara", count: "50" },
+    { icon: <FaCreditCard />, title: "Pembayaran Online", count: "650" },
   ];
 
   return (
@@ -57,7 +57,7 @@ export default function GallerySection() {
         </div>
 
         {/* Bagian 2: Kemitraan Strategis */}
-        <div className="bg-gray-100 w-full py-10 md:py-12">
+        <div className="bg-gray-50 w-full py-10 md:py-12">
           <div className="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row items-center gap-6">
             <div className="flex-1 text-center md:text-left px-4">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
@@ -72,14 +72,16 @@ export default function GallerySection() {
               {infoItems.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white p-4 rounded-lg shadow-sm flex items-center space-x-2"
+                  className="p-4 rounded-lg flex items-center space-x-3"
                 >
-                  <div className="text-xl text-green-600">{item.icon}</div>
+                  <div className="text-3xl md:text-4xl text-green-600">
+                    {item.icon}
+                  </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-gray-900">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-600 text-xs">{item.count}</p>
+                    <p className="text-gray-600 font-semibold text-lg">
+                      {item.count}
+                    </p>
+                    <h4 className="text-sm text-gray-500">{item.title}</h4>
                   </div>
                 </div>
               ))}
@@ -90,15 +92,13 @@ export default function GallerySection() {
         {/* Bagian 3: Digitalisasi Layanan */}
         <div className="max-w-screen-xl mx-auto px-12 flex flex-col md:flex-row items-center gap-12">
           <div className="flex-[5] max-w-[280px]">
-            <div className="bg-white p-4 rounded-lg shadow-md">
-              <Image
-                src={galleryImage2}
-                alt="Digitalisasi Layanan"
-                width={280}
-                height={168}
-                className="w-full h-auto rounded-lg object-contain"
-              />
-            </div>
+            <Image
+              src={galleryImage2}
+              alt="Digitalisasi Layanan"
+              width={280}
+              height={168}
+              className="w-full h-auto rounded-lg object-contain"
+            />
           </div>
           <div className="flex-[7] text-center md:text-left">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
