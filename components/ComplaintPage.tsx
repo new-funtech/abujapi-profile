@@ -12,6 +12,7 @@ import {
   FaMapMarkerAlt,
   FaFileAlt,
 } from "react-icons/fa";
+import { useDropzone } from "react-dropzone";
 
 interface ComplaintPageProps {
   isOpen: boolean;
@@ -42,7 +43,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     "application/pdf",
   ];
   const maxFiles = 5;
-  const maxFileSize = 5 * 1024 * 1024; // 5MB
+  const maxTotalSize = 5 * 1024 * 1024; // 5MB for total files
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -75,58 +76,64 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files).slice(
-        0,
-        maxFiles - formData.evidence_document.length
-      );
-      const invalidFiles = filesArray.filter(
-        (file) => !allowedFileTypes.includes(file.type)
-      );
-      const oversizedFiles = filesArray.filter(
-        (file) => file.size > maxFileSize
-      );
+  const handleFileChange = (acceptedFiles: File[]) => {
+    const filesArray = acceptedFiles.slice(
+      0,
+      maxFiles - formData.evidence_document.length
+    );
+    const invalidFiles = filesArray.filter(
+      (file) => !allowedFileTypes.includes(file.type)
+    );
 
-      if (invalidFiles.length > 0) {
-        console.log(
-          "Invalid files:",
-          invalidFiles.map((f) => ({ name: f.name, type: f.type }))
-        );
-        setSubmissionStatus(
-          "File tidak didukung. Hanya JPG, JPEG, PNG, atau PDF yang diizinkan."
-        );
-        return;
-      }
-      if (oversizedFiles.length > 0) {
-        console.log(
-          "Oversized files:",
-          oversizedFiles.map((f) => ({ name: f.name, size: f.size }))
-        );
-        setSubmissionStatus("Salah satu file melebihi 5MB. Harap pilih ulang.");
-        return;
-      }
-      if (formData.evidence_document.length + filesArray.length > maxFiles) {
-        setSubmissionStatus(`Maksimum ${maxFiles} file diizinkan.`);
-        return;
-      }
+    // Calculate total size of existing and new files
+    const currentTotalSize = formData.evidence_document.reduce(
+      (sum, file) => sum + file.size,
+      0
+    );
+    const newFilesSize = filesArray.reduce((sum, file) => sum + file.size, 0);
+    const totalSize = currentTotalSize + newFilesSize;
 
+    if (invalidFiles.length > 0) {
       console.log(
-        "Uploaded files:",
-        filesArray.map((file) => ({
-          name: file.name,
-          type: file.type,
-          size: file.size,
-        }))
+        "Invalid files:",
+        invalidFiles.map((f) => ({ name: f.name, type: f.type }))
       );
-
-      setFormData((prev) => ({
-        ...prev,
-        evidence_document: [...prev.evidence_document, ...filesArray],
-      }));
-      setErrors((prev) => ({ ...prev, evidence_document: "" }));
-      setSubmissionStatus(null);
+      setSubmissionStatus(
+        "File tidak didukung. Hanya JPG, JPEG, PNG, atau PDF yang diizinkan."
+      );
+      return;
     }
+    if (totalSize > maxTotalSize) {
+      console.log(
+        "Total file size exceeds limit:",
+        totalSize,
+        "bytes (max:",
+        maxTotalSize,
+        "bytes)"
+      );
+      setSubmissionStatus("Total ukuran file melebihi 5MB. Harap pilih ulang.");
+      return;
+    }
+    if (formData.evidence_document.length + filesArray.length > maxFiles) {
+      setSubmissionStatus(`Maksimum ${maxFiles} file diizinkan.`);
+      return;
+    }
+
+    console.log(
+      "Uploaded files:",
+      filesArray.map((file) => ({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      }))
+    );
+
+    setFormData((prev) => ({
+      ...prev,
+      evidence_document: [...prev.evidence_document, ...filesArray],
+    }));
+    setErrors((prev) => ({ ...prev, evidence_document: "" }));
+    setSubmissionStatus(null);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -272,7 +279,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     const formDataToSend = new FormData();
     formDataToSend.append("reporter_name", formData.reporter_name);
     formDataToSend.append("reporter_company", formData.reporter_company);
-    formDataToSend.append("reporter_phone", formData.reporter_phone); // Dikirim sebagai string
+    formDataToSend.append("reporter_phone", formData.reporter_phone);
     formDataToSend.append("reporter_address", formData.reporter_address);
     formDataToSend.append("complaint_type", formData.complaint_type);
     formDataToSend.append("complaint_content", formData.complaint_content);
@@ -371,7 +378,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
             </div>
           ) : (
             <p className="text-gray-600 text-xs md:text-sm text-center">
-              Jenis Pengaduan: {complaintTypeText}
+              Jenis Pengaduan : {complaintTypeText}
             </p>
           )}
           <div className="w-full bg-gray-200 h-2 rounded-full">
@@ -562,6 +569,18 @@ function SecurityForm({
 }: any) {
   const isSecurityPersonnel = complaintType === "SECURITY_PERSONNEL";
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/png": [".png"],
+      "application/pdf": [".pdf"],
+    },
+    maxFiles: 5,
+    onDrop: (acceptedFiles) => {
+      handleFileChange(acceptedFiles);
+    },
+  });
+
   return (
     <div className="space-y-4">
       <div className="space-y-3">
@@ -646,20 +665,25 @@ function SecurityForm({
             Aduan *
           </label>
           <p className="text-xs md:text-sm text-gray-600 mb-2">
-            Foto (JPG, JPEG, PNG) atau Dokumen (PDF), maksimum 5 file,
-            masing-masing 5 MB
+            Foto (JPG, JPEG, PNG) atau Dokumen (PDF), maksimum 5 file, total
+            ukuran 5MB
           </p>
-          <div className="border-dashed border-2 border-gray-300 p-3 md:p-4 rounded-lg text-center cursor-pointer hover:border-gray-400 transition relative">
-            <input
-              type="file"
-              name="evidence_document"
-              onChange={handleFileChange}
-              accept=".jpg,.jpeg,.png,.pdf"
-              multiple
-              className="opacity-0 w-full h-full absolute cursor-pointer"
-            />
-            <p className="text-gray-600 text-xs md:text-sm flex items-center justify-center">
-              <FaPaperclip className="mr-2" /> Klik atau drop file di sini
+          <div
+            {...getRootProps()}
+            className={`border-dashed border-2 ${
+              isDragActive ? "border-green-500 bg-green-50" : "border-gray-300"
+            } p-3 md:p-4 rounded-lg text-center cursor-pointer hover:border-gray-400 transition-all duration-200`}
+          >
+            <input {...getInputProps()} />
+            <p
+              className={`text-xs md:text-sm flex items-center justify-center ${
+                isDragActive ? "text-green-600 font-semibold" : "text-gray-600"
+              }`}
+            >
+              <FaPaperclip className="mr-2" />
+              {isDragActive
+                ? "Lepaskan file di sini"
+                : "Klik atau seret file ke sini"}
             </p>
           </div>
           {formData.evidence_document.length > 0 && (
