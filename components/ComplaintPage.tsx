@@ -278,8 +278,7 @@ const handleSubmit = async () => {
   setSubmissionStatus("Mengirim pengaduan...");
 
   try {
-    const result = await submitComplaint(formData);
-    // console.log("Response body:", result);
+    await submitComplaint(formData);
 
     setSubmissionStatus("Pengaduan berhasil dikirim!");
     setTimeout(() => {
@@ -300,11 +299,17 @@ const handleSubmit = async () => {
       setStep(1);
       setErrors({});
     }, 2000);
-  } catch (error: any) {
-    console.error("API Error:", error.message);
-    setSubmissionStatus(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("API Error:", error.message);
+      setSubmissionStatus(error.message);
+    } else {
+      console.error("Unexpected error:", error);
+      setSubmissionStatus("Terjadi kesalahan yang tidak terduga.");
+    }
   }
 };
+
 
 
   const complaintTypeText =
