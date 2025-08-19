@@ -11,7 +11,13 @@ export interface ComplaintFormData {
   evidence_document: File[];
 }
 
-export async function submitComplaint(data: ComplaintFormData): Promise<any> {
+export interface ApiResponse {
+  message?: string;
+  errors?: Record<string, string[]>;
+  [key: string]: unknown; 
+}
+
+export async function submitComplaint(data: ComplaintFormData): Promise<ApiResponse> {
   const formDataToSend = new FormData();
 
   Object.entries(data).forEach(([key, value]) => {
@@ -31,7 +37,8 @@ export async function submitComplaint(data: ComplaintFormData): Promise<any> {
       body: formDataToSend,
     });
 
-    const result = await response.json();
+    const result: ApiResponse = await response.json();
+
     if (!response.ok) {
       const errorMessage =
         result.errors?.evidence_document?.join(", ") ||
@@ -41,7 +48,10 @@ export async function submitComplaint(data: ComplaintFormData): Promise<any> {
     }
 
     return result;
-  } catch (error: any) {
-    throw new Error(error.message || "Terjadi kesalahan saat mengirim pengaduan.");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "Terjadi kesalahan saat mengirim pengaduan.");
+    }
+    throw new Error("Terjadi kesalahan tak terduga saat mengirim pengaduan.");
   }
 }

@@ -301,10 +301,8 @@ const handleSubmit = async () => {
     }, 2000);
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error("API Error:", error.message);
       setSubmissionStatus(error.message);
     } else {
-      console.error("Unexpected error:", error);
       setSubmissionStatus("Terjadi kesalahan yang tidak terduga.");
     }
   }
