@@ -13,6 +13,8 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { useDropzone } from "react-dropzone";
+import { ChangeEvent } from "react";
+
 
 interface ComplaintPageProps {
   isOpen: boolean;
@@ -559,6 +561,34 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
   );
 }
 
+
+// ADD INTERFACE 
+interface FormData {
+  complaint_content: string;
+  reported_personnel_name: string;
+  location: string;
+  related_company: string;
+  evidence_document: File[];
+}
+
+interface Errors {
+  complaint_content?: string;
+  reported_personnel_name?: string;
+  location?: string;
+  related_company?: string;
+  evidence_document?: string;
+}
+
+
+interface SecurityFormProps {
+  formData: FormData;
+  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleFileChange: (files: File[]) => void;
+  handleRemoveFile: (index: number) => void;
+  errors: Errors;
+  complaintType: string;
+}
+
 function SecurityForm({
   formData,
   handleChange,
@@ -566,7 +596,7 @@ function SecurityForm({
   handleRemoveFile,
   errors,
   complaintType,
-}: any) {
+}: SecurityFormProps) {
   const isSecurityPersonnel = complaintType === "SECURITY_PERSONNEL";
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -584,6 +614,7 @@ function SecurityForm({
   return (
     <div className="space-y-4">
       <div className="space-y-3">
+        {/* Isi Pengaduan */}
         <div>
           <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
             <FaFileAlt className="mr-2 text-green-600" /> Isi Pengaduan *
@@ -601,6 +632,8 @@ function SecurityForm({
             </p>
           )}
         </div>
+
+        {/* Nama / Badan Usaha & Lokasi */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
@@ -623,6 +656,7 @@ function SecurityForm({
               </p>
             )}
           </div>
+
           <div>
             <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
               <FaMapMarkerAlt className="mr-2 text-green-600" /> Lokasi *
@@ -640,6 +674,8 @@ function SecurityForm({
             )}
           </div>
         </div>
+
+        {/* Badan Usaha */}
         <div>
           <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
             <FaBuilding className="mr-2 text-green-600" /> Badan Usaha yang
@@ -659,6 +695,8 @@ function SecurityForm({
             </p>
           )}
         </div>
+
+        {/* Upload Dokumen */}
         <div>
           <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
             <FaPaperclip className="mr-2 text-green-600" /> Upload Dokumen Bukti
@@ -686,15 +724,17 @@ function SecurityForm({
                 : "Klik atau seret file ke sini"}
             </p>
           </div>
+
           {formData.evidence_document.length > 0 && (
             <ul className="mt-2 space-y-1">
-              {formData.evidence_document.map((file: File, index: number) => (
+              {formData.evidence_document.map((file, index) => (
                 <li
                   key={index}
                   className="flex items-center justify-between text-xs md:text-sm text-gray-700 bg-gray-100 p-2 rounded"
                 >
                   <span>{file.name}</span>
                   <button
+                    type="button"
                     onClick={() => handleRemoveFile(index)}
                     className="text-red-500 hover:text-red-700"
                   >
@@ -704,6 +744,7 @@ function SecurityForm({
               ))}
             </ul>
           )}
+
           {errors.evidence_document && (
             <p className="text-red-500 text-xs mt-1">
               {errors.evidence_document}
