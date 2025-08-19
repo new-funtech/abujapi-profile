@@ -124,7 +124,7 @@ export default function GallerySection() {
             </p>
             <button
               onClick={() => setIsComplaintOpen(true)}
-              className="inline-block bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition-colors text-base"
+              className="inline-block bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition-colors text-base cursor-pointer"
             >
               Kirim Pengaduan
             </button>

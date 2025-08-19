@@ -5,14 +5,15 @@ import {
   FaTimes,
   FaArrowLeft,
   FaArrowRight,
-  FaPaperclip,
   FaUser,
   FaBuilding,
   FaPhone,
   FaMapMarkerAlt,
   FaFileAlt,
 } from "react-icons/fa";
-import { useDropzone } from "react-dropzone";
+import SecurityForm from "@components/SecurityForm";
+import { submitComplaint } from "@/lib/api";
+
 
 interface ComplaintPageProps {
   isOpen: boolean;
@@ -94,23 +95,23 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     const totalSize = currentTotalSize + newFilesSize;
 
     if (invalidFiles.length > 0) {
-      console.log(
-        "Invalid files:",
-        invalidFiles.map((f) => ({ name: f.name, type: f.type }))
-      );
+      // console.log(
+      //   "Invalid files:",
+      //   invalidFiles.map((f) => ({ name: f.name, type: f.type }))
+      // );
       setSubmissionStatus(
         "File tidak didukung. Hanya JPG, JPEG, PNG, atau PDF yang diizinkan."
       );
       return;
     }
     if (totalSize > maxTotalSize) {
-      console.log(
-        "Total file size exceeds limit:",
-        totalSize,
-        "bytes (max:",
-        maxTotalSize,
-        "bytes)"
-      );
+      // console.log(
+      //   "Total file size exceeds limit:",
+      //   totalSize,
+      //   "bytes (max:",
+      //   maxTotalSize,
+      //   "bytes)"
+      // );
       setSubmissionStatus("Total ukuran file melebihi 5MB. Harap pilih ulang.");
       return;
     }
@@ -119,14 +120,14 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
       return;
     }
 
-    console.log(
-      "Uploaded files:",
-      filesArray.map((file) => ({
-        name: file.name,
-        type: file.type,
-        size: file.size,
-      }))
-    );
+    // console.log(
+    //   "Uploaded files:",
+    //   filesArray.map((file) => ({
+    //     name: file.name,
+    //     type: file.type,
+    //     size: file.size,
+    //   }))
+    // );
 
     setFormData((prev) => ({
       ...prev,
@@ -268,77 +269,46 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     setErrors({});
   };
 
-  const handleSubmit = async () => {
-    if (!validateStep2()) {
-      setSubmissionStatus("Harap isi semua field wajib dan unggah dokumen.");
-      return;
-    }
+const handleSubmit = async () => {
+  if (!validateStep2()) {
+    setSubmissionStatus("Harap isi semua field wajib dan unggah dokumen.");
+    return;
+  }
 
-    setSubmissionStatus("Mengirim pengaduan...");
+  setSubmissionStatus("Mengirim pengaduan...");
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("reporter_name", formData.reporter_name);
-    formDataToSend.append("reporter_company", formData.reporter_company);
-    formDataToSend.append("reporter_phone", formData.reporter_phone);
-    formDataToSend.append("reporter_address", formData.reporter_address);
-    formDataToSend.append("complaint_type", formData.complaint_type);
-    formDataToSend.append("complaint_content", formData.complaint_content);
-    formDataToSend.append(
-      "reported_personnel_name",
-      formData.reported_personnel_name
-    );
-    formDataToSend.append("location", formData.location);
-    formDataToSend.append("related_company", formData.related_company);
+  try {
+    await submitComplaint(formData);
 
-    formData.evidence_document.forEach((file) => {
-      formDataToSend.append("evidence_document", file);
-    });
-
-    try {
-      const response = await fetch("https://api.gada86.id/api/complaints", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: formDataToSend,
+    setSubmissionStatus("Pengaduan berhasil dikirim!");
+    setTimeout(() => {
+      setSubmissionStatus(null);
+      onClose();
+      setFormData({
+        reporter_name: "",
+        reporter_company: "",
+        reporter_phone: "",
+        reporter_address: "",
+        complaint_type: "",
+        complaint_content: "",
+        reported_personnel_name: "",
+        location: "",
+        related_company: "",
+        evidence_document: [],
       });
-
-      const result = await response.json();
-      console.log("Response status:", response.status);
-      console.log("Response body:", result);
-
-      if (response.ok) {
-        setSubmissionStatus("Pengaduan berhasil dikirim!");
-        setTimeout(() => {
-          setSubmissionStatus(null);
-          onClose();
-          setFormData({
-            reporter_name: "",
-            reporter_company: "",
-            reporter_phone: "",
-            reporter_address: "",
-            complaint_type: "",
-            complaint_content: "",
-            reported_personnel_name: "",
-            location: "",
-            related_company: "",
-            evidence_document: [],
-          });
-          setStep(1);
-          setErrors({});
-        }, 2000);
-      } else {
-        const errorMessage =
-          result.errors?.evidence_document?.join(", ") ||
-          result.message ||
-          "Gagal mengirim pengaduan. Silakan coba lagi.";
-        setSubmissionStatus(errorMessage);
-      }
-    } catch (error) {
-      console.error("Fetch error:", error);
-      setSubmissionStatus("Terjadi kesalahan saat mengirim pengaduan.");
+      setStep(1);
+      setErrors({});
+    }, 2000);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      setSubmissionStatus(error.message);
+    } else {
+      setSubmissionStatus("Terjadi kesalahan yang tidak terduga.");
     }
-  };
+  }
+};
+
+
 
   const complaintTypeText =
     formData.complaint_type === "SECURITY_PERSONNEL"
@@ -350,367 +320,254 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl overflow-y-auto max-h-[90vh] text-sm md:text-base">
-        {/* ==================== HEADER ==================== */}
-        <div className="p-2 md:p-3 border-b border-gray-200 relative flex items-center bg-gradient-to-r from-green-600 to-green-500">
-          <h1 className="text-sm md:text-lg font-semibold text-white text-left ml-2 flex items-center">
-            <FaFileAlt className="mr-2 text-white" /> Formulir Pengaduan
-          </h1>
-          <button
-            onClick={onClose}
-            className="absolute top-0 bottom-0 right-2 my-auto p-2 md:p-3 text-white hover:text-gray-200 text-base md:text-lg"
-          >
-            <FaTimes />
-          </button>
+  <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl overflow-y-auto max-h-[90vh] text-sm md:text-base">
+      {/* ==================== HEADER ==================== */}
+      <div className="p-2 md:p-3 border-b border-gray-200 relative flex items-center bg-gradient-to-r from-green-600 to-green-500">
+        <h1 className="text-sm md:text-lg font-semibold text-white text-left ml-2 flex items-center">
+          <FaFileAlt className="mr-2 text-white" /> Formulir Pengaduan
+        </h1>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Tutup formulir"
+          className="absolute top-0 bottom-0 right-2 my-auto p-2 md:p-3 text-white hover:text-gray-200 text-base md:text-lg cursor-pointer"
+        >
+          <FaTimes />
+        </button>
+      </div>
+
+      {/* ==================== BODY ==================== */}
+      <div className="p-4 md:p-6 space-y-4">
+        {step === 1 ? (
+          <div>
+            <p className="text-gray-600 text-xs md:text-sm text-center">
+              Isi formulir di bawah ini untuk mengajukan pengaduan.
+            </p>
+            <p className="text-gray-600 text-xs md:text-sm text-center">
+              Semua data dijamin kerahasiaannya.
+            </p>
+          </div>
+        ) : (
+          <p className="text-gray-600 text-xs md:text-sm text-center">
+            Jenis Pengaduan : {complaintTypeText}
+          </p>
+        )}
+
+       {/* Progress Bar */}
+        <div className="w-full bg-gray-200 h-2 rounded-full">
+          <div
+            className={`h-2 rounded-full bg-green-600 transition-all duration-300 ${
+              step === 1 ? "w-1/2" : "w-full"
+            }`}
+          ></div>
         </div>
 
-        {/* ==================== BODY ==================== */}
-        <div className="p-4 md:p-6 space-y-4">
-          {step === 1 ? (
-            <div>
-              <p className="text-gray-600 text-xs md:text-sm text-center">
-                Isi formulir di bawah ini untuk mengajukan pengaduan.
-              </p>
-              <p className="text-gray-600 text-xs md:text-sm text-center">
-                Semua data dijamin kerahasiaannya.
-              </p>
-            </div>
-          ) : (
-            <p className="text-gray-600 text-xs md:text-sm text-center">
-              Jenis Pengaduan : {complaintTypeText}
-            </p>
-          )}
-          <div className="w-full bg-gray-200 h-2 rounded-full">
-            <div
-              className="h-2 rounded-full bg-green-600 transition-all duration-300"
-              style={{ width: step === 1 ? "50%" : "100%" }}
-            ></div>
+        {submissionStatus && (
+          <div className="text-center text-red-600 font-semibold text-xs md:text-sm">
+            {submissionStatus}
           </div>
-          {submissionStatus && (
-            <div className="text-center text-red-600 font-semibold text-xs md:text-sm">
-              {submissionStatus}
-            </div>
-          )}
+        )}
 
-          {/* Step 1 */}
-          {step === 1 && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-                    <FaUser className="mr-2 text-green-600" /> Nama Pelapor *
-                  </label>
-                  <input
-                    type="text"
-                    name="reporter_name"
-                    value={formData.reporter_name}
-                    onChange={handleChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-                    required
-                  />
-                  {errors.reporter_name && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.reporter_name}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-                    <FaBuilding className="mr-2 text-green-600" /> Nama
-                    Perusahaan BUJP Pelapor *
-                  </label>
-                  <input
-                    type="text"
-                    name="reporter_company"
-                    value={formData.reporter_company}
-                    onChange={handleChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-                    required
-                  />
-                  {errors.reporter_company && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.reporter_company}
-                    </p>
-                  )}
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-                    <FaPhone className="mr-2 text-green-600" /> No HP Pelapor *
-                  </label>
-                  <input
-                    type="tel"
-                    name="reporter_phone"
-                    value={formData.reporter_phone}
-                    onChange={handleChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-                    required
-                    pattern="0\d*"
-                    placeholder="0xxxxxxxxxxx"
-                  />
-                  {errors.reporter_phone && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.reporter_phone}
-                    </p>
-                  )}
-                  <p className="text-xs md:text-sm text-gray-500 mt-1">
-                    Dijamin Kerahasiaannya
+        {/* Step 1 */}
+        {step === 1 && (
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Nama Pelapor */}
+              <div>
+                <label
+                  htmlFor="reporter_name"
+                  className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
+                >
+                  <FaUser className="mr-2 text-green-600" />
+                  Nama Pelapor{" "}
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <input
+                  id="reporter_name"
+                  type="text"
+                  name="reporter_name"
+                  value={formData.reporter_name}
+                  onChange={handleChange}
+                  className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+                  required
+                />
+                {errors.reporter_name && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.reporter_name}
                   </p>
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-                    <FaMapMarkerAlt className="mr-2 text-green-600" /> Alamat
-                    Pelapor *
-                  </label>
-                  <textarea
-                    name="reporter_address"
-                    value={formData.reporter_address}
-                    onChange={handleChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 h-20 md:h-24 text-xs md:text-sm text-black"
-                    required
-                  />
-                  {errors.reporter_address && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.reporter_address}
-                    </p>
-                  )}
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-                    <FaFileAlt className="mr-2 text-green-600" /> Jenis
-                    Pengaduan *
-                  </label>
-                  <select
-                    name="complaint_type"
-                    value={formData.complaint_type}
-                    onChange={handleChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-                    required
-                  >
-                    <option value="">Pilih Jenis Pengaduan</option>
-                    <option value="SECURITY_PERSONNEL">
-                      Satuan Pengamanan
-                    </option>
-                    <option value="SECURITY_COMPANY">
-                      Badan Usaha Jasa Pengamanan
-                    </option>
-                  </select>
-                  {errors.complaint_type && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.complaint_type}
-                    </p>
-                  )}
-                </div>
+                )}
+              </div>
+
+              {/* Nama Perusahaan */}
+              <div>
+                <label
+                  htmlFor="reporter_company"
+                  className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
+                >
+                  <FaBuilding className="mr-2 text-green-600" />
+                  Nama Perusahaan BUJP Pelapor{" "}
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <input
+                  id="reporter_company"
+                  type="text"
+                  name="reporter_company"
+                  value={formData.reporter_company}
+                  onChange={handleChange}
+                  className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+                  required
+                />
+                {errors.reporter_company && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.reporter_company}
+                  </p>
+                )}
+              </div>
+
+              {/* Nomor HP */}
+              <div className="md:col-span-2">
+                <label
+                  htmlFor="reporter_phone"
+                  className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
+                >
+                  <FaPhone className="mr-2 text-green-600" />
+                  No HP Pelapor <span className="text-red-500 ml-1">*</span>
+                </label>
+                <input
+                  id="reporter_phone"
+                  type="tel"
+                  name="reporter_phone"
+                  value={formData.reporter_phone}
+                  onChange={handleChange}
+                  className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+                  required
+                  pattern="0\d*"
+                  placeholder="0xxxxxxxxxxx"
+                />
+                {errors.reporter_phone && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.reporter_phone}
+                  </p>
+                )}
+                <p className="text-xs md:text-sm text-gray-500 mt-1">
+                  Dijamin Kerahasiaannya
+                </p>
+              </div>
+
+              {/* Alamat */}
+              <div className="md:col-span-2">
+                <label
+                  htmlFor="reporter_address"
+                  className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
+                >
+                  <FaMapMarkerAlt className="mr-2 text-green-600" />
+                  Alamat Pelapor <span className="text-red-500 ml-1">*</span>
+                </label>
+                <textarea
+                  id="reporter_address"
+                  name="reporter_address"
+                  value={formData.reporter_address}
+                  onChange={handleChange}
+                  className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 h-20 md:h-24 text-xs md:text-sm text-black"
+                  required
+                />
+                {errors.reporter_address && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.reporter_address}
+                  </p>
+                )}
+              </div>
+
+              {/* Jenis Pengaduan */}
+              <div className="md:col-span-2">
+                <label
+                  htmlFor="complaint_type"
+                  className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
+                >
+                  <FaFileAlt className="mr-2 text-green-600" />
+                  Jenis Pengaduan <span className="text-red-500 ml-1">*</span>
+                </label>
+                <select
+                  id="complaint_type"
+                  name="complaint_type"
+                  value={formData.complaint_type}
+                  onChange={handleChange}
+                  className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+                  required
+                >
+                  <option value="">Pilih Jenis Pengaduan</option>
+                  <option value="SECURITY_PERSONNEL">
+                    Satuan Pengamanan
+                  </option>
+                  <option value="SECURITY_COMPANY">
+                    Badan Usaha Jasa Pengamanan
+                  </option>
+                </select>
+                {errors.complaint_type && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.complaint_type}
+                  </p>
+                )}
               </div>
             </div>
-          )}
-
-          {/* Step 2 */}
-          {(formData.complaint_type === "SECURITY_PERSONNEL" ||
-            formData.complaint_type === "SECURITY_COMPANY") &&
-            step === 2 && (
-              <SecurityForm
-                formData={formData}
-                handleChange={handleChange}
-                handleFileChange={handleFileChange}
-                handleRemoveFile={handleRemoveFile}
-                errors={errors}
-                complaintType={formData.complaint_type}
-              />
-            )}
-        </div>
-
-        {/* ==================== FOOTER ==================== */}
-        <div className="p-2 md:p-3 border-t border-gray-200 bg-gray-100 flex justify-between items-center">
-          <span className="text-gray-700 text-xs md:text-sm">
-            Langkah {step} dari 2
-          </span>
-          <div className="flex space-x-2">
-            {step > 1 && (
-              <button
-                type="button"
-                onClick={prevStep}
-                className="bg-gray-500 text-white px-2 md:px-3 py-1 rounded-sm hover:bg-gray-600 transition-all shadow text-xs md:text-sm flex items-center"
-              >
-                <FaArrowLeft className="mr-1" /> Back
-              </button>
-            )}
-            {step === 1 ? (
-              <button
-                type="button"
-                onClick={nextStep}
-                className="bg-green-600 text-white px-2 md:px-3 py-1 rounded-sm hover:bg-green-700 transition-all shadow text-xs md:text-sm flex items-center"
-              >
-                Next <FaArrowRight className="ml-1" />
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="bg-green-600 text-white px-2 md:px-3 py-1 rounded-sm hover:bg-green-700 transition-all shadow text-xs md:text-sm flex items-center"
-              >
-                Submit <FaArrowRight className="ml-1" />
-              </button>
-            )}
           </div>
-        </div>
+        )}
+
+        {/* Step 2 */}
+        {(formData.complaint_type === "SECURITY_PERSONNEL" ||
+          formData.complaint_type === "SECURITY_COMPANY") &&
+          step === 2 && (
+            <SecurityForm
+              formData={formData}
+              handleChange={handleChange}
+              handleFileChange={handleFileChange}
+              handleRemoveFile={handleRemoveFile}
+              errors={errors}
+              complaintType={formData.complaint_type}
+            />
+          )}
       </div>
-    </div>
-  );
-}
 
-function SecurityForm({
-  formData,
-  handleChange,
-  handleFileChange,
-  handleRemoveFile,
-  errors,
-  complaintType,
-}: any) {
-  const isSecurityPersonnel = complaintType === "SECURITY_PERSONNEL";
+      {/* ==================== FOOTER ==================== */}
+      <div className="p-3 md:p-4 border-t border-gray-200 bg-gray-50 flex justify-between items-center">
+        <span className="text-gray-700 text-sm md:text-base font-medium">
+          Langkah {step} dari 2
+        </span>
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: {
-      "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"],
-      "application/pdf": [".pdf"],
-    },
-    maxFiles: 5,
-    onDrop: (acceptedFiles) => {
-      handleFileChange(acceptedFiles);
-    },
-  });
-
-  return (
-    <div className="space-y-4">
-      <div className="space-y-3">
-        <div>
-          <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-            <FaFileAlt className="mr-2 text-green-600" /> Isi Pengaduan *
-          </label>
-          <textarea
-            name="complaint_content"
-            value={formData.complaint_content}
-            onChange={handleChange}
-            className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 h-28 md:h-32 text-xs md:text-sm text-black"
-            required
-          />
-          {errors.complaint_content && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.complaint_content}
-            </p>
-          )}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-              <FaUser className="mr-2 text-green-600" />
-              {isSecurityPersonnel
-                ? "Nama Satuan Pengamanan *"
-                : "Nama Badan Usaha *"}
-            </label>
-            <input
-              type="text"
-              name="reported_personnel_name"
-              value={formData.reported_personnel_name}
-              onChange={handleChange}
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-              required
-            />
-            {errors.reported_personnel_name && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.reported_personnel_name}
-              </p>
-            )}
-          </div>
-          <div>
-            <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-              <FaMapMarkerAlt className="mr-2 text-green-600" /> Lokasi *
-            </label>
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-              required
-            />
-            {errors.location && (
-              <p className="text-red-500 text-xs mt-1">{errors.location}</p>
-            )}
-          </div>
-        </div>
-        <div>
-          <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-            <FaBuilding className="mr-2 text-green-600" /> Badan Usaha yang
-            Bersangkutan Bekerja *
-          </label>
-          <input
-            type="text"
-            name="related_company"
-            value={formData.related_company}
-            onChange={handleChange}
-            className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
-            required
-          />
-          {errors.related_company && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.related_company}
-            </p>
-          )}
-        </div>
-        <div>
-          <label className="block font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-            <FaPaperclip className="mr-2 text-green-600" /> Upload Dokumen Bukti
-            Aduan *
-          </label>
-          <p className="text-xs md:text-sm text-gray-600 mb-2">
-            Foto (JPG, JPEG, PNG) atau Dokumen (PDF), maksimum 5 file, total
-            ukuran 5MB
-          </p>
-          <div
-            {...getRootProps()}
-            className={`border-dashed border-2 ${
-              isDragActive ? "border-green-500 bg-green-50" : "border-gray-300"
-            } p-3 md:p-4 rounded-lg text-center cursor-pointer hover:border-gray-400 transition-all duration-200`}
-          >
-            <input {...getInputProps()} />
-            <p
-              className={`text-xs md:text-sm flex items-center justify-center ${
-                isDragActive ? "text-green-600 font-semibold" : "text-gray-600"
-              }`}
+        <div className="flex space-x-3">
+          {step > 1 && (
+            <button
+              type="button"
+              onClick={prevStep}
+              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
             >
-              <FaPaperclip className="mr-2" />
-              {isDragActive
-                ? "Lepaskan file di sini"
-                : "Klik atau seret file ke sini"}
-            </p>
-          </div>
-          {formData.evidence_document.length > 0 && (
-            <ul className="mt-2 space-y-1">
-              {formData.evidence_document.map((file: File, index: number) => (
-                <li
-                  key={index}
-                  className="flex items-center justify-between text-xs md:text-sm text-gray-700 bg-gray-100 p-2 rounded"
-                >
-                  <span>{file.name}</span>
-                  <button
-                    onClick={() => handleRemoveFile(index)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <FaTimes />
-                  </button>
-                </li>
-              ))}
-            </ul>
+              <FaArrowLeft className="mr-2" /> Back
+            </button>
           )}
-          {errors.evidence_document && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.evidence_document}
-            </p>
+
+          {step === 1 ? (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
+            >
+              Next <FaArrowRight className="ml-2" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
+            >
+              Submit <FaArrowRight className="ml-2" />
+            </button>
           )}
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 }
+
