@@ -13,7 +13,7 @@ export default function ContactPage() {
     email: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting] = useState(false);
   const [alert, setAlert] = useState({ show: false, message: "" });
 
   const handleInputChange = (
