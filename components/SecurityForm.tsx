@@ -28,7 +28,9 @@ interface Errors {
 
 interface SecurityFormProps {
   formData: FormData;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   handleFileChange: (files: File[]) => void;
   handleRemoveFile: (index: number) => void;
   errors: Errors;
@@ -53,6 +55,14 @@ export default function SecurityForm({
     },
     maxFiles: 5,
     onDrop: (acceptedFiles) => {
+      console.log(
+        "Selected files:",
+        acceptedFiles.map((file) => ({
+          name: file.name,
+          type: file.type,
+          size: `${(file.size / 1024).toFixed(2)} KB`,
+        }))
+      );
       handleFileChange(acceptedFiles);
     },
   });
@@ -203,7 +213,10 @@ export default function SecurityForm({
                   <button
                     aria-label="Hapus File"
                     type="button"
-                    onClick={() => handleRemoveFile(index)}
+                    onClick={() => {
+                      console.log(`Removing file: ${file.name}`);
+                      handleRemoveFile(index);
+                    }}
                     className="text-red-500 hover:text-red-700"
                   >
                     <FaTimes />
