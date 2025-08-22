@@ -6,6 +6,7 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Sidebar from "@components/Sidebar";
 import { BsBookmarksFill } from "react-icons/bs";
+import Header from "@/components/Header";
 
 export default function AboutPage() {
   const pathname = usePathname();
@@ -21,6 +22,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Header: Navbar */}
+      <Header/>
       <Navbar />
 
       {/* Main Content */}

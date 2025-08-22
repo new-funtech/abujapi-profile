@@ -2,18 +2,33 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FiMenu, FiX } from "react-icons/fi";
+import {
+  FiMenu,
+  FiX,
+  FiArrowRight,
+  FiArrowUpRight,
+} from "react-icons/fi";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuTerbuka, setMenuTerbuka] = useState(false);
+  const [hoverHubungi, setHoverHubungi] = useState(false);
+  const pathname = usePathname();
 
   const menuItems = [
-    { name: "Home", href: "#home" },
-    { name: "About Us", href: "/about" },
-    { name: "Services", href: "#services" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "News", href: "#news" },
+    { name: "Beranda", href: "/", exact: true },
+    { name: "Profil", href: "/profil", exact: true },
+    { name: "Keanggotaan", href: "/profil/keanggotaan" },
+    { name: "Galeri", href: "/profil/galeri" },
+    { name: "Berita", href: "/berita" },
   ];
+
+  const isAktif = (href: string, exact?: boolean) => {
+    if (exact) {
+      return pathname === href; 
+    }
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   return (
     <header className="backdrop-blur-md bg-white/80 shadow-sm sticky top-0 z-50 transition-all duration-300">
@@ -21,7 +36,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-3">
           <Image
             src="https://storage.ganipedia.xyz/abujapi/assets/logo.jpeg"
-            alt="ABUJAPI Logo"
+            alt="Logo ABUJAPI"
             width={40}
             height={40}
             className="object-contain"
@@ -33,46 +48,61 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Desktop Menu */}
+        {/* Menu Desktop */}
         <nav className="hidden md:flex space-x-8 text-gray-700 font-medium">
           {menuItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="relative hover:text-green-600 transition-colors duration-300 
-                         after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-green-600 after:left-0 after:-bottom-1 
-                         hover:after:w-full after:transition-all after:duration-300"
+              className={`relative group transition-colors duration-300 ${
+                isAktif(item.href, item.exact)
+                  ? "text-green-600"
+                  : "hover:text-green-600"
+              }`}
             >
               {item.name}
+              <span
+                className={`absolute left-0 -bottom-1 h-[2px] bg-green-600 transition-all duration-300 
+                ${
+                  isAktif(item.href, item.exact)
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              />
             </Link>
           ))}
         </nav>
 
-        {/* Contact Us - Desktop */}
         <div className="hidden md:block">
           <Link
-            href="#contact"
-            className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 
+            href="/profil/kontak"
+            onMouseEnter={() => setHoverHubungi(true)}
+            onMouseLeave={() => setHoverHubungi(false)}
+            className="flex items-center gap-2 bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 
                        shadow-md transition-transform duration-300 hover:scale-105"
           >
-            Contact Us →
+            Hubungi Kami
+            {hoverHubungi ? (
+              <FiArrowUpRight className="text-lg transition-transform duration-300" />
+            ) : (
+              <FiArrowRight className="text-lg transition-transform duration-300" />
+            )}
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuTerbuka(!menuTerbuka)}
           className="md:hidden text-2xl text-gray-700 focus:outline-none"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuTerbuka ? "Tutup menu" : "Buka menu"}
         >
-          {menuOpen ? <FiX /> : <FiMenu />}
+          {menuTerbuka ? <FiX /> : <FiMenu />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Menu Mobile */}
       <div
         className={`md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 overflow-hidden transition-all duration-300 ${
-          menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          menuTerbuka ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav className="flex flex-col space-y-4 px-6 py-4 text-gray-700 font-medium">
@@ -80,18 +110,23 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="hover:text-green-600 transition-colors duration-300"
-              onClick={() => setMenuOpen(false)}
+              className={`transition-colors duration-300 ${
+                isAktif(item.href, item.exact)
+                  ? "text-green-600 font-semibold"
+                  : "hover:text-green-600"
+              }`}
+              onClick={() => setMenuTerbuka(false)}
             >
               {item.name}
             </Link>
           ))}
           <Link
-            href="#contact"
-            className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-all duration-300 text-center shadow-md"
-            onClick={() => setMenuOpen(false)}
+            href="/profil/kontak"
+            className="flex items-center justify-center gap-2 bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
+            onClick={() => setMenuTerbuka(false)}
           >
-            Contact Us →
+            Hubungi Kami
+            <FiArrowUpRight className="text-lg" />
           </Link>
         </nav>
       </div>

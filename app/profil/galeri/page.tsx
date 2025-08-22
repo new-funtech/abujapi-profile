@@ -9,6 +9,7 @@ import { BsBookmarksFill } from "react-icons/bs";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import Head from "next/head";
+import Header from "@/components/Header";
 
 export default function GalleryPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -67,6 +68,7 @@ export default function GalleryPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* SEO Metadata */}
+      <Header/>
       <Head>
         <title>Galeri</title>
         <meta
