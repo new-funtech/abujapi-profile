@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import newsData from "@utils/newsData";
@@ -16,68 +17,69 @@ export default function NewsSection() {
     <section
       id="news"
       aria-label="Berita dan Informasi BPD Abujapi Jabar"
-      className="bg-gray-50 py-12 md:py-24"
+      className="bg-gradient-to-b from-gray-50 to-white py-16 md:py-24"
     >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-4 sm:mb-6">
-          Berita & Informasi Terbaru BPD Abujapi Jabar
-        </h2>
-        <p className="text-gray-600 text-sm sm:text-base md:text-lg text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
-          Dapatkan berita terbaru, agenda kegiatan, dan informasi penting
-          seputar BPD Abujapi Jabar. Simak perkembangan industri pengamanan,
-          keanggotaan, serta program pelatihan dan sertifikasi.
-        </p>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            Berita & Informasi Terbaru
+          </h2>
+          <p className="mt-3 text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+            Dapatkan berita terbaru, agenda kegiatan, serta informasi penting seputar
+            BPD Abujapi Jabar. Selalu up-to-date dengan perkembangan industri.
+          </p>
+        </div>
 
         {/* Swiper */}
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={16} 
+          spaceBetween={24}
           slidesPerView={1}
-          loop={true} 
+          loop={true}
           grabCursor={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          pagination={{ clickable: true, el: '.custom-pagination' }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          pagination={{ clickable: true, el: ".custom-pagination" }}
           breakpoints={{
-            640: { slidesPerView: 1, spaceBetween: 16 },
-            768: { slidesPerView: 2, spaceBetween: 24 },
-            1024: { slidesPerView: 3, spaceBetween: 32 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
           className="relative"
         >
           {newsItems.map((item) => (
             <SwiperSlide key={item.slug}>
-              <div className="group relative bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg">
+              <div className="relative bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col h-full border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
                 {/* Image */}
-                <div className="w-full h-48 sm:h-56 md:h-60 relative">
+                <div className="relative w-full h-52 sm:h-60 md:h-64 overflow-hidden group">
                   <Image
                     src={item.main_image}
                     alt={item.title}
                     fill
                     unoptimized
-                    className="object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover rounded-t-2xl transform transition-transform duration-700 ease-out group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
 
-                {/* Card Content */}
-                <div className="p-4 flex flex-col flex-1">
-                  <h3 className="text-base sm:text-lg md:text-lg font-semibold mb-1 line-clamp-2 text-gray-800">
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-gray-900 group-hover:text-green-700 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-500 text-xs sm:text-sm mb-2">
+                  <p className="text-gray-500 text-xs sm:text-sm mb-3">
                     {item.date} — {item.location}
                   </p>
 
                   <div className="flex-1">
-                    <p className="text-gray-700 text-sm sm:text-base mb-3 line-clamp-3">
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                       {item.highlights.join(" ")}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {item.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-blue-100 text-blue-800 text-xs sm:text-sm px-2 py-0.5 rounded-full font-medium"
+                          className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded-full font-medium border border-green-200"
                         >
                           {tag}
                         </span>
@@ -89,19 +91,37 @@ export default function NewsSection() {
                     href={item.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-green-600 text-white text-xs sm:text-sm font-semibold py-2 px-3 rounded-lg shadow hover:bg-green-700 hover:shadow-md transition-all duration-300 w-full text-center"
+                    className="group inline-flex items-center justify-center gap-2 bg-green-600 text-white text-sm font-semibold py-2.5 px-4 rounded-xl shadow-md hover:bg-green-700 transition-all duration-300 w-full"
                   >
-                    Detail Berita <FaArrowRight className="ml-1" />
+                    <span>Detail Berita</span>
+                    <span className="relative w-4 h-4">
+                      <FaArrowRight className="absolute inset-0 transition-all duration-300 group-hover:opacity-0 group-hover:translate-x-1" />
+                      <FaArrowUpRightFromSquare className="absolute inset-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1" />
+                    </span>
                   </a>
                 </div>
               </div>
             </SwiperSlide>
           ))}
 
-          {/* Custom Pagination */}
-          <div className="custom-pagination mt-6 flex justify-center"></div>
+          <div className="custom-pagination mt-10 flex justify-center gap-2"></div>
         </Swiper>
       </div>
+
+      <style jsx global>{`
+        .custom-pagination .swiper-pagination-bullet {
+          width: 10px;
+          height: 10px;
+          background: #d1d5db;
+          opacity: 1;
+          transition: all 0.3s ease;
+        }
+        .custom-pagination .swiper-pagination-bullet-active {
+          background: #16a34a;
+          width: 28px;
+          border-radius: 9999px;
+        }
+      `}</style>
     </section>
   );
 }

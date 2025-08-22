@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "storage.ganipedia.xyz",
         port: "",
-        pathname: "/**", 
+        pathname: "/**",
       },
     ],
   },
