@@ -3,7 +3,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
-import logoImage from "@/public/images/logo.png";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,10 +18,9 @@ export default function Navbar() {
   return (
     <header className="backdrop-blur-md bg-white/80 shadow-sm sticky top-0 z-50 transition-all duration-300">
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo */}
         <div className="flex items-center space-x-3">
           <Image
-            src={logoImage}
+            src="https://storage.ganipedia.xyz/abujapi/assets/logo.jpeg"
             alt="ABUJAPI Logo"
             width={40}
             height={40}
