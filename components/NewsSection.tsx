@@ -54,6 +54,7 @@ export default function NewsSection() {
                     src={item.main_image}
                     alt={item.title}
                     fill
+                    unoptimized
                     className="object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>

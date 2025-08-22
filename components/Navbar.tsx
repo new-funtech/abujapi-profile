@@ -26,6 +26,7 @@ export default function Navbar() {
             height={40}
             className="object-contain"
             priority
+            unoptimized
           />
           <span className="font-bold text-lg text-gray-800 tracking-wide">
             ABUJAPI
