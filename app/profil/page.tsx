@@ -85,98 +85,61 @@ export default function AboutPage() {
                 usaha, dan lembaga pendidikan/sertifikasi.
               </p>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                Fungsi Utama BPD ABUJAPI Jabar
+                Tujuan BPD ABUJAPI Jabar
               </h3>
               <ul className="text-sm text-gray-600 leading-relaxed list-disc list-inside space-y-2 mb-4">
                 <li>
-                  <strong>Pembinaan Anggota BUJP</strong>
-                  <ul className="list-circle list-inside ml-4">
-                    <li>
-                      Membantu perusahaan jasa pengamanan agar patuh pada
-                      regulasi (misalnya Perpol No. 4 Tahun 2020 tentang Pam
-                      Swakarsa).
-                    </li>
-                    <li>
-                      Memberikan arahan terkait operasional, standar keamanan,
-                      dan manajemen satpam.
-                    </li>
-                  </ul>
+                  Menghimpun, membina, dan mengembangkan kemampuan, kegiatan,
+                  dan kepentingan Badan Usaha di bidang pengamanan dan
+                  penyelamatan agar menjadi lebih tangguh, profesional, dan
+                  mandiri dalam rangka mewujudkan lingkungan yang aman dan
+                  tertib.
                 </li>
                 <li>
-                  <strong>Konsolidasi & Koordinasi</strong>
-                  <ul className="list-circle list-inside ml-4">
-                    <li>Menjadi forum komunikasi antar-BUJP di Jawa Barat.</li>
-                    <li>
-                      Menyampaikan aspirasi anggota kepada pemerintah pusat
-                      maupun Polri.
-                    </li>
-                  </ul>
+                  Menciptakan dan mengembangkan iklim yang aman dan tertib di
+                  lingkungan dunia usaha yang memungkinkan keikutsertaan
+                  pengusaha berperan secara efektif dalam pembangunan nasional.
                 </li>
                 <li>
-                  <strong>Peningkatan Profesionalisme</strong>
-                  <ul className="list-circle list-inside ml-4">
-                    <li>
-                      Mendorong pelatihan dan sertifikasi satpam (Gada Pratama,
-                      Gada Madya, Gada Utama).
-                    </li>
-                    <li>
-                      Bekerjasama dengan LSP (Lembaga Sertifikasi Profesi) dan
-                      BNSP untuk uji kompetensi.
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <strong>Advokasi & Perlindungan Hukum</strong>
-                  <ul className="list-circle list-inside ml-4">
-                    <li>
-                      Membela kepentingan BUJP jika terjadi masalah hukum,
-                      regulasi, atau konflik ketenagakerjaan.
-                    </li>
-                    <li>
-                      Memberikan masukan kepada pemerintah terkait kebijakan
-                      upah, struktur skala upah, dan perlindungan tenaga satpam.
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <strong>Kemitraan & Sinergi</strong>
-                  <ul className="list-circle list-inside ml-4">
-                    <li>
-                      Bekerja sama dengan Polri untuk mendukung tugas keamanan
-                      swakarsa.
-                    </li>
-                    <li>
-                      Bermitra dengan KADIN, Disnaker, akademisi, serta
-                      organisasi profesi lainnya.
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <strong>Penguatan Organisasi Daerah</strong>
-                  <ul className="list-circle list-inside ml-4">
-                    <li>
-                      Membentuk Korwil (Koordinator Wilayah) untuk daerah-daerah
-                      di Jawa Barat (Bogor Raya, Purwasuka, Ciayumajakuning,
-                      dll.) agar pembinaan lebih merata.
-                    </li>
-                  </ul>
+                  Mengadakan penelitian, pengembangan, dan kerjasama di bidang
+                  teknologi dan pelayanan jasa pengamanan/penyelamatan pada
+                  tingkat nasional maupun internasional.
                 </li>
               </ul>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                Tujuan Utama
+                Fungsi BPD ABUJAPI Jabar
               </h3>
               <ul className="text-sm text-gray-600 leading-relaxed list-disc list-inside space-y-2 mb-4">
+                <li>Wadah penyalur kegiatan sesuai kepentingan anggota.</li>
                 <li>
-                  Menjadikan BUJP di Jawa Barat lebih profesional, sehat, dan
-                  berdaya saing.
+                  Wadah pembinaan dan pengembangan anggota dalam usaha
+                  mewujudkan tujuan organisasi.
                 </li>
                 <li>
-                  Menjaga kemandirian sektor pengamanan nasional agar tidak
-                  dikuasai oleh perusahaan asing.
+                  Wadah peran serta dalam usaha mensukseskan pembangunan
+                  nasional, khususnya dalam bidang keamanan dan ketertiban
+                  masyarakat.
                 </li>
                 <li>
-                  Memberikan perlindungan, kesejahteraan, dan pengakuan profesi
-                  bagi satpam sebagai tenaga kerja formal.
+                  Sarana penyalur aspirasi anggota dan sebagai sarana komunikasi
+                  sosial timbal balik antar anggota.
+                </li>
+                <li>
+                  Pusat informasi, konsultasi, advokasi, dan fasilitasi
+                  pengusaha jasa pengamanan dan penyelamatan.
+                </li>
+                <li>
+                  Menjembatani kepentingan antara pengguna jasa pengamanan dan
+                  penyelamatan dengan anggota ABUJAPI.
+                </li>
+                <li>
+                  Mitra Pemerintah/Kepolisian Negara Republik Indonesia dalam
+                  menetapkan kualifikasi perusahaan di bidang pengamanan dan
+                  penyelamatan serta pengawasan standar peningkatan mutu.
+                </li>
+                <li>
+                  Melaksanakan sertifikasi bagi perusahaan-perusahaan yang
+                  terkait dengan jasa pengamanan dan penyelamatan.
                 </li>
               </ul>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
@@ -214,7 +177,6 @@ export default function AboutPage() {
                     BPD Abujapi Jabar Selenggarakan Acara...
                   </Link>
                 </div>
-                {/* Example additional news item */}
                 <div className="border-l-4 border-green-600 pl-4">
                   <p className="text-xs text-gray-500 mb-1">Tue, 24/12/2024</p>
                   <Link
