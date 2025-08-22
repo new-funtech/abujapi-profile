@@ -17,11 +17,11 @@ export default function Header() {
             <span>+62 812-3456-789</span>
           </a>
           <a
-            href="mailto:info@abujapi.or.id"
+            href="mailto:cs@bpdabujapijabar.or.id"
             className="flex items-center gap-2 hover:text-green-200 transition-colors"
           >
             <FiMail className="text-base" />
-            <span>info@abujapi.or.id</span>
+            <span>cs@bpdabujapijabar.or.id</span>
           </a>
         </div>
 
