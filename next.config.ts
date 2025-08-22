@@ -1,12 +1,13 @@
-// next.config.js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "storage.ganipedia.xyz",
-        pathname: "*",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

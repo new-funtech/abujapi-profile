@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     creator: "@usernameTwitter",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "https://storage.ganipedia.xyz/abujapi/assets/logo.ico",
     apple: "/apple-touch-icon.png",
-    shortcut: "/favicon.ico",
+    shortcut: "https://storage.ganipedia.xyz/abujapi/assets/logo.ico",
   },
   robots: {
     index: true,
