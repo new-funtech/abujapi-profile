@@ -76,7 +76,7 @@ export default function VisiMisiPage() {
                 transition={{ duration: 0.6 }}
                 className="text-2xl font-bold text-gray-800 mb-4"
               >
-                Visi, Misi, Tujuan, dan Fungsi ABUJAPI
+                Visi dan Misi
               </motion.h2>
               <div className="space-y-6 text-sm text-gray-600 leading-relaxed">
                 <div>
@@ -136,71 +136,6 @@ export default function VisiMisiPage() {
                       menetapkan kualifikasi perusahaan bidang jasa pengamanan
                       dan/atau pengawasan terhadap kualitas standar peningkatan
                       mutu perusahaan.
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    Tujuan
-                  </h3>
-                  <ul className="list-disc list-inside space-y-2">
-                    <li>
-                      Menghimpun, membina, dan mengembangkan kemampuan,
-                      kegiatan, dan kepentingan Badan Usaha di bidang pengamanan
-                      dan penyelamatan agar menjadi lebih tangguh, profesional,
-                      dan mandiri dalam rangka mewujudkan lingkungan yang aman
-                      dan tertib.
-                    </li>
-                    <li>
-                      Menciptakan dan mengembangkan iklim yang aman dan tertib
-                      di lingkungan dunia usaha yang memungkinkan keikutsertaan
-                      pengusaha berperan secara efektif dalam pembangunan
-                      nasional.
-                    </li>
-                    <li>
-                      Mengadakan penelitian, pengembangan, dan kerjasama di
-                      bidang teknologi dan pelayanan jasa
-                      pengamanan/penyelamatan pada tingkat nasional maupun
-                      internasional.
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    Fungsi
-                  </h3>
-                  <ul className="list-disc list-inside space-y-2">
-                    <li>Wadah penyalur kegiatan sesuai kepentingan anggota.</li>
-                    <li>
-                      Wadah pembinaan dan pengembangan anggota dalam usaha
-                      mewujudkan tujuan organisasi.
-                    </li>
-                    <li>
-                      Wadah peran serta dalam usaha mensukseskan pembangunan
-                      nasional, khususnya dalam bidang keamanan dan ketertiban
-                      masyarakat.
-                    </li>
-                    <li>
-                      Sarana penyalur aspirasi anggota dan sebagai sarana
-                      komunikasi sosial timbal balik antar anggota.
-                    </li>
-                    <li>
-                      Pusat informasi, konsultasi, advokasi, dan fasilitasi
-                      pengusaha jasa pengamanan dan penyelamatan.
-                    </li>
-                    <li>
-                      Menjembatani kepentingan antara pengguna jasa pengamanan
-                      dan penyelamatan dengan anggota ABUJAPI.
-                    </li>
-                    <li>
-                      Mitra Pemerintah/Kepolisian Negara Republik Indonesia
-                      dalam menetapkan kualifikasi perusahaan di bidang
-                      pengamanan dan penyelamatan serta pengawasan standar
-                      peningkatan mutu.
-                    </li>
-                    <li>
-                      Melaksanakan sertifikasi bagi perusahaan-perusahaan yang
-                      terkait dengan jasa pengamanan dan penyelamatan.
                     </li>
                   </ul>
                 </div>

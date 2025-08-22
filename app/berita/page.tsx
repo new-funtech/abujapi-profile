@@ -1,66 +1,72 @@
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import newsData from "@utils/newsData";
-import Header from "@/components/Header";
-import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import Link from "next/link";
+import { BsBookmarksFill } from "react-icons/bs";
 
 export default function NewsPage() {
   const newsList = newsData();
 
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
-      <Header />
       <Navbar />
 
-      <section className="flex-1 container mx-auto px-6 py-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-          Berita Terbaru
-        </h1>
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {newsList.map((news) => (
-            <article
-              key={news.slug}
-              className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
-            >
-              {/* Gambar */}
-              <img
-                src={news.main_image}
-                alt={news.title}
-                className="w-full h-48 object-cover"
-              />
-
-              {/* Konten */}
-              <div className="flex flex-col flex-1 p-6">
-                <h2 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2">
-                  {news.title}
-                </h2>
-
-                <div className="flex items-center text-gray-500 text-sm mb-3 space-x-4">
-                  <span className="flex items-center gap-1">
-                    <FaCalendarAlt className="text-green-600" /> {news.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <FaMapMarkerAlt className="text-green-600" /> {news.location}
-                  </span>
-                </div>
-
-                <p className="text-gray-600 text-sm flex-1 line-clamp-3 mb-4">
-                  {news.highlights.join(" ")}
-                </p>
-
-                <a
-                  href={news.source_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-block bg-green-600 text-white px-4 py-2 rounded-full font-medium text-sm text-center shadow hover:bg-green-700 hover:scale-105 transition-transform duration-300"
+      {/* Subheader: Breadcrumb Navigation */}
+      <section className="bg-gray-100 py-4">
+        <div className="max-w-screen-2xl mx-auto px-6">
+          <nav
+            className="text-sm text-gray-600 font-medium flex items-center mx-22"
+            aria-label="Breadcrumb"
+          >
+            <span className="text-gray-600 mr-2" aria-label="Bookmark Berita">
+              <BsBookmarksFill className="w-4 h-4" />
+            </span>
+            <ol className="flex items-center space-x-2">
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-green-600 transition-colors duration-300"
                 >
-                  Baca Selengkapnya →
-                </a>
-              </div>
-            </article>
-          ))}
+                  Beranda
+                </Link>
+              </li>
+              <li className="text-gray-400">/</li>
+              <li>
+                <span
+                  className="text-green-600 font-semibold"
+                  aria-current="page"
+                >
+                  Berita
+                </span>
+              </li>
+            </ol>
+          </nav>
         </div>
+      </section>
+
+      <section className="flex-1 container mx-auto p-4">
+        {newsList.map((news) => (
+          <article key={news.slug} className="mb-8 p-4 bg-white rounded shadow">
+            <img
+              src={news.main_image}
+              alt={news.title}
+              className="w-full h-64 object-cover rounded mb-4"
+            />
+            <h2 className="text-xl font-bold mb-2">{news.title}</h2>
+            <p className="text-gray-500 text-sm mb-2">
+              {news.date} — {news.location}
+            </p>
+            <p className="mb-2">{news.highlights.join(" ")}</p>
+            <a
+              href={news.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Read more
+            </a>
+          </article>
+        ))}
       </section>
 
       <Footer />

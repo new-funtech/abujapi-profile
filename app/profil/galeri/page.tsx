@@ -68,7 +68,7 @@ export default function GalleryPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* SEO Metadata */}
-      <Header/>
+      <Header />
       <Head>
         <title>Galeri</title>
         <meta
@@ -89,7 +89,7 @@ export default function GalleryPage() {
         <section className="bg-gray-100 py-4">
           <div className="max-w-screen-2xl mx-auto px-6">
             <nav
-              className="text-xs text-gray-600 font-medium flex items-center mx-22"
+              className="text-sm text-gray-600 font-medium flex items-center mx-22"
               aria-label="Breadcrumb"
             >
               <span className="text-gray-600 mr-2" aria-label="Bookmark Galeri">
