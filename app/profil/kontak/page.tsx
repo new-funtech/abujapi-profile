@@ -5,7 +5,7 @@ import { useState } from "react";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Head from "next/head";
-import { BsEnvelopeFill, BsSendFill } from "react-icons/bs";
+import { BsEnvelopeFill, BsSendFill, BsBookmarksFill } from "react-icons/bs";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -53,7 +53,7 @@ export default function ContactPage() {
               aria-label="Breadcrumb"
             >
               <span className="text-gray-600 mr-2" aria-label="Bookmark Kontak">
-                <BsEnvelopeFill className="w-4 h-4" />
+                <BsBookmarksFill className="w-4 h-4" />
               </span>
               <ol className="flex items-center space-x-2">
                 <li>
