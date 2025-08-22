@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["storage.ganipedia.xyz"], 
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.ganipedia.xyz",
+        port: "",
+        pathname: "/**", 
+      },
+    ],
   },
 };
 
