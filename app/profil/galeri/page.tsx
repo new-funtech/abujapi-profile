@@ -105,10 +105,10 @@ export default function GalleryPage() {
                 <li className="text-gray-400">/</li>
                 <li>
                   <Link
-                    href="/about"
+                    href="/profil"
                     className="hover:text-green-600 transition-colors duration-300"
                   >
-                    About
+                    Profil
                   </Link>
                 </li>
                 <li className="text-gray-400">/</li>
