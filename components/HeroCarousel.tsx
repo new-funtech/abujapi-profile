@@ -15,7 +15,7 @@ export default function HeroCarousel() {
   ];
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-full sm:max-w-md">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -23,14 +23,16 @@ export default function HeroCarousel() {
         loop
       >
         {carouselImages.map((img, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={img}
-              alt={`Carousel ${index + 1}`}
-              width={500} 
-              height={300}
-              priority={index === 0}
-            />
+          <SwiperSlide key={index} className="flex justify-center">
+            <div className="relative w-full h-64 sm:h-80 md:h-96">
+              <Image
+                src={img}
+                alt={`Carousel ${index + 1}`}
+                fill
+                className="object-contain"
+                priority={index === 0}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
