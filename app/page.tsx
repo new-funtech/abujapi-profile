@@ -5,10 +5,12 @@ import ServicesSection from "@components/ServicesSection";
 import GallerySection from "@components/GallerySection";
 import NewsSection from "@components/NewsSection";
 import Footer from "@components/Footer";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
+      <Header/>
       <Navbar />
       <HeroSection />
       <AboutSection />
