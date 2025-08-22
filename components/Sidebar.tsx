@@ -14,7 +14,7 @@ export default function Sidebar({ pathname }: SidebarProps) {
     // { name: "Manajemen", href: "/profil/manajemen" },
     { name: "Galeri", href: "/profil/galeri" },
     { name: "Berita", href: "/berita" },
-    { name: "Kontak", href: "/kontak" },
+    { name: "Kontak", href: "/profil/kontak" },
   ];
 
   return (
