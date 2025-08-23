@@ -1,60 +1,37 @@
-export interface ComplaintFormData {
-  reporter_name: string;
-  reporter_company: string;
-  reporter_phone: string;
-  reporter_address: string;
-  complaint_type: string;
-  complaint_content: string;
-  reported_personnel_name: string;
-  location: string;
-  related_company: string;
-  evidence_document: File[];
-}
+import {
+  ComplaintFormData,
+  ApiResponse,
+  BujpPaginatedResponse,
+} from "../types/interface";
 
-export interface ApiResponse {
-  message?: string;
-  errors?: Record<string, string[]>;
-  [key: string]: unknown;
-}
-
+/**
+ * Submit a complaint
+ * @param data - complaint form data
+ */
 export async function submitComplaint(
   data: ComplaintFormData
 ): Promise<ApiResponse> {
-  const formDataToSend = new FormData();
+  const formData = new FormData();
 
-  Object.entries(data).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(data)) {
     if (key === "evidence_document" && Array.isArray(value)) {
-      value.forEach((file, index) => {
-        formDataToSend.append("evidence_document[]", file);
-        console.log(`Appending file ${index + 1}:`, {
-          name: file.name,
-          type: file.type,
-          size: `${(file.size / 1024).toFixed(2)} KB`,
-        });
+      value.forEach((file) => {
+        formData.append("evidence_document[]", file);
       });
     } else if (typeof value === "string") {
-      formDataToSend.append(key, value);
+      formData.append(key, value);
     }
-  });
+  }
 
-  console.log("FormData to be sent:", {
-    fields: Object.fromEntries(formDataToSend),
-    files: data.evidence_document.map((file, index) => ({
-      index: index + 1,
-      name: file.name,
-      type: file.type,
-      size: `${(file.size / 1024).toFixed(2)} KB`,
-    })),
-  });
+  const apiUrl = "https://api.gada86.id/api/complaints";
 
   try {
-    // const response = await fetch("http://127.0.0.1:8000/api/complaints", {
-    const response = await fetch("https://api.gada86.id/api/complaints", {
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body: formDataToSend,
+      body: formData,
     });
 
     const result: ApiResponse = await response.json();
@@ -63,19 +40,50 @@ export async function submitComplaint(
       const errorMessage =
         result.errors?.evidence_document?.join(", ") ||
         result.message ||
-        "Gagal mengirim pengaduan. Silakan coba lagi.";
+        "Failed to submit complaint. Please try again.";
       throw new Error(errorMessage);
     }
 
-    console.log("Submission successful:", result);
     return result;
   } catch (error: unknown) {
-    console.error("Error during submission:", error);
     if (error instanceof Error) {
+      throw new Error(error.message || "Error submitting complaint.");
+    }
+    throw new Error("Unexpected error submitting complaint.");
+  }
+}
+
+/**
+ * Fetch paginated BUJP data
+ * @param page - page number (default: 1)
+ * @param perPage - items per page (default: 10)
+ */
+export async function fetchBujps(
+  page: number = 1,
+  perPage: number = 10
+): Promise<BujpPaginatedResponse> {
+  const apiUrl = `https://api.gada86.id/api/bujps?page=${page}&per_page=${perPage}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
       throw new Error(
-        error.message || "Terjadi kesalahan saat mengirim pengaduan."
+        `Failed to fetch BUJP data: ${response.status} ${response.statusText}`
       );
     }
-    throw new Error("Terjadi kesalahan tak terduga saat mengirim pengaduan.");
+
+    const result: BujpPaginatedResponse = await response.json();
+    return result;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "Error fetching BUJP data.");
+    }
+    throw new Error("Unexpected error fetching BUJP data.");
   }
 }
