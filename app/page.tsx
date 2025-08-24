@@ -6,17 +6,28 @@ import GallerySection from "@components/GallerySection";
 import NewsSection from "@components/NewsSection";
 import Footer from "@components/Footer";
 import Header from "@/components/Header";
+import AnimatedSection from "@components/AnimatedSection";
 
 export default function Home() {
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
-      <Header/>
+      <Header />
       <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <GallerySection />
-      <NewsSection />
+      <AnimatedSection>
+        <HeroSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <AboutSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <ServicesSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <GallerySection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <NewsSection />
+      </AnimatedSection>
       <Footer />
     </main>
   );

@@ -7,10 +7,9 @@ import {
   FaCalendarAlt,
   FaCreditCard,
 } from "react-icons/fa";
-import galleryImage1 from "@/public/images/carouselItem1.png";
-import galleryImage2 from "@/public/images/carouselItem2.png";
 import { useState } from "react";
 import ComplaintPage from "@components/ComplaintPage";
+import Link from "next/link";
 
 export default function GallerySection() {
   const infoItems = [
@@ -18,6 +17,13 @@ export default function GallerySection() {
     { icon: <FaUserFriends />, title: "Komunitas", count: "45" },
     { icon: <FaCalendarAlt />, title: "Agenda Acara", count: "50" },
     { icon: <FaCreditCard />, title: "Pembayaran Online", count: "650" },
+  ];
+
+  const galleryImages = [
+    "https://storage.ganipedia.xyz/abujapi/assets/gallery6.jpeg",
+    "https://storage.ganipedia.xyz/abujapi/assets/gallery7.jpeg",
+    "https://storage.ganipedia.xyz/abujapi/assets/gallery8.jpeg",
+    "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
   ];
 
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
@@ -32,21 +38,32 @@ export default function GallerySection() {
       <div className="space-y-12 md:space-y-20">
         {/* Bagian 1: Penguatan Kompetensi Satpam */}
         <div className="max-w-screen-xl mx-auto px-12 flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-[5] max-w-[280px]">
-            <Image
-              src={galleryImage1}
-              alt="Penguatan Kompetensi Satpam"
-              width={280}
-              height={168}
-              className="w-full h-auto rounded-lg object-contain"
-            />
+          <div className="flex-[5] relative bg-white rounded-2xl shadow-sm overflow-hidden h-[400px] border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+            <div className="relative w-full h-full overflow-hidden group">
+              <Image
+                src="https://storage.ganipedia.xyz/abujapi/assets/gallery1.jpeg"
+                alt="Penguatan Kompetensi Satpam"
+                fill
+                unoptimized
+                className="object-cover rounded-2xl transform transition-transform duration-700 ease-out group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-5">
+                <h3 className="text-xl md:text-2xl font-semibold text-white mb-1 line-clamp-2">
+                  Penguatan Kompetensi Satpam
+                </h3>
+                <p className="text-sm text-gray-200 line-clamp-2">
+                  Program pelatihan dan sertifikasi untuk meningkatkan
+                  profesionalisme Satpam.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="flex-[7] text-center md:text-left">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
               Penguatan Kompetensi Satpam
             </h3>
-            <p className="text-gray-600 mb-4 text-base md:text-lg">
-              PD ABUJAPI Jawa Barat berkomitmen untuk terus meningkatkan
+            <p className="text-gray-600 mb-4 text-base md:text-lg text-justify">
+              BPD ABUJAPI Jawa Barat berkomitmen untuk terus meningkatkan
               kompetensi dan profesionalisme Satuan Pengamanan (Satpam) melalui
               pelatihan, sertifikasi, dan uji kompetensi yang sesuai dengan
               standar nasional. Program ini mencakup pembekalan keterampilan
@@ -57,7 +74,7 @@ export default function GallerySection() {
               profesional di berbagai lingkungan kerja.
             </p>
             <a
-              href="#"
+              href="/profil"
               className="inline-block bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition-colors text-base"
             >
               Learn More
@@ -66,54 +83,75 @@ export default function GallerySection() {
         </div>
 
         {/* Bagian 2: Kemitraan Strategis */}
-        <div className="bg-gray-50 w-full py-10 md:py-12">
-          <div className="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row items-center gap-6">
-            <div className="flex-1 text-center md:text-left px-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                Kemitraan Strategis
-              </h3>
-              <p className="text-gray-600 mb-4 text-base md:text-lg">
-                Kerja sama dengan kepolisian, pemerintah, dan swasta untuk
-                memperluas peran Satpam.
-              </p>
-            </div>
-            <div className="flex-1 grid grid-cols-2 gap-4 px-4">
+        <div className="bg-gradient-to-b from-gray-50 to-white w-full py-10 md:py-12">
+          <div className="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
               {infoItems.map((item, index) => (
                 <div
                   key={index}
-                  className="p-4 rounded-lg flex items-center space-x-3"
+                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
-                  <div className="text-3xl md:text-4xl text-green-600">
-                    {item.icon}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white rounded-full p-3">
+                    <div className="text-2xl md:text-3xl">{item.icon}</div>
                   </div>
-                  <div>
-                    <p className="text-gray-600 font-semibold text-lg">
+                  <div className="text-center pt-10">
+                    <p className="text-gray-800 font-bold text-xl md:text-2xl">
                       {item.count}
                     </p>
-                    <h4 className="text-sm text-gray-500">{item.title}</h4>
+                    <h4 className="text-sm md:text-base text-gray-600 font-medium mt-2">
+                      {item.title}
+                    </h4>
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="flex-1 text-center md:text-left px-4">
+              <div className="grid grid-cols-2 gap-4">
+                {galleryImages.map((image, index) => (
+                  <Link key={index} href="/profil/galeri">
+                    <div className="relative bg-white rounded-xl shadow-md overflow-hidden h-[200px] border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                      <Image
+                        src={image}
+                        alt={`Gallery Image ${index + 1}`}
+                        fill
+                        unoptimized
+                        className="object-cover rounded-xl transform transition-transform duration-500 ease-out hover:scale-105"
+                      />
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bagian 3: Digitalisasi Layanan */}
         <div className="max-w-screen-xl mx-auto px-12 flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-[5] max-w-[280px]">
-            <Image
-              src={galleryImage2}
-              alt="Digitalisasi Layanan"
-              width={280}
-              height={168}
-              className="w-full h-auto rounded-lg object-contain"
-            />
+          <div className="flex-[5] relative bg-white rounded-2xl shadow-sm overflow-hidden h-[400px] border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+            <div className="relative w-full h-full overflow-hidden group">
+              <Image
+                src="https://storage.ganipedia.xyz/abujapi/assets/gallery2.jpeg"
+                alt="Digitalisasi Layanan"
+                fill
+                unoptimized
+                className="object-cover rounded-2xl transform transition-transform duration-700 ease-out group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-5">
+                <h3 className="text-xl md:text-2xl font-semibold text-white mb-1 line-clamp-2">
+                  Digitalisasi Layanan
+                </h3>
+                <p className="text-sm text-gray-200 line-clamp-2">
+                  Sistem berbasis web untuk administrasi dan pelaporan yang
+                  efisien.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="flex-[7] text-center md:text-left">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
               Digitalisasi Layanan
             </h3>
-            <p className="text-gray-600 mb-4 text-base md:text-lg">
+            <p className="text-gray-600 mb-4 text-base md:text-lg text-justify">
               BPD ABUJAPI Jawa Barat berkomitmen untuk menghadirkan layanan yang
               cepat, transparan, dan mudah diakses melalui pemanfaatan teknologi
               digital. Dengan sistem berbasis web, anggota dapat mengurus

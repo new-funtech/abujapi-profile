@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-import { BsPeopleFill } from "react-icons/bs";
+import { BsBookmarksFill } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import Link from "next/link";
 import { Bujp, BujpPaginatedResponse } from "@/types/interface";
@@ -44,7 +44,7 @@ export default function Keanggotaan() {
       try {
         const data: BujpPaginatedResponse = await fetchBujps(
           pageIndex + 1,
-          pageSize,
+          pageSize
         );
 
         await new Promise((resolve) => setTimeout(resolve, 500));
@@ -107,17 +107,23 @@ export default function Keanggotaan() {
       {/* Breadcrumb */}
       <section className="bg-gray-100 py-3 shadow-sm">
         <div className="max-w-screen-2xl mx-auto px-6">
-          <nav className="text-sm text-gray-700 font-medium flex items-center">
-            <BsPeopleFill className="w-4 h-4 mr-2 text-gray-500" />
+          <nav className="text-sm text-gray-700 font-medium flex items-center mx-22">
+            <BsBookmarksFill className="w-4 h-4 mr-2 text-gray-500" />
             <ol className="flex items-center space-x-2">
               <li>
-                <Link href="/" className="hover:text-green-600 transition-colors">
+                <Link
+                  href="/"
+                  className="hover:text-green-600 transition-colors"
+                >
                   Beranda
                 </Link>
               </li>
               <li className="text-gray-400">/</li>
               <li>
-                <Link href="/profil" className="hover:text-green-600 transition-colors">
+                <Link
+                  href="/profil"
+                  className="hover:text-green-600 transition-colors"
+                >
                   Profil
                 </Link>
               </li>
@@ -135,7 +141,9 @@ export default function Keanggotaan() {
           <div className="flex items-center justify-between mb-6 border-b pb-4">
             <div className="flex items-center space-x-3">
               <FiUsers className="w-7 h-7 text-green-600" />
-              <h1 className="text-xl font-semibold text-gray-800">Keanggotaan BUJP</h1>
+              <h1 className="text-xl font-semibold text-gray-800">
+                Keanggotaan BUJP
+              </h1>
             </div>
           </div>
 
@@ -163,8 +171,14 @@ export default function Keanggotaan() {
                     {table.getHeaderGroups().map((headerGroup) => (
                       <tr key={headerGroup.id}>
                         {headerGroup.headers.map((header) => (
-                          <th key={header.id} className="px-4 py-3 text-left font-medium">
-                            {flexRender(header.column.columnDef.header, header.getContext())}
+                          <th
+                            key={header.id}
+                            className="px-4 py-3 text-left font-medium"
+                          >
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                           </th>
                         ))}
                       </tr>
@@ -177,8 +191,14 @@ export default function Keanggotaan() {
                         className="hover:bg-gray-50 transition-colors duration-150"
                       >
                         {row.getVisibleCells().map((cell) => (
-                          <td key={cell.id} className="px-4 py-2 whitespace-nowrap">
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          <td
+                            key={cell.id}
+                            className="px-4 py-2 whitespace-nowrap"
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
                           </td>
                         ))}
                       </tr>
