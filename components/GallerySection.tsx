@@ -37,21 +37,22 @@ export default function GallerySection() {
     >
       <div className="space-y-12 md:space-y-20">
         {/* Bagian 1: Penguatan Kompetensi Satpam */}
-        <div className="max-w-screen-xl mx-auto px-12 flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-[5] relative bg-white rounded-2xl shadow-sm overflow-hidden h-[400px] border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
-            <div className="relative w-full h-full overflow-hidden group">
+        <div className="w-full max-w-screen-xl mx-auto px-6 md:px-18 flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-[5] w-full relative bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 md:rounded-2xl">
+            <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[400px] overflow-hidden group">
               <Image
                 src="https://storage.ganipedia.xyz/abujapi/assets/gallery1.jpeg"
                 alt="Penguatan Kompetensi Satpam"
-                fill
+                width={500}
+                height={400}
                 unoptimized
-                className="object-cover rounded-2xl transform transition-transform duration-700 ease-out group-hover:scale-110"
+                className="object-cover rounded-2xl w-full h-full transform transition-transform duration-700 ease-out group-hover:scale-110 md:rounded-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-5">
-                <h3 className="text-xl md:text-2xl font-semibold text-white mb-1 line-clamp-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-1 line-clamp-2">
                   Penguatan Kompetensi Satpam
                 </h3>
-                <p className="text-sm text-gray-200 line-clamp-2">
+                <p className="text-xs sm:text-sm text-gray-200 line-clamp-2">
                   Program pelatihan dan sertifikasi untuk meningkatkan
                   profesionalisme Satpam.
                 </p>
@@ -84,8 +85,8 @@ export default function GallerySection() {
 
         {/* Bagian 2: Kemitraan Strategis */}
         <div className="bg-gradient-to-b from-gray-50 to-white w-full py-10 md:py-12">
-          <div className="max-w-screen-xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-18 flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1 grid grid-cols-2 gap-4 sm:gap-6 px-2 md:px-4">
               {infoItems.map((item, index) => (
                 <div
                   key={index}
@@ -105,17 +106,18 @@ export default function GallerySection() {
                 </div>
               ))}
             </div>
-            <div className="flex-1 text-center md:text-left px-4">
+            <div className="flex-1 text-center md:text-left px-2 md:px-4">
               <div className="grid grid-cols-2 gap-4">
                 {galleryImages.map((image, index) => (
                   <Link key={index} href="/profil/galeri">
-                    <div className="relative bg-white rounded-xl shadow-md overflow-hidden h-[200px] border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="relative rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                       <Image
                         src={image}
                         alt={`Gallery Image ${index + 1}`}
-                        fill
+                        width={500}
+                        height={400}
                         unoptimized
-                        className="object-cover rounded-xl transform transition-transform duration-500 ease-out hover:scale-105"
+                        className="object-cover rounded-xl w-full h-[20vh] sm:h-[30vh] md:h-[200px] transform transition-transform duration-500 ease-out hover:scale-105"
                       />
                     </div>
                   </Link>
@@ -126,21 +128,22 @@ export default function GallerySection() {
         </div>
 
         {/* Bagian 3: Digitalisasi Layanan */}
-        <div className="max-w-screen-xl mx-auto px-12 flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-[5] relative bg-white rounded-2xl shadow-sm overflow-hidden h-[400px] border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
-            <div className="relative w-full h-full overflow-hidden group">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-18 flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-[5] relative bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+            <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[400px] overflow-hidden group">
               <Image
                 src="https://storage.ganipedia.xyz/abujapi/assets/gallery2.jpeg"
                 alt="Digitalisasi Layanan"
-                fill
+                width={500}
+                height={400}
                 unoptimized
-                className="object-cover rounded-2xl transform transition-transform duration-700 ease-out group-hover:scale-110"
+                className="object-cover rounded-2xl w-full h-full transform transition-transform duration-700 ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-5">
-                <h3 className="text-xl md:text-2xl font-semibold text-white mb-1 line-clamp-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-1 line-clamp-2">
                   Digitalisasi Layanan
                 </h3>
-                <p className="text-sm text-gray-200 line-clamp-2">
+                <p className="text-xs sm:text-sm text-gray-200 line-clamp-2">
                   Sistem berbasis web untuk administrasi dan pelaporan yang
                   efisien.
                 </p>
