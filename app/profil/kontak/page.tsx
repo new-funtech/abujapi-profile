@@ -162,6 +162,7 @@ export default function ContactPage() {
                 fill
                 className="object-contain"
                 priority
+                unoptimized
               />
             </div>
           </div>
@@ -290,6 +291,7 @@ export default function ContactPage() {
                         alt="Phone Icon"
                         fill
                         className="object-contain"
+                        unoptimized
                       />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-800">
@@ -310,6 +312,7 @@ export default function ContactPage() {
                         alt="Social Media Icon"
                         fill
                         className="object-contain"
+                        unoptimized
                       />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-800">
