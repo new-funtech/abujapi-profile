@@ -42,6 +42,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             src={slide.image}
             alt={`Slide ${index + 1}`}
             fill
+            unoptimized
             className="object-cover"
             priority={index === 0}
           />
