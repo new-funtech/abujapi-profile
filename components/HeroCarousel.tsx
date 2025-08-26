@@ -15,13 +15,9 @@ type Slide = {
 
 type HeroCarouselProps = {
   slides: Slide[];
-  onSecondaryBtnClick?: (link: string | null) => void;
 };
 
-export default function HeroCarousel({
-  slides,
-  onSecondaryBtnClick,
-}: HeroCarouselProps) {
+export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const [current, setCurrent] = useState(0);
 
   // Auto slide
@@ -70,21 +66,21 @@ export default function HeroCarousel({
               {slides[current].description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={slides[current].primaryBtn.link || "#"}
-                className="inline-block border border-white text-white px-6 py-3 rounded-xl hover:bg-white/20 transition-all text-sm sm:text-base"
-              >
-                {slides[current].primaryBtn.text}
-              </a>
+              {slides[current].primaryBtn.text && (
+                <a
+                  href={slides[current].primaryBtn.link || "#"}
+                  className="inline-block border border-white text-white px-6 py-3 rounded-xl hover:bg-white/20 transition-all text-sm sm:text-base"
+                >
+                  {slides[current].primaryBtn.text}
+                </a>
+              )}
               {slides[current].secondaryBtn.text && (
-                <button
-                  onClick={() =>
-                    onSecondaryBtnClick?.(slides[current].secondaryBtn.link)
-                  }
+                <a
+                  href={slides[current].secondaryBtn.link || "#"}
                   className="inline-block border border-white text-white px-6 py-3 rounded-xl hover:bg-white/20 transition-all text-sm sm:text-base"
                 >
                   {slides[current].secondaryBtn.text}
-                </button>
+                </a>
               )}
             </div>
           </motion.div>

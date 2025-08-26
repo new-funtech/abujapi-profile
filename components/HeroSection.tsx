@@ -1,8 +1,6 @@
 // components/HeroSection.tsx
 "use client";
 
-import { useState } from "react";
-import ComplaintPage from "@components/ComplaintPage";
 import HeroCarousel from "@components/HeroCarousel";
 
 const slides = [
@@ -34,7 +32,7 @@ const slides = [
     description:
       "Menjadi wadah komunikasi dan koordinasi antar perusahaan jasa pengamanan di Jawa Barat.",
     primaryBtn: { text: "Gabung Sekarang", link: "/profil/keanggotaan" },
-    secondaryBtn: { text: "Tentang Kami", link: "/profil" },
+    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
   },
   {
     image: "https://storage.ganipedia.xyz/abujapi/assets/gallery8.jpeg",
@@ -46,34 +44,16 @@ const slides = [
         </span>
       </>
     ),
-    description:
-      "Lihat program kami atau ajukan pengaduan dengan mudah dan cepat.",
+    description: "Lihat program kami secara mudah dan cepat.",
     primaryBtn: { text: "Lihat Program", link: "/profil/galeri" },
-    secondaryBtn: { text: "Buat Pengaduan", link: null }, // pakai state
+    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
   },
 ];
 
 export default function HeroSection() {
-  const [isComplaintOpen, setIsComplaintOpen] = useState(false);
-
-  const handleSecondaryBtnClick = (link: string | null) => {
-    if (link) {
-      window.location.href = link;
-    } else {
-      setIsComplaintOpen(true);
-    }
-  };
-
   return (
     <section id="home" role="banner">
-      <HeroCarousel
-        slides={slides}
-        onSecondaryBtnClick={handleSecondaryBtnClick}
-      />
-      <ComplaintPage
-        isOpen={isComplaintOpen}
-        onClose={() => setIsComplaintOpen(false)}
-      />
+      <HeroCarousel slides={slides} />
     </section>
   );
 }
