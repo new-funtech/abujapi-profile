@@ -32,7 +32,7 @@ export default function Navbar() {
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-3">
             <Image
-              src="https://storage.ganipedia.xyz/abujapi/assets/logo.jpeg"
+              src="https://storage.ganipedia.xyz/abujapi/assets/logo.png"
               alt="Logo ABUJAPI"
               width={40}
               height={40}
