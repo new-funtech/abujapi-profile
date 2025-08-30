@@ -4,7 +4,7 @@ import newsData from "@utils/newsData";
 import Link from "next/link";
 import { BsBookmarksFill } from "react-icons/bs";
 import { FaCalendarAlt, FaMapMarkerAlt, FaArrowRight } from "react-icons/fa";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 
 export default function NewsPage() {
   const newsList = newsData();

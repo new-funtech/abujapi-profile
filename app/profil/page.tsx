@@ -6,7 +6,7 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Sidebar from "@components/Sidebar";
 import { BsBookmarksFill } from "react-icons/bs";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 
 export default function AboutPage() {
   const pathname = usePathname();

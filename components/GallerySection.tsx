@@ -1,15 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import {
-  FaUsers,
-  FaUserFriends,
-  FaCalendarAlt,
-  FaCreditCard,
-} from "react-icons/fa";
 import { useState } from "react";
 import ComplaintPage from "@components/ComplaintPage";
-import Link from "next/link";
 
 export default function GallerySection() {
   // const infoItems = [

@@ -6,7 +6,7 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Head from "next/head";
 import { BsEnvelopeFill, BsSendFill, BsBookmarksFill } from "react-icons/bs";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import Image from "next/image";
 
 const sectionVariants: Variants = {

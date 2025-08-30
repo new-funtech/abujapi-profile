@@ -5,7 +5,7 @@ import ServicesSection from "@components/ServicesSection";
 import GallerySection from "@components/GallerySection";
 import NewsSection from "@components/NewsSection";
 import Footer from "@components/Footer";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import AnimatedSection from "@components/AnimatedSection";
 
 export default function Home() {

@@ -9,7 +9,7 @@ import { BsBookmarksFill } from "react-icons/bs";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import Head from "next/head";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 
 export default function GalleryPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
