@@ -11,7 +11,7 @@ export default function NewsPage() {
 
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
-      <Header/>
+      {/* <Header/> */}
       <Navbar />
 
       {/* Breadcrumb */}
@@ -47,7 +47,9 @@ export default function NewsPage() {
 
       {/* News List */}
       <section className="flex-1 max-w-screen-xl mx-auto px-6 py-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">Berita Terbaru</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">
+          Berita Terbaru
+        </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsList.map((news) => (

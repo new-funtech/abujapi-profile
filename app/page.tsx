@@ -11,22 +11,22 @@ import AnimatedSection from "@components/AnimatedSection";
 export default function Home() {
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
-      <Header />
       <Navbar />
       <AnimatedSection>
         <HeroSection />
       </AnimatedSection>
+
       <AnimatedSection>
-        <AboutSection />
+        <GallerySection />
       </AnimatedSection>
       <AnimatedSection>
         <ServicesSection />
       </AnimatedSection>
       <AnimatedSection>
-        <GallerySection />
+        <NewsSection />
       </AnimatedSection>
       <AnimatedSection>
-        <NewsSection />
+        <AboutSection />
       </AnimatedSection>
       <Footer />
     </main>

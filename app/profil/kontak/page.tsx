@@ -68,7 +68,7 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
+      {/* <Header /> */}
       <Head>
         <title>Kontak Kami</title>
         <meta

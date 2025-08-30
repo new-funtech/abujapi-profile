@@ -20,7 +20,7 @@ const slides = [
     secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
   },
   {
-    image: "https://storage.ganipedia.xyz/abujapi/assets/gallery6.jpeg",
+    image: "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
     title: (
       <>
         Jaringan <br /> Pengusaha Jasa Pengamanan <br />

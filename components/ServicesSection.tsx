@@ -15,26 +15,26 @@ export default function ServicesSection() {
       subtitle:
         "Sertifikasi Gada Pratama untuk satpam sesuai Perpol No. 4/2020.",
     },
-    {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery2.jpeg",
-      title: "Advokasi & Hukum",
-      subtitle: "Pendampingan hukum dan pengurusan SIO untuk BUJP.",
-    },
-    {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery3.jpeg",
-      title: "Konsolidasi & Jaringan",
-      subtitle: "Membangun jejaring antar BUJP dan pihak eksternal.",
-    },
-    {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery4.jpeg",
-      title: "Promosi Jasa Lokal",
-      subtitle: "Dorong penggunaan BUJP lokal bersama KADIN Jabar.",
-    },
-    {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery5.jpeg",
-      title: "Pengembangan Organisasi",
-      subtitle: "Program strategis melalui Rakerda untuk BUJP.",
-    },
+    // {
+    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery2.jpeg",
+    //   title: "Advokasi & Hukum",
+    //   subtitle: "Pendampingan hukum dan pengurusan SIO untuk BUJP.",
+    // },
+    // {
+    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery3.jpeg",
+    //   title: "Konsolidasi & Jaringan",
+    //   subtitle: "Membangun jejaring antar BUJP dan pihak eksternal.",
+    // },
+    // {
+    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery4.jpeg",
+    //   title: "Promosi Jasa Lokal",
+    //   subtitle: "Dorong penggunaan BUJP lokal bersama KADIN Jabar.",
+    // },
+    // {
+    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery5.jpeg",
+    //   title: "Pengembangan Organisasi",
+    //   subtitle: "Program strategis melalui Rakerda untuk BUJP.",
+    // },
     {
       image: "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
       title: "Kegiatan Komunitas",
