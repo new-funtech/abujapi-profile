@@ -12,19 +12,19 @@ import ComplaintPage from "@components/ComplaintPage";
 import Link from "next/link";
 
 export default function GallerySection() {
-  const infoItems = [
-    { icon: <FaUsers />, title: "Anggota", count: "2,245" },
-    { icon: <FaUserFriends />, title: "Komunitas", count: "45" },
-    { icon: <FaCalendarAlt />, title: "Agenda Acara", count: "50" },
-    { icon: <FaCreditCard />, title: "Pembayaran Online", count: "650" },
-  ];
+  // const infoItems = [
+  //   { icon: <FaUsers />, title: "Anggota", count: "2,245" },
+  //   { icon: <FaUserFriends />, title: "Komunitas", count: "45" },
+  //   { icon: <FaCalendarAlt />, title: "Agenda Acara", count: "50" },
+  //   { icon: <FaCreditCard />, title: "Pembayaran Online", count: "650" },
+  // ];
 
-  const galleryImages = [
-    "https://storage.ganipedia.xyz/abujapi/assets/gallery6.jpeg",
-    "https://storage.ganipedia.xyz/abujapi/assets/gallery7.jpeg",
-    "https://storage.ganipedia.xyz/abujapi/assets/gallery8.jpeg",
-    "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
-  ];
+  // const galleryImages = [
+  //   "https://storage.ganipedia.xyz/abujapi/assets/gallery6.jpeg",
+  //   "https://storage.ganipedia.xyz/abujapi/assets/gallery7.jpeg",
+  //   "https://storage.ganipedia.xyz/abujapi/assets/gallery8.jpeg",
+  //   "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
+  // ];
 
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
 
