@@ -12,7 +12,7 @@ export default function Sidebar({ pathname }: SidebarProps) {
     { name: "Visi dan Misi", href: "/profil/visi-misi" },
     { name: "Keanggotaan", href: "/profil/keanggotaan" },
     // { name: "Manajemen", href: "/profil/manajemen" },
-    { name: "Galeri", href: "/profil/galeri" },
+    { name: "Dokumentasi", href: "/profil/galeri" },
     { name: "Berita", href: "/berita" },
     { name: "Kontak", href: "/profil/kontak" },
   ];

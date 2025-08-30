@@ -17,7 +17,7 @@ export default function GalleryPage() {
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  // Daftar gambar untuk galeri
+  // Daftar gambar untuk Dokumentasi
   const galleryImages = [
     {
       src: "https://storage.ganipedia.xyz/abujapi/assets/gallery1.jpeg",
@@ -68,12 +68,12 @@ export default function GalleryPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* SEO Metadata */}
-      <Header />
+      {/* <Header /> */}
       <Head>
-        <title>Galeri</title>
+        <title>Dokumentasi</title>
         <meta
           name="description"
-          content="Galeri kegiatan BPD ABUJAPI Jabar, termasuk acara, pelantikan, dan sertifikasi."
+          content="Dokumentasi kegiatan BPD ABUJAPI Jabar, termasuk acara, pelantikan, dan sertifikasi."
         />
         {galleryImages.map((image, index) => (
           <link key={index} rel="preload" href={image.src} as="image" />
@@ -92,7 +92,10 @@ export default function GalleryPage() {
               className="text-sm text-gray-600 font-medium flex items-center mx-22"
               aria-label="Breadcrumb"
             >
-              <span className="text-gray-600 mr-2" aria-label="Bookmark Galeri">
+              <span
+                className="text-gray-600 mr-2"
+                aria-label="Bookmark Dokumentasi"
+              >
                 <BsBookmarksFill className="w-4 h-4" />
               </span>
               <ol className="flex items-center space-x-2">
@@ -119,7 +122,7 @@ export default function GalleryPage() {
                     className="text-green-600 font-semibold"
                     aria-current="page"
                   >
-                    Galeri
+                    Dokumentasi
                   </span>
                 </li>
               </ol>
@@ -189,7 +192,9 @@ export default function GalleryPage() {
               }
               imageCaption={galleryImages[selectedImageIndex].alt}
               wrapperClassName="z-50"
-              reactModalProps={{ ariaLabel: "Galeri Gambar ABUJAPI Jabar" }}
+              reactModalProps={{
+                ariaLabel: "Dokumentasi Gambar ABUJAPI Jabar",
+              }}
               imageLoadErrorMessage="Gagal memuat gambar, coba lagi nanti."
               onImageLoad={() => setIsLoading(false)}
             />

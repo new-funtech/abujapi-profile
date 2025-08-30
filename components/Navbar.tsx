@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FiMenu, FiX, FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import ComplaintPage from "@components/ComplaintPage";
+import Header from "./Header";
 
 export default function Navbar() {
   const [menuTerbuka, setMenuTerbuka] = useState(false);
@@ -16,7 +17,7 @@ export default function Navbar() {
     { name: "Beranda", href: "/", exact: true },
     { name: "Profil", href: "/profil", exact: true },
     { name: "Keanggotaan", href: "/profil/keanggotaan" },
-    { name: "Galeri", href: "/profil/galeri" },
+    { name: "Dokumentasi", href: "/profil/galeri" },
     { name: "Berita", href: "/berita" },
     { name: "Kontak", href: "/profil/kontak" },
   ];
@@ -28,14 +29,16 @@ export default function Navbar() {
 
   return (
     <>
+      <Header />
+
       <header className="backdrop-blur-md bg-white/80 shadow-sm sticky top-0 z-50 transition-all duration-300">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-3">
             <Image
               src="https://storage.ganipedia.xyz/abujapi/assets/logo.png"
               alt="Logo ABUJAPI"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               className="object-contain"
               priority
               unoptimized
