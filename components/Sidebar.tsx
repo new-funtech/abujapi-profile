@@ -7,7 +7,7 @@ interface SidebarProps {
 
 export default function Sidebar({ pathname }: SidebarProps) {
   const menuItems = [
-    { name: "Tentang", href: "/profil" },
+    { name: "Tentang Kami", href: "/profil" },
     { name: "Sejarah Perusahaan", href: "/profil/sejarah" },
     { name: "Visi dan Misi", href: "/profil/visi-misi" },
     { name: "Keanggotaan", href: "/profil/keanggotaan" },
