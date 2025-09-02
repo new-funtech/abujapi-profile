@@ -71,7 +71,7 @@ export default function Navbar() {
             {menuItems.map((item) => (
               <div
                 key={item.name}
-                className="relative group"
+                className="relative group py-2"
                 onMouseEnter={() =>
                   item.isDropdown && setIsProfilDropdownOpen(true)
                 }
@@ -105,7 +105,7 @@ export default function Navbar() {
                 </Link>
                 {item.isDropdown && (
                   <div
-                    className={`absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 z-50 transition-all duration-300 ease-in-out transform border-l-4 border-[#2c3691] ${
+                    className={`absolute top-full left-0 mt-0 w-64 bg-white shadow-lg rounded-md py-2 z-50 transition-all duration-300 ease-in-out transform border-l-4 border-[#2c3691] ${
                       isProfilDropdownOpen
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 -translate-y-2 pointer-events-none"
@@ -181,16 +181,10 @@ export default function Navbar() {
             menuTerbuka ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <nav className="flex flex-col space-y-4 px-6 py-4 text-gray-700 font-medium">
+          <nav className="flex flex-col space-y-1 px-6 py-4 text-gray-700 font-medium">
             {menuItems.map((item) => (
               <div key={item.name}>
-                <div
-                  className="flex items-center justify-between"
-                  onClick={() =>
-                    item.isDropdown &&
-                    setIsProfilDropdownOpen(!isProfilDropdownOpen)
-                  }
-                >
+                <div className="flex items-center justify-between px-4 py-3">
                   <Link
                     href={item.href}
                     className={`transition-colors duration-300 ${
@@ -207,48 +201,40 @@ export default function Navbar() {
                       className={`text-lg transition-transform duration-300 ${
                         isProfilDropdownOpen ? "rotate-180" : ""
                       }`}
+                      onClick={() =>
+                        item.isDropdown &&
+                        setIsProfilDropdownOpen(!isProfilDropdownOpen)
+                      }
                     />
                   )}
                 </div>
                 {item.isDropdown && (
                   <div
-                    className={`pl-4 pt-2 flex flex-col space-y-2 transition-all duration-300 ease-in-out transform border-l-4 border-[#2c3691] w-64 ${
+                    className={`pl-6 pt-2 pb-1 flex flex-col space-y-2 transition-all duration-300 ease-in-out transform w-full ${
                       isProfilDropdownOpen
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 -translate-y-2 h-0 overflow-hidden"
+                        ? "max-h-[400px] opacity-100 translate-y-0"
+                        : "max-h-0 opacity-0 -translate-y-2 overflow-hidden"
                     }`}
                   >
                     {profilMenuItems.map((subItem, index) => (
-                      <div
-                        key={subItem.name}
-                        onMouseEnter={() => setHoveredMenuItem(subItem.name)}
-                        onMouseLeave={() => setHoveredMenuItem(null)}
-                      >
+                      <div key={subItem.name}>
                         <Link
                           href={subItem.href}
-                          className={`flex items-center text-sm transition-all duration-300 ${
+                          className={`flex items-center text-sm transition-colors duration-300 ${
                             isAktif(subItem.href)
                               ? "text-green-600 font-semibold"
                               : "hover:text-green-600"
-                          } ${hoveredMenuItem === subItem.name ? "pl-10" : "pl-4"}`}
+                          } pl-4 py-2`}
                           onClick={() => {
                             setMenuTerbuka(false);
                             setIsProfilDropdownOpen(false);
                           }}
                         >
-                          <FiArrowRight
-                            className={`absolute left-4 text-lg transition-opacity duration-300 ${
-                              hoveredMenuItem === subItem.name
-                                ? "opacity-100 mr-3"
-                                : "opacity-0 mr-0"
-                            }`}
-                          />
-                          <span className="transition-transform duration-300">
-                            {subItem.name}
-                          </span>
+                          <FiArrowRight className="mr-3 text-lg" />
+                          <span>{subItem.name}</span>
                         </Link>
                         {index < profilMenuItems.length - 1 && (
-                          <hr className="border-t border-gray-200 mt-2" />
+                          <hr className="border-t border-gray-200 mx-2 my-1" />
                         )}
                       </div>
                     ))}
@@ -261,7 +247,7 @@ export default function Navbar() {
                 setMenuTerbuka(false);
                 setIsComplaintOpen(true);
               }}
-              className="flex items-center justify-center gap-2 bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
+              className="flex items-center justify-center gap-2 bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md mt-4 mx-4"
             >
               Buat Pengaduan
               <FiArrowUpRight className="text-lg" />
