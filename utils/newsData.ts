@@ -1,3 +1,8 @@
+import newsImage1 from "@images/heroCarousel1.jpeg";
+import newsImage2 from "@images/newsImage2.jpeg";
+import newsImage3 from "@images/newsImage3.jpeg";
+import newsImage4 from "@images/newsImage4.jpeg";
+
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -17,8 +22,7 @@ export default function newsData() {
       author: "Jabar Pikiran Rakyat",
       source_url:
         "https://jabar.pikiran-rakyat.com/nasional/pr-3659495460/lantik-pengurus-bpd-abujapi-jabar-komjen-purn-sofyan-yacoub-satpam-harus-budayakan-senyum-sapa-salam",
-      main_image:
-        "https://storage.ganipedia.xyz/abujapi/news/news1.jpeg",
+      main_image: newsImage1,
       figures: {
         keynote: "Komjen Pol (Purn) Sofyan Yacoub",
         bpd_chairman: "Rudi Nursoleh",
@@ -47,8 +51,7 @@ export default function newsData() {
       author: "Herald Jabar",
       source_url:
         "https://jabar.herald.id/2025/07/14/komjen-purn-sofyan-yacoub-satpam-harus-budayakan-senyum-sapa-salamsaat-lantik-pengurus-bpd-abujapi-jabar/",
-      main_image:
-        "https://storage.ganipedia.xyz/abujapi/news/news2.jpeg",
+      main_image: newsImage2,
       figures: {
         keynote: "Komjen Pol (Purn) Sofyan Yacoub",
         bpd_chairman: "Rudi Nursoleh",
@@ -68,8 +71,7 @@ export default function newsData() {
       author: "Pikiran Rakyat KBB",
       source_url:
         "https://beritakbb.pikiran-rakyat.com/ekonomi/pr-969308251/jadi-ketua-umum-abujapi-jabar-rudi-nursoleh-ajak-pengusaha-sejahterakan-satpam",
-      main_image:
-        "https://storage.ganipedia.xyz/abujapi/news/news3.jpeg",
+      main_image: newsImage3,
       figures: {
         keynote: "Rudi Nursoleh",
         bpd_chairman: "Rudi Nursoleh",
@@ -89,8 +91,7 @@ export default function newsData() {
       author: "Pikiran Rakyat KBB",
       source_url:
         "https://beritakbb.pikiran-rakyat.com/bandung-barat/pr-969495382/abujapi-kukuhkan-pengurus-baru-bpd-jawa-barat-masa-bakti-20252030-fokus-tingkatkan-profesionalisme-satpam",
-      main_image:
-        "https://storage.ganipedia.xyz/abujapi/news/news4.jpeg",
+      main_image: newsImage4,
       figures: {
         keynote: "Rudi Nursoleh",
         bpd_chairman: "Rudi Nursoleh",

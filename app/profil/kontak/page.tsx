@@ -6,8 +6,11 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Head from "next/head";
 import { BsEnvelopeFill, BsSendFill, BsBookmarksFill } from "react-icons/bs";
-// import Header from "@/components/Header";
 import Image from "next/image";
+import csImage from "@images/customerService.png";
+import phoneImage from "@images/phone.png";
+import sosmedImage from "@images/socialMedia.png";
+
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
@@ -157,12 +160,11 @@ export default function ContactPage() {
           <div className="flex-1 flex justify-center w-full">
             <div className="relative w-full max-w-full sm:max-w-lg md:max-w-xl h-80 sm:h-96 md:h-[28rem]">
               <Image
-                src="https://storage.ganipedia.xyz/abujapi/assets/cs-2.png"
+                src={csImage}
                 alt="ABUJAPI Jabar Contact"
                 fill
                 className="object-contain"
                 priority
-                unoptimized
               />
             </div>
           </div>
@@ -286,13 +288,13 @@ export default function ContactPage() {
                 <Link href="https://wa.me/+6282210398227" className="block">
                   <div className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center h-64 hover:bg-gray-100 transition-colors">
                     <div className="relative w-40 h-40 mb-2">
-                      <Image
-                        src="https://storage.ganipedia.xyz/abujapi/assets/phone.png"
-                        alt="Phone Icon"
-                        fill
-                        className="object-contain"
-                        unoptimized
-                      />
+                        <Image
+                          src={phoneImage}
+                          alt="Phone Icon"
+                          fill
+                          className="object-contain"
+                          priority
+                        />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-800">
                       Nomor Telepon
@@ -308,12 +310,12 @@ export default function ContactPage() {
                   <div className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center h-64 hover:bg-gray-100 transition-colors">
                     <div className="relative w-40 h-40 mb-2">
                       <Image
-                        src="https://storage.ganipedia.xyz/abujapi/assets/sosmed.png"
-                        alt="Social Media Icon"
-                        fill
-                        className="object-contain"
-                        unoptimized
-                      />
+                          src={sosmedImage}
+                          alt="Social Media Icon"
+                          fill
+                          className="object-contain"
+                          priority
+                        />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-800">
                       Media Sosial

@@ -29,18 +29,22 @@ export default function AboutSection() {
         </h2>
         <p className="text-gray-600 text-lg text-center mb-12 max-w-2xl mx-auto">
           Kami bekerja sama dengan instansi pemerintah, perusahaan swasta, dan
-          lembaga pelatihan untuk menciptakan tenaga pengamanan yang
-          profesional.
+          lembaga pelatihan untuk menciptakan tenaga pengamanan yang profesional.
         </p>
+
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
           {partners.map((partner, index) => (
-            <div key={index} className="flex items-center justify-center">
+            <div
+              key={index}
+              className="flex items-center justify-center p-4 rounded-lg transition duration-300 filter grayscale hover:grayscale-0"
+            >
               <Image
                 src={partner.src}
                 alt={partner.alt}
                 width={150}
                 height={100}
                 className="h-auto max-h-20 object-contain"
+                priority={index < 3} 
               />
             </div>
           ))}

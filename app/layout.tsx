@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import "./globals.css";
+import logoImage from "@images/logo.ico"; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,9 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// Helper untuk mendapatkan URL gambar dari StaticImageData
+const getImageUrl = (img: typeof logoImage) => img.src;
 
 export const metadata: Metadata = {
   title: {
@@ -45,7 +49,7 @@ export const metadata: Metadata = {
       "Asosiasi Perusahaan Jasa Pengamanan Indonesia wilayah Jawa Barat.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: getImageUrl(logoImage), 
         width: 1200,
         height: 630,
         alt: "BPD Abujapi Jabar",
@@ -57,13 +61,13 @@ export const metadata: Metadata = {
     title: "BPD Abujapi Jabar",
     description:
       "Asosiasi Perusahaan Jasa Pengamanan Indonesia wilayah Jawa Barat.",
-    images: ["/og-image.jpg"],
+    images: [getImageUrl(logoImage)],
     creator: "@usernameTwitter",
   },
   icons: {
-    icon: "https://storage.ganipedia.xyz/abujapi/assets/logo.ico",
+    icon: getImageUrl(logoImage),
     apple: "/apple-touch-icon.png",
-    shortcut: "https://storage.ganipedia.xyz/abujapi/assets/logo.ico",
+    shortcut: getImageUrl(logoImage), 
   },
   robots: {
     index: true,

@@ -1,11 +1,13 @@
-// components/HeroSection.tsx
-"use client";
-
 import HeroCarousel from "@components/HeroCarousel";
+
+import herocarousel1 from "@images/heroCarousel1.jpeg";
+import herocarousel2 from "@images/heroCarousel2.jpeg";
+import herocarousel3 from "@images/heroCarousel3.jpeg";
 
 const slides = [
   {
-    image: "https://storage.ganipedia.xyz/abujapi/assets/gallery5.jpeg",
+    image: herocarousel1,
+    alt: "Sinergi dan Profesionalitas ABUJAPI Jabar",
     title: (
       <>
         Membangun Sinergi <br /> & Profesionalitas <br />
@@ -20,7 +22,8 @@ const slides = [
     secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
   },
   {
-    image: "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
+    image: herocarousel2,
+    alt: "Jaringan Pengusaha Jasa Pengamanan ABUJAPI Jabar",
     title: (
       <>
         Jaringan <br /> Pengusaha Jasa Pengamanan <br />
@@ -35,7 +38,8 @@ const slides = [
     secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
   },
   {
-    image: "https://storage.ganipedia.xyz/abujapi/assets/gallery8.jpeg",
+    image: herocarousel3,
+    alt: "Laporan dan Pengaduan ABUJAPI Jabar",
     title: (
       <>
         Laporan & Pengaduan <br />

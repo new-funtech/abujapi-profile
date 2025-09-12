@@ -12,6 +12,9 @@ import {
 import { usePathname } from "next/navigation";
 import ComplaintPage from "@components/ComplaintPage";
 import Header from "./Header";
+import logoImage from "@images/logo.png";
+
+
 
 export default function Navbar() {
   const [menuTerbuka, setMenuTerbuka] = useState(false);
@@ -53,13 +56,12 @@ export default function Navbar() {
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-3">
             <Image
-              src="https://storage.ganipedia.xyz/abujapi/assets/logo.png"
+              src={logoImage}
               alt="Logo ABUJAPI"
               width={50}
               height={50}
               className="object-contain"
               priority
-              unoptimized
             />
             <span className="font-bold text-lg text-gray-800 tracking-wide">
               ABUJAPI

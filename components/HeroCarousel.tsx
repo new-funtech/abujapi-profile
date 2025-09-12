@@ -1,12 +1,13 @@
-// components/HeroCarousel.tsx
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Slide = {
-  image: string;
+  image: string | StaticImageData;
+  alt: string;
   title: React.ReactNode;
   description: string;
   primaryBtn: { text: string; link: string | null };
@@ -40,9 +41,8 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
         >
           <Image
             src={slide.image}
-            alt={`Slide ${index + 1}`}
+            alt={slide.alt}
             fill
-            unoptimized
             className="object-cover"
             priority={index === 0}
           />
@@ -68,20 +68,20 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {slides[current].primaryBtn.text && (
-                <a
+                <Link
                   href={slides[current].primaryBtn.link || "#"}
                   className="inline-block border border-white text-white px-6 py-3 rounded-xl hover:bg-white/20 transition-all text-sm sm:text-base"
                 >
                   {slides[current].primaryBtn.text}
-                </a>
+                </Link>
               )}
               {slides[current].secondaryBtn.text && (
-                <a
+                <Link
                   href={slides[current].secondaryBtn.link || "#"}
                   className="inline-block border border-white text-white px-6 py-3 rounded-xl hover:bg-white/20 transition-all text-sm sm:text-base"
                 >
                   {slides[current].secondaryBtn.text}
-                </a>
+                </Link>
               )}
             </div>
           </motion.div>
@@ -90,15 +90,20 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
       {/* Indicator Dots */}
       <div className="absolute bottom-6 w-full flex justify-center gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full transition ${
-              index === current ? "bg-green-400 scale-110" : "bg-white/50"
-            }`}
-          />
-        ))}
+        <div className="absolute bottom-6 w-full flex justify-center gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setCurrent(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === current ? "true" : "false"}
+              className={`w-3 h-3 rounded-full transition ${
+                index === current ? "bg-green-400 scale-110" : "bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

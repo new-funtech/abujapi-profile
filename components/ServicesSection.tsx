@@ -4,44 +4,28 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 
+import serviceImage1 from "@images/heroCarousel2.jpeg";
+import serviceImage2 from "@images/serviceImage1.jpeg";
+import serviceImage3 from "@images/serviceImage2.jpeg";
+
 import "swiper/css";
 import "swiper/css/pagination";
 
 export default function ServicesSection() {
   const services = [
     {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery1.jpeg",
+      image: serviceImage1,
       title: "Pelatihan & Sertifikasi",
       subtitle:
         "Sertifikasi Gada Pratama untuk satpam sesuai Perpol No. 4/2020.",
     },
-    // {
-    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery2.jpeg",
-    //   title: "Advokasi & Hukum",
-    //   subtitle: "Pendampingan hukum dan pengurusan SIO untuk BUJP.",
-    // },
-    // {
-    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery3.jpeg",
-    //   title: "Konsolidasi & Jaringan",
-    //   subtitle: "Membangun jejaring antar BUJP dan pihak eksternal.",
-    // },
-    // {
-    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery4.jpeg",
-    //   title: "Promosi Jasa Lokal",
-    //   subtitle: "Dorong penggunaan BUJP lokal bersama KADIN Jabar.",
-    // },
-    // {
-    //   image: "https://storage.ganipedia.xyz/abujapi/assets/gallery5.jpeg",
-    //   title: "Pengembangan Organisasi",
-    //   subtitle: "Program strategis melalui Rakerda untuk BUJP.",
-    // },
     {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery9.jpeg",
+      image: serviceImage2,
       title: "Kegiatan Komunitas",
       subtitle: "Turnamen olahraga dan budaya Senyum, Sapa, Salam.",
     },
     {
-      image: "https://storage.ganipedia.xyz/abujapi/assets/gallery7.jpeg",
+      image: serviceImage3,
       title: "Kerja Sama Lembaga",
       subtitle: "Sinergi dengan Polri, KADIN, dan BPJS Ketenagakerjaan.",
     },
@@ -90,7 +74,6 @@ export default function ServicesSection() {
                     src={service.image}
                     alt={service.title}
                     fill
-                    unoptimized
                     className="object-cover rounded-2xl transform transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-5">

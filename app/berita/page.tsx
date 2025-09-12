@@ -1,17 +1,18 @@
+"use client";
+
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import newsData from "@utils/newsData";
 import Link from "next/link";
+import Image from "next/image";
 import { BsBookmarksFill } from "react-icons/bs";
 import { FaCalendarAlt, FaMapMarkerAlt, FaArrowRight } from "react-icons/fa";
-// import Header from "@/components/Header";
 
 export default function NewsPage() {
   const newsList = newsData();
 
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
-      {/* <Header/> */}
       <Navbar />
 
       {/* Breadcrumb */}
@@ -59,10 +60,13 @@ export default function NewsPage() {
             >
               {/* Image */}
               <div className="relative w-full h-52">
-                <img
+                <Image
                   src={news.main_image}
                   alt={news.title}
-                  className="w-full h-full object-cover"
+                  className="object-cover rounded-t-xl"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={false}
                 />
               </div>
 
