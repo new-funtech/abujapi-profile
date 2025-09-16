@@ -23,8 +23,8 @@ export async function submitComplaint(
     }
   }
 
-  // const apiUrl = "https://api.gada86.id/api/complaints";
-  const apiUrl = "http://127.0.0.1:8000/api/complaints"; // Local testing
+  const apiUrl = "https://api.gada86.id/api/complaints";
+  // const apiUrl = "http://127.0.0.1:8000/api/complaints"; // Local testing
 
   try {
     const response = await fetch(apiUrl, {
@@ -66,7 +66,8 @@ export async function fetchBujps(
   search: string = ""
 ): Promise<BujpPaginatedResponse> {
   const searchParam = search ? `&search=${encodeURIComponent(search)}` : "";
-  const apiUrl = `http://127.0.0.1:8000/api/bujps?page=${page}&per_page=${perPage}${searchParam}`;
+  // const apiUrl = `http://127.0.0.1:8000/api/bujps?page=${page}&per_page=${perPage}${searchParam}`;
+  const apiUrl = `https://api.gada86.id/api/bujps?page=${page}&per_page=${perPage}${searchParam}`;
 
   try {
     const response = await fetch(apiUrl, {
