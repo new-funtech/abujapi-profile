@@ -2,9 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Footer from "@/components/Footer";
-// import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-import { BsBookmarksFill } from "react-icons/bs";
+import { BsBookmarksFill, BsX } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import Link from "next/link";
 import { Bujp, BujpPaginatedResponse } from "@/types/interface";
@@ -22,6 +21,7 @@ export default function Keanggotaan() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
   const pageSize = 10;
   const [totalItems, setTotalItems] = useState(0);
 
@@ -34,46 +34,54 @@ export default function Keanggotaan() {
     }
   };
 
+  const handleReset = () => {
+    setSearchTerm("");
+    setPageIndex(0); // Reset to first page
+  };
+
   useEffect(() => {
     let isMounted = true;
+    const delayDebounceFn = setTimeout(() => {
+      const loadBujps = async () => {
+        setLoading(true);
+        setError(null);
 
-    const loadBujps = async () => {
-      setLoading(true);
-      setError(null);
+        try {
+          const data: BujpPaginatedResponse = await fetchBujps(
+            pageIndex + 1,
+            pageSize,
+            searchTerm
+          );
 
-      try {
-        const data: BujpPaginatedResponse = await fetchBujps(
-          pageIndex + 1,
-          pageSize
-        );
+          await new Promise((resolve) => setTimeout(resolve, 500));
 
-        await new Promise((resolve) => setTimeout(resolve, 500));
+          if (!isMounted) return;
 
-        if (!isMounted) return;
+          const formattedData = data.data.map((item) => ({
+            ...item,
+            tgl_daftar: parseDate(item.tgl_daftar),
+            tgl_expired: parseDate(item.tgl_expired),
+          }));
 
-        const formattedData = data.data.map((item) => ({
-          ...item,
-          tgl_daftar: parseDate(item.tgl_daftar),
-          tgl_expired: parseDate(item.tgl_expired),
-        }));
-
-        setBujps(formattedData);
-        setTotalItems(data.total);
-      } catch (err) {
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Terjadi kesalahan.");
+          setBujps(formattedData);
+          setTotalItems(data.total);
+        } catch (err) {
+          if (isMounted) {
+            setError(err instanceof Error ? err.message : "Terjadi kesalahan.");
+          }
+        } finally {
+          if (isMounted) setLoading(false);
         }
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
+      };
 
-    loadBujps();
+      loadBujps();
+    }, 500); // Debounce search for 500ms
 
     return () => {
       isMounted = false;
+      clearTimeout(delayDebounceFn);
     };
-  }, [pageIndex, pageSize]);
+  }, [pageIndex, pageSize, searchTerm]);
 
   const columns = useMemo<ColumnDef<Bujp>[]>(
     () => [
@@ -101,7 +109,6 @@ export default function Keanggotaan() {
 
   return (
     <main className="bg-gray-50 min-h-screen flex flex-col">
-      {/* <Header /> */}
       <Navbar />
 
       {/* Breadcrumb */}
@@ -145,6 +152,34 @@ export default function Keanggotaan() {
                 Keanggotaan BUJP
               </h1>
             </div>
+            {/* Search Form */}
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="flex items-center space-x-2"
+            >
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Cari BUJP..."
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setPageIndex(0); // Reset to first page on search
+                  }}
+                  className="px-4 py-2 bg-gray-100 border border-gray-500 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700 focus:border-transparent shadow-sm pr-10"
+                />
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    aria-label="Reset search"
+                  >
+                    <BsX className="w-5 h-5" />
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
 
           {/* Loading Spinner */}
