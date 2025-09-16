@@ -23,7 +23,8 @@ export async function submitComplaint(
     }
   }
 
-  const apiUrl = "https://api.gada86.id/api/complaints";
+  // const apiUrl = "https://api.gada86.id/api/complaints";
+  const apiUrl = "http://127.0.0.1:8000/api/complaints"; // Local testing
 
   try {
     const response = await fetch(apiUrl, {
@@ -57,12 +58,15 @@ export async function submitComplaint(
  * Fetch paginated BUJP data
  * @param page - page number (default: 1)
  * @param perPage - items per page (default: 10)
+ * @param search - search keyword (optional)
  */
 export async function fetchBujps(
   page: number = 1,
-  perPage: number = 10
+  perPage: number = 10,
+  search: string = ""
 ): Promise<BujpPaginatedResponse> {
-  const apiUrl = `https://api.gada86.id/api/bujps?page=${page}&per_page=${perPage}`;
+  const searchParam = search ? `&search=${encodeURIComponent(search)}` : "";
+  const apiUrl = `http://127.0.0.1:8000/api/bujps?page=${page}&per_page=${perPage}${searchParam}`;
 
   try {
     const response = await fetch(apiUrl, {
@@ -78,8 +82,8 @@ export async function fetchBujps(
       );
     }
 
-    const result: BujpPaginatedResponse = await response.json();
-    return result;
+    const result = await response.json();
+    return result.data; // Extract the 'data' object from the response
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(error.message || "Error fetching BUJP data.");
