@@ -66,7 +66,7 @@ export default function GallerySection() {
             className="relative order-2 lg:order-1"
           >
             <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden border border-white/30 group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-green-500/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-slate-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative h-[350px] md:h-[400px] overflow-hidden">
                 <Image
                   src={galleryImage}
@@ -114,7 +114,7 @@ export default function GallerySection() {
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                     className="flex items-start space-x-3 p-3 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30"
                   >
-                    <div className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
                       <feature.icon className="text-white text-lg" />
                     </div>
                     <div>
@@ -133,7 +133,7 @@ export default function GallerySection() {
               >
                 <a
                   href="/profil"
-                  className="group inline-flex items-center space-x-2 bg-green-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                  className="group inline-flex items-center space-x-2 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
                 >
                   <span>Pelajari Lebih Lanjut</span>
                   <BsArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />

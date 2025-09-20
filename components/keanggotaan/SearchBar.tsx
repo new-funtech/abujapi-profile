@@ -141,7 +141,7 @@ export default function SearchBar({
             {loading ? (
               <span className="flex items-center">
                 <div className="animate-spin rounded-full h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-green-500 mr-1 sm:mr-2"></div>
-                <span className="hidden sm:inline">Mencari...</span>
+                <span className="hidden sm:inline">Loading...</span>
               </span>
             ) : (
               `${totalResults.toLocaleString('id-ID')} data`

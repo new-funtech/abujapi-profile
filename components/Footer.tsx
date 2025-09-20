@@ -2,7 +2,7 @@ import { FaPaperPlane, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icon
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-green-50/95 via-emerald-50/40 to-green-50/30 border-t border-green-200/50">
+    <footer className="bg-gradient-to-br from-slate-50/95 via-blue-50/40 to-slate-50/30 border-t border-slate-200/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -20,26 +20,26 @@ export default function Footer() {
             {/* Contact Info */}
             <div className="space-y-4">
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl flex items-center justify-center group-hover:from-green-500 group-hover:to-emerald-500 transition-all duration-300">
-                  <FaMapMarkerAlt className="text-sm text-green-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-slate-100 rounded-xl flex items-center justify-center group-hover:from-blue-500 group-hover:to-slate-500 transition-all duration-300">
+                  <FaMapMarkerAlt className="text-sm text-blue-600 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <span className="text-slate-600 text-sm">Jawa Barat, Indonesia</span>
               </div>
               
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl flex items-center justify-center group-hover:from-green-500 group-hover:to-emerald-500 transition-all duration-300">
-                  <FaPhoneAlt className="text-sm text-green-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-slate-100 rounded-xl flex items-center justify-center group-hover:from-blue-500 group-hover:to-slate-500 transition-all duration-300">
+                  <FaPhoneAlt className="text-sm text-blue-600 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <a href="tel:+62123456789" className="text-slate-600 text-sm hover:text-green-600 transition-colors duration-300">
+                <a href="tel:+62123456789" className="text-slate-600 text-sm hover:text-blue-600 transition-colors duration-300">
                   +62 812-3456-789
                 </a>
               </div>
               
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl flex items-center justify-center group-hover:from-green-500 group-hover:to-emerald-500 transition-all duration-300">
-                  <FaEnvelope className="text-sm text-green-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-slate-100 rounded-xl flex items-center justify-center group-hover:from-blue-500 group-hover:to-slate-500 transition-all duration-300">
+                  <FaEnvelope className="text-sm text-blue-600 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <a href="mailto:cs@bpdabujapijabar.or.id" className="text-slate-600 text-sm hover:text-green-600 transition-colors duration-300">
+                <a href="mailto:cs@bpdabujapijabar.or.id" className="text-slate-600 text-sm hover:text-blue-600 transition-colors duration-300">
                   cs@bpdabujapijabar.or.id
                 </a>
               </div>
@@ -62,9 +62,9 @@ export default function Footer() {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-slate-600 hover:text-green-600 transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center group"
+                    className="text-slate-600 hover:text-blue-600 transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center group"
                   >
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-3 group-hover:bg-green-600 transition-colors duration-300"></span>
+                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:bg-blue-600 transition-colors duration-300"></span>
                     {link.name}
                   </a>
                 </li>
@@ -86,7 +86,7 @@ export default function Footer() {
               ].map((service, index) => (
                 <li key={index}>
                   <span className="text-slate-600 text-sm font-medium flex items-center group">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-3 group-hover:bg-green-600 transition-colors duration-300"></span>
+                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:bg-blue-600 transition-colors duration-300"></span>
                     {service}
                   </span>
                 </li>
@@ -110,16 +110,17 @@ export default function Footer() {
                   type="email"
                   placeholder="Masukkan email Anda"
                   aria-label="Enter your email address"
-                  className="w-full px-5 py-4 bg-white/90 backdrop-blur-sm border border-slate-200/50 rounded-xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all duration-300 group-hover:bg-white"
+                  className="w-full px-5 py-4 bg-white/90 backdrop-blur-sm border border-slate-200/50 rounded-xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all duration-300 group-hover:bg-white"
                 />
               </div>
               <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white px-6 py-4 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] font-semibold text-sm flex items-center justify-center gap-3 group"
-              >
-                <span>Subscribe Newsletter</span>
-                <FaPaperPlane className="text-sm group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              type="submit"
+              className="w-full bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 font-semibold text-sm flex items-center justify-center gap-3 group"
+            >
+              <span>Subscribe Newsletter</span>
+              <FaPaperPlane className="text-sm group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+
             </form>
           </div>
         </div>
@@ -130,9 +131,9 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-slate-500">
               <span>© 2025 BPD ABUJAPI Jawa Barat. All rights reserved.</span>
               <div className="flex items-center gap-6">
-                <a href="#" className="hover:text-green-600 transition-colors duration-300">Privacy Policy</a>
-                <a href="#" className="hover:text-green-600 transition-colors duration-300">Terms of Service</a>
-                <a href="#" className="hover:text-green-600 transition-colors duration-300">Cookie Policy</a>
+                <a href="#" className="hover:text-blue-600 transition-colors duration-300">Privacy Policy</a>
+                <a href="#" className="hover:text-blue-600 transition-colors duration-300">Terms of Service</a>
+                <a href="#" className="hover:text-blue-600 transition-colors duration-300">Cookie Policy</a>
               </div>
             </div>
           </div>

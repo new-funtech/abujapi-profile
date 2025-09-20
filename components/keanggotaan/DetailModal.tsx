@@ -55,15 +55,6 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
     }
   };
 
-  const getStatusInfo = (expiredDate?: string) => {
-    const expired = isExpired(expiredDate);
-    return {
-      status: expired ? 'Kadaluarsa' : 'Aktif',
-      color: expired ? 'text-red-700 bg-red-50 border-red-200' : 'text-green-700 bg-green-50 border-green-200',
-      icon: expired ? '❌' : '✅'
-    };
-  };
-
   // Close modal on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -85,7 +76,8 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
 
   if (!data) return null;
 
-  const statusInfo = getStatusInfo(data.tgl_expired);
+  // Removed unused statusInfo variable
+  // const statusInfo = getStatusInfo(data.tgl_expired);
 
   return (
     <AnimatePresence>
@@ -111,35 +103,39 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
               className="relative bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl max-w-4xl w-full max-h-[85vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Simple Header */}
-              <div className="relative bg-gradient-to-r from-green-600 to-green-700 text-white p-6">
+              {/* Clean Header */}
+              <div className="relative bg-white border-b border-slate-200 p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
-                      <FiUser className="w-8 h-8" />
+                    <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+                      <FiUser className="w-6 h-6 text-slate-600" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold mb-1">{data.bujp}</h2>
+                      <h2 className="text-xl font-semibold text-slate-900 mb-1">{data.bujp}</h2>
                       {data.no_kta && (
-                        <p className="text-green-100">No. KTA: {data.no_kta}</p>
+                        <p className="text-slate-600 text-sm">No. KTA: {data.no_kta}</p>
                       )}
                     </div>
                   </div>
                   
                   <button
                     onClick={onClose}
-                    className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                    className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
                     aria-label="Tutup modal"
                   >
-                    <FiX className="w-6 h-6" />
+                    <FiX className="w-5 h-5 text-slate-500" />
                   </button>
                 </div>
 
-                {/* Simple Status Badge */}
+                {/* Clean Status Badge */}
                 <div className="mt-4">
-                  <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border ${statusInfo.color}`}>
-                    <span className="mr-2">{statusInfo.icon}</span>
-                    Status: {statusInfo.status}
+                  <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium border ${
+                    isExpired(data.tgl_expired) 
+                      ? 'text-red-700 bg-red-50 border-red-200' 
+                      : 'text-green-700 bg-green-50 border-green-200'
+                  }`}>
+                    <span className="mr-2">{isExpired(data.tgl_expired) ? '⚠️' : '✓'}</span>
+                    Status: {isExpired(data.tgl_expired) ? 'Kadaluarsa' : 'Aktif'}
                   </span>
                 </div>
               </div>
@@ -150,8 +146,8 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
                   {/* Basic Information */}
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <FiUser className="w-5 h-5 mr-2 text-green-600" />
+                      <h3 className="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                        <FiUser className="w-4 h-4 mr-2 text-slate-500" />
                         Informasi Dasar
                       </h3>
                       
@@ -185,32 +181,36 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
 
                     {/* Dates Information */}
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <FiCalendar className="w-5 h-5 mr-2 text-green-600" />
+                      <h3 className="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                        <FiCalendar className="w-4 h-4 mr-2 text-slate-500" />
                         Informasi Tanggal
                       </h3>
                       
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                           <div className="flex items-center space-x-3">
-                            <FiCalendar className="w-5 h-5 text-gray-400" />
+                            <FiCalendar className="w-4 h-4 text-slate-400" />
                             <div>
-                              <p className="text-sm font-medium text-gray-900">Tanggal Pendaftaran</p>
-                              <p className="text-sm text-gray-600">{formatDate(data.tgl_daftar)}</p>
+                              <p className="text-sm font-medium text-slate-900">Tanggal Pendaftaran</p>
+                              <p className="text-sm text-slate-600">{formatDate(data.tgl_daftar)}</p>
                             </div>
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
                           <div className="flex items-center space-x-3">
-                            <FiClock className="w-5 h-5 text-gray-400" />
+                            <FiClock className="w-4 h-4 text-slate-400" />
                             <div>
-                              <p className="text-sm font-medium text-gray-900">Masa Berlaku</p>
-                              <p className="text-sm text-gray-600">{formatDate(data.tgl_expired)}</p>
+                              <p className="text-sm font-medium text-slate-900">Masa Berlaku</p>
+                              <p className="text-sm text-slate-600">{formatDate(data.tgl_expired)}</p>
                             </div>
                           </div>
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusInfo.color}`}>
-                            {statusInfo.status}
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${
+                            isExpired(data.tgl_expired) 
+                              ? 'text-red-700 bg-red-100' 
+                              : 'text-green-700 bg-green-100'
+                          }`}>
+                            {isExpired(data.tgl_expired) ? 'Kadaluarsa' : 'Aktif'}
                           </span>
                         </div>
                       </div>
@@ -220,8 +220,8 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
                   {/* Address Information */}
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <FiMapPin className="w-5 h-5 mr-2 text-green-600" />
+                      <h3 className="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                        <FiMapPin className="w-4 h-4 mr-2 text-slate-500" />
                         Informasi Alamat
                       </h3>
                       
@@ -286,15 +286,15 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
                 </div>
               </div>
 
-              {/* Simple Footer */}
-              <div className="flex-shrink-0 border-t border-gray-200 p-6 bg-gray-50">
+              {/* Clean Footer */}
+              <div className="flex-shrink-0 border-t border-slate-200 p-6 bg-slate-50">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-slate-500">
                     Data diproteksi dan tidak dapat di-copy secara otomatis
                   </p>
                   <button
                     onClick={onClose}
-                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                    className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium text-sm"
                   >
                     Tutup
                   </button>
@@ -319,26 +319,26 @@ interface InfoFieldProps {
 
 function InfoField({ label, value, onCopy, copied, multiline = false }: InfoFieldProps) {
   return (
-    <div className="flex items-start justify-between p-4 bg-gray-50 rounded-lg">
+    <div className="flex items-start justify-between p-3 bg-slate-50 rounded-lg">
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-gray-900 mb-1">{label}</p>
-        <p className={`text-sm text-gray-600 ${multiline ? 'whitespace-pre-wrap' : ''}`}>
+        <p className="text-sm font-medium text-slate-900 mb-1">{label}</p>
+        <p className={`text-sm text-slate-600 ${multiline ? 'whitespace-pre-wrap' : ''}`}>
           {value}
         </p>
       </div>
       <button
         onClick={onCopy}
-        className={`ml-3 p-2 rounded-lg transition-all duration-200 ${
+        className={`ml-3 p-1.5 rounded-lg transition-all duration-200 ${
           copied 
             ? 'bg-green-100 text-green-600' 
-            : 'bg-white text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+            : 'bg-white text-slate-400 hover:text-slate-600 hover:bg-slate-100'
         }`}
         title={copied ? 'Tersalin!' : 'Salin'}
       >
         {copied ? (
-          <FiCheckCircle className="w-4 h-4" />
+          <FiCheckCircle className="w-3.5 h-3.5" />
         ) : (
-          <FiCopy className="w-4 h-4" />
+          <FiCopy className="w-3.5 h-3.5" />
         )}
       </button>
     </div>

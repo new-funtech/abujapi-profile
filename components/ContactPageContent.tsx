@@ -133,27 +133,27 @@ export default function ContactPageContent() {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* Modern Hero Section */}
       <motion.section
         ref={heroRef}
         initial="hidden"
         animate={isHeroInView ? "visible" : "hidden"}
-        className="bg-gradient-to-br from-slate-50 to-gray-100 py-20 relative overflow-hidden"
+        className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 py-16 relative overflow-hidden"
       >
-        {/* Background decoration */}
+        {/* Clean background decoration */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 right-10 w-20 h-20 bg-blue-100 rounded-full opacity-20"></div>
-          <div className="absolute bottom-10 left-10 w-16 h-16 bg-green-100 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-slate-200 rounded-full opacity-25"></div>
+          <div className="absolute top-10 right-10 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+          <div className="absolute bottom-10 left-10 w-64 h-64 bg-slate-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute top-1/2 left-1/4 w-1 h-1 bg-white rounded-full opacity-20"></div>
         </div>
 
-        <div className="max-w-screen-xl mx-auto px-6 relative">
+        <div className="max-w-5xl mx-auto px-6 relative">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200 mb-6"
+              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6"
             >
               <BsEnvelopeFill className="w-4 h-4 mr-2" />
               Hubungi Kami
@@ -163,36 +163,34 @@ export default function ContactPageContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
             >
-              <span className="text-slate-900">Kontak </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-slate-700">ABUJAPI Jabar</span>
+              <span className="text-white">Kontak </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">ABUJAPI Jabar</span>
             </motion.h1>
 
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg sm:text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto leading-relaxed"
             >
-              Hubungi kami untuk informasi lebih lanjut tentang layanan, keanggotaan,
-              atau konsultasi mengenai ABUJAPI Jawa Barat
+              Hubungi kami untuk informasi dan konsultasi ABUJAPI Jawa Barat
             </motion.p>
 
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-6 text-slate-600"
+              className="flex flex-wrap justify-center gap-6 text-slate-300"
             >
               <div className="flex items-center space-x-2">
-                <BsClockFill className="w-5 h-5 text-blue-600" />
-                <span className="font-medium">Respon Cepat</span>
+                <BsClockFill className="w-4 h-4 text-blue-400" />
+                <span className="text-sm">Respon Cepat</span>
               </div>
-              <div className="hidden sm:block w-px h-6 bg-slate-300"></div>
               <div className="flex items-center space-x-2">
-                <BsPhoneFill className="w-5 h-5 text-green-600" />
-                <span className="font-medium">24/7 Support</span>
+                <BsPhoneFill className="w-4 h-4 text-cyan-400" />
+                <span className="text-sm">24/7 Support</span>
               </div>
             </motion.div>
           </div>
@@ -212,12 +210,26 @@ export default function ContactPageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-slate-200 hover:scale-105 cursor-pointer hover:border-blue-200"
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                  borderColor: "rgb(59 130 246)"
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="group bg-white p-6 rounded-2xl shadow-md transition-all duration-300 border border-slate-200 cursor-pointer"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
+                  <motion.div 
+                    className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mb-4 shadow-md"
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 5,
+                      boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.4)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
                     <info.icon className="w-6 h-6 text-white" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-lg font-bold text-slate-800 mb-2">{info.title}</h3>
                   <p className="text-slate-900 font-medium mb-1">{info.value}</p>
                   <p className="text-sm text-slate-500">{info.description}</p>
@@ -340,10 +352,15 @@ export default function ContactPageContent() {
                   />
                 </div>
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-6 py-4 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-200 transition-all duration-200 transform hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.4)"
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-6 py-4 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-200 transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {isSubmitting ? (
                     <>
@@ -356,7 +373,7 @@ export default function ContactPageContent() {
                       Kirim Pesan
                     </>
                   )}
-                </button>
+                </motion.button>
               </form>
             </div>
 
@@ -398,7 +415,13 @@ export default function ContactPageContent() {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className={`w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center hover:border-transparent transition-all duration-200 transform hover:scale-110 ${social.color}`}
+                      whileHover={{ 
+                        y: -4,
+                        rotate: 10,
+                        boxShadow: "0 8px 15px -3px rgba(0, 0, 0, 0.1)"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center hover:border-transparent transition-all duration-200 ${social.color}`}
                     >
                       <social.icon className="w-6 h-6" />
                     </motion.a>

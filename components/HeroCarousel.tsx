@@ -60,9 +60,9 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           <path d="M2 17L12 22L22 17"/>
           <path d="M2 12L12 17L22 12"/>
         </svg>
-        <div className="absolute top-1/4 right-1/3 w-3 h-3 bg-green-400/30 rounded-full animate-pulse"></div>
+        <div className="absolute top-1/4 right-1/3 w-3 h-3 bg-blue-400/30 rounded-full animate-pulse"></div>
         <div className="absolute bottom-1/3 left-1/6 w-2 h-2 bg-white/40 rounded-full animate-pulse"></div>
-        <div className="absolute top-2/3 right-1/5 w-4 h-4 bg-emerald-300/20 rounded-full animate-pulse"></div>
+        <div className="absolute top-2/3 right-1/5 w-4 h-4 bg-blue-300/20 rounded-full animate-pulse"></div>
       </div>
 
       {/* Enhanced Carousel Background */}

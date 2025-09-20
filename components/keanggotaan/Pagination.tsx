@@ -142,7 +142,7 @@ export default function Pagination({
                   whileTap={!isCurrentPage && !loading ? { scale: 0.95 } : undefined}
                   className={`inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 ${
                     isCurrentPage
-                      ? 'text-white bg-green-600 border border-green-600 shadow-sm'
+                      ? 'text-white bg-blue-600 border border-blue-600 shadow-sm'
                       : loading
                       ? 'text-gray-400 bg-gray-100 border border-gray-200 cursor-not-allowed'
                       : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
@@ -193,7 +193,7 @@ export default function Pagination({
               }
             }}
             disabled={loading}
-            className="w-16 px-2 py-1 text-center border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-16 px-2 py-1 text-center border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             aria-label="Nomor halaman"
           />
           <span>dari {totalPages}</span>

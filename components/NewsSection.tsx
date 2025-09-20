@@ -91,7 +91,7 @@ export default function NewsSection() {
                     href={item.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-center gap-2 bg-green-800 text-white text-xs font-semibold py-2 px-3 rounded-lg shadow-md hover:bg-green-700 transition-all duration-300 w-full"
+                    className="group inline-flex items-center justify-center gap-2 bg-blue-800 text-white text-xs font-semibold py-2 px-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 w-full"
                   >
                     <span>Detail Berita</span>
                     <span className="relative w-3 h-3">
@@ -117,7 +117,7 @@ export default function NewsSection() {
           transition: all 0.3s ease;
         }
         .custom-pagination .swiper-pagination-bullet-active {
-          background: #16a34a;
+          background: #2563eb;
           width: 28px;
           border-radius: 9999px;
         }

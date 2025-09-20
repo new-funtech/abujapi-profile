@@ -69,7 +69,7 @@ export default function ServicesSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-700 border border-green-200 mb-6"
+            className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-700 border border-blue-200 mb-6"
           >
             <BsShield className="w-4 h-4 mr-2" />
             Layanan Unggulan
@@ -121,12 +121,12 @@ export default function ServicesSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   
                   {/* Service Icon */}
-                  <div className="absolute top-4 left-4 bg-green-800/80 backdrop-blur-sm p-2.5 rounded-lg shadow-md">
+                  <div className="absolute top-4 left-4 bg-blue-800/80 backdrop-blur-sm p-2.5 rounded-lg shadow-md">
                     <service.icon className="w-5 h-5 text-white" />
                   </div>
 
                   {/* Service Number Badge */}
-                  <div className="absolute top-4 right-4 bg-green-800/80 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+                  <div className="absolute top-4 right-4 bg-blue-800/80 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
                     0{index + 1}
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export default function ServicesSection() {
                   <div className="space-y-1.5 mb-4">
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center text-xs text-gray-700">
-                        <div className="w-1.5 h-1.5 bg-green-700 rounded-full mr-2"></div>
+                        <div className="w-1.5 h-1.5 bg-blue-700 rounded-full mr-2"></div>
                         {feature}
                       </div>
                     ))}

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   FiMenu,
   FiX,
@@ -52,11 +53,11 @@ export default function Navbar() {
     <>
       <Header />
 
-      <header className="backdrop-blur-md bg-gradient-to-r from-green-50/95 via-emerald-50/60 to-green-50/40 shadow-sm sticky top-0 z-50 transition-all duration-300 border-b border-green-200/40">
+      <header className="backdrop-blur-md bg-gradient-to-r from-white/95 via-slate-50/60 to-white/40 shadow-sm sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/40">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 py-3">
           {/* Compact Logo Section */}
           <div className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl flex items-center justify-center border border-green-200/30 group-hover:shadow-sm transition-all duration-300">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500/10 to-slate-500/10 rounded-xl flex items-center justify-center border border-slate-200/30 group-hover:border-blue-300/50 transition-all duration-300">
               <Image
                 src={logoImage}
                 alt="Logo ABUJAPI"
@@ -91,8 +92,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center relative transition-all duration-300 px-3 py-2 rounded-lg text-sm ${
                     isAktif(item.href, item.exact)
-                      ? "text-green-600 font-semibold bg-green-50/80"
-                      : "hover:text-green-600 hover:bg-slate-50/80"
+                      ? "text-blue-600 font-semibold"
+                      : "hover:text-blue-600 hover:bg-slate-50/80"
                   }`}
                 >
                   {item.name}
@@ -101,6 +102,14 @@ export default function Navbar() {
                       className={`ml-1 text-sm transition-transform duration-300 ${
                         isProfilDropdownOpen ? "rotate-180" : ""
                       }`}
+                    />
+                  )}
+                  {/* Modern Active Indicator */}
+                  {isAktif(item.href, item.exact) && (
+                    <motion.div
+                      layoutId="navbar-indicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
                 </Link>
@@ -120,15 +129,15 @@ export default function Navbar() {
                       >
                         <Link
                           href={subItem.href}
-                          className={`flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 hover:text-green-600 transition-all duration-300 rounded-lg mx-2 group ${
+                          className={`flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-slate-50 hover:text-blue-600 transition-all duration-300 rounded-lg mx-2 group ${
                             isAktif(subItem.href)
-                              ? "text-green-600 font-semibold bg-gradient-to-r from-green-50 to-emerald-50"
+                              ? "text-blue-600 font-semibold bg-gradient-to-r from-blue-50 to-slate-50"
                               : ""
                           } ${hoveredMenuItem === subItem.name ? "pl-10" : "pl-4"}`}
                           onClick={() => setIsProfilDropdownOpen(false)}
                         >
                           <FiArrowRight
-                            className={`absolute left-4 text-sm transition-all duration-300 text-green-500 ${
+                            className={`absolute left-4 text-sm transition-all duration-300 text-blue-500 ${
                               hoveredMenuItem === subItem.name
                                 ? "opacity-100 transform translate-x-1"
                                 : "opacity-0 transform translate-x-0"
@@ -155,8 +164,8 @@ export default function Navbar() {
               onClick={() => setIsComplaintOpen(true)}
               onMouseEnter={() => setHoverHubungi(true)}
               onMouseLeave={() => setHoverHubungi(false)}
-              className="flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white px-4 py-2 rounded-lg hover:from-green-700 hover:to-green-700 
-                        shadow-md transition-all duration-300 hover:shadow-lg text-sm group"
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 
+                        transition-all duration-300 text-sm group"
             >
               <span>Pengaduan</span>
               {hoverHubungi ? (
@@ -165,12 +174,13 @@ export default function Navbar() {
                 <FiArrowRight className="text-sm transition-transform duration-300" />
               )}
             </button>
+
           </div>
 
           {/* Compact Mobile Menu Toggle */}
           <button
             onClick={() => setMenuTerbuka(!menuTerbuka)}
-            className="lg:hidden w-9 h-9 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600 hover:bg-green-50 hover:text-green-600 transition-all duration-300"
+            className="lg:hidden w-9 h-9 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
             aria-label={menuTerbuka ? "Tutup menu" : "Buka menu"}
           >
             {menuTerbuka ? (
@@ -183,7 +193,7 @@ export default function Navbar() {
 
         {/* Enhanced Mobile Menu */}
         <div
-          className={`lg:hidden bg-gradient-to-r from-green-50/98 via-emerald-50/80 to-green-50/70 backdrop-blur-md border-t border-green-200/50 overflow-hidden transition-all duration-500 shadow-xl ${
+          className={`lg:hidden bg-gradient-to-r from-white/98 via-slate-50/80 to-white/70 backdrop-blur-md border-t border-slate-200/50 overflow-hidden transition-all duration-500 shadow-xl ${
             menuTerbuka ? "max-h-[80vh] opacity-100 visible" : "max-h-0 opacity-0 invisible"
           }`}
         >
@@ -195,8 +205,8 @@ export default function Navbar() {
                     <button
                       className={`flex-1 text-left px-3 sm:px-4 py-3 sm:py-4 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base flex items-center justify-between ${
                         isAktif(item.href, item.exact)
-                          ? "text-green-600 font-semibold bg-green-50/80"
-                          : "text-slate-700 hover:text-green-600 hover:bg-slate-50/80"
+                          ? "text-blue-600 font-semibold bg-blue-50/80"
+                          : "text-slate-700 hover:text-blue-600 hover:bg-slate-50/80"
                       }`}
                       onClick={() => setIsProfilDropdownOpen(!isProfilDropdownOpen)}
                     >
@@ -210,20 +220,24 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`flex-1 px-3 sm:px-4 py-3 sm:py-4 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+                      className={`flex-1 px-3 sm:px-4 py-3 sm:py-4 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base relative ${
                         isAktif(item.href, item.exact)
-                          ? "text-green-600 font-semibold bg-green-50/80"
-                          : "text-slate-700 hover:text-green-600 hover:bg-slate-50/80"
+                          ? "text-blue-600 font-semibold"
+                          : "text-slate-700 hover:text-blue-600 hover:bg-slate-50/80"
                       }`}
                       onClick={() => setMenuTerbuka(false)}
                     >
                       {item.name}
+                      {/* Modern Mobile Active Indicator */}
+                      {isAktif(item.href, item.exact) && (
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full" />
+                      )}
                     </Link>
                   )}
                 </div>
                 {item.isDropdown && (
                   <div
-                    className={`mt-2 sm:mt-3 ml-2 sm:ml-4 mr-1 sm:mr-2 bg-gradient-to-r from-green-50/80 to-emerald-50/50 rounded-xl border border-green-200/40 overflow-hidden transition-all duration-500 ease-out ${
+                    className={`mt-2 sm:mt-3 ml-2 sm:ml-4 mr-1 sm:mr-2 bg-gradient-to-r from-blue-50/80 to-slate-50/50 rounded-xl border border-blue-200/40 overflow-hidden transition-all duration-500 ease-out ${
                       isProfilDropdownOpen
                         ? "max-h-[400px] sm:max-h-[500px] opacity-100 visible"
                         : "max-h-0 opacity-0 invisible"
@@ -236,15 +250,15 @@ export default function Navbar() {
                             href={subItem.href}
                             className={`flex items-center text-xs sm:text-sm transition-all duration-300 px-3 sm:px-4 py-2 sm:py-3 rounded-lg group ${
                               isAktif(subItem.href)
-                                ? "text-green-600 font-semibold bg-white/80 shadow-sm"
-                                : "text-slate-700 hover:text-green-600 hover:bg-white/60"
+                                ? "text-blue-600 font-semibold bg-white/80 shadow-sm"
+                                : "text-slate-700 hover:text-blue-600 hover:bg-white/60"
                             }`}
                             onClick={() => {
                               setMenuTerbuka(false);
                               setIsProfilDropdownOpen(false);
                             }}
                           >
-                            <FiArrowRight className="mr-2 sm:mr-3 text-sm sm:text-base text-green-500 group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0" />
+                            <FiArrowRight className="mr-2 sm:mr-3 text-sm sm:text-base text-blue-500 group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0" />
                             <span className="font-medium">{subItem.name}</span>
                           </Link>
                           {index < profilMenuItems.length - 1 && (
@@ -265,11 +279,12 @@ export default function Navbar() {
                   setMenuTerbuka(false);
                   setIsComplaintOpen(true);
                 }}
-                className="w-full flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg font-semibold text-sm sm:text-base hover:shadow-xl hover:scale-[1.02] group"
+                className="w-full flex items-center justify-center gap-2 sm:gap-3 bg-blue-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 font-semibold text-sm sm:text-base hover:scale-[1.02] group"
               >
                 <span>Pengaduan</span>
                 <FiArrowUpRight className="text-base sm:text-lg group-hover:rotate-45 transition-transform duration-300" />
               </button>
+
             </div>
           </nav>
         </div>

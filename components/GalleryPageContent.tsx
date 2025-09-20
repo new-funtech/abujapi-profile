@@ -50,36 +50,35 @@ export default function GalleryPageContent() {
 
   return (
     <>
-      {/* Enhanced Hero Section */}
+      {/* Modern Hero Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-green-900 via-green-800 to-green-700 overflow-hidden"
+        className="relative py-16 flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden"
       >
-        {/* Enhanced Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 to-green-700/80"></div>
+        {/* Subtle Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 to-blue-900/90"></div>
         
-        {/* Animated Background Shapes */}
+        {/* Clean Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/4 -left-1/4 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-          <div className="absolute -top-1/4 -right-1/4 w-96 h-96 bg-green-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-1/4 left-1/4 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+          <div className="absolute top-20 right-10 w-64 h-64 bg-slate-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-10 left-32 w-64 h-64 bg-cyan-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
           
-          {/* Floating geometric shapes */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full opacity-40"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-200 rounded-full opacity-60"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-3 h-3 bg-blue-300 rounded-full opacity-30"></div>
-          <div className="absolute top-2/3 left-1/5 w-3 h-3 bg-green-200 rounded-full opacity-30"></div>
+          {/* Minimal dot pattern */}
+          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-20"></div>
+          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-200 rounded-full opacity-30"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-slate-300 rounded-full opacity-20"></div>
         </div>
 
-        <div className="max-w-screen-xl mx-auto px-6 relative">
+        <div className="max-w-5xl mx-auto px-6 relative">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200 mb-6"
+              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6"
             >
               <BsImages className="w-4 h-4 mr-2" />
               Galeri Foto
@@ -89,33 +88,33 @@ export default function GalleryPageContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
             >
               <span className="text-white">Galeri</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300"> Foto</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"> Dokumentasi</span>
             </motion.h1>
 
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto leading-relaxed"
             >
-              Dokumentasi kegiatan dan momen penting dalam perjalanan organisasi kami
+              Dokumentasi kegiatan dan momen penting ABUJAPI Jawa Barat
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap justify-center gap-4"
+              className="flex flex-wrap justify-center gap-6"
             >
-              <div className="flex items-center text-blue-200">
-                <div className="w-2 h-2 bg-green-300 rounded-full mr-2"></div>
+              <div className="flex items-center text-slate-300">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
                 <span className="text-sm">Kegiatan Organisasi</span>
               </div>
-              <div className="flex items-center text-blue-200">
-                <div className="w-2 h-2 bg-blue-300 rounded-full mr-2"></div>
+              <div className="flex items-center text-slate-300">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></div>
                 <span className="text-sm">Dokumentasi Resmi</span>
               </div>
             </motion.div>

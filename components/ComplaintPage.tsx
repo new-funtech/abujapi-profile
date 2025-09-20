@@ -328,27 +328,37 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl overflow-y-auto max-h-[90vh] text-sm md:text-base">
         {/* ==================== HEADER ==================== */}
-        <div className="p-2 md:p-3 border-b border-gray-200 relative flex items-center bg-gradient-to-r from-green-600 to-green-500">
-          <h1 className="text-sm md:text-lg font-semibold text-white text-left ml-2 flex items-center">
-            <FaFileAlt className="mr-2 text-white" /> Formulir Pengaduan
+        <div className="p-4 md:p-6 border-b border-gray-200 relative flex items-center bg-gradient-to-r from-blue-600 to-blue-500 shadow-lg">
+          <h1 className="text-lg md:text-xl font-bold text-white text-left ml-2 flex items-center">
+            <FaFileAlt className="mr-3 text-white w-5 h-5" /> 
+            Formulir Pengaduan
           </h1>
           <button
             type="button"
             onClick={onClose}
             aria-label="Tutup formulir"
-            className="absolute top-0 bottom-0 right-2 my-auto p-2 md:p-3 text-white hover:text-gray-200 text-base md:text-lg cursor-pointer"
+            className="absolute top-0 bottom-0 right-4 my-auto p-2 md:p-3 text-white hover:text-gray-200 hover:bg-white/10 rounded-lg transition-all duration-200 text-lg md:text-xl cursor-pointer"
           >
             <FaTimes />
           </button>
         </div>
 
         {/* ==================== BODY ==================== */}
-        <div className="p-4 md:p-6 space-y-4">
+        <div className="p-6 md:p-8 space-y-6 bg-gradient-to-br from-slate-50 to-blue-50/30">
           {step === 1 ? (
             <div>
-              <p className="text-gray-600 text-xs md:text-sm text-center">
-                Isi formulir di bawah ini untuk mengajukan pengaduan.
-              </p>
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200 mb-4">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                  Langkah 1 dari 2
+                </div>
+                <h2 className="text-xl font-bold text-gray-800 mb-2">Data Pelapor</h2>
+                <p className="text-gray-600 text-sm leading-relaxed max-w-md mx-auto">
+                  Isi informasi pribadi Anda dengan lengkap dan benar untuk mengajukan pengaduan.
+                </p>
+              </div>
               <p className="text-gray-600 text-xs md:text-sm text-center">
                 Semua data dijamin kerahasiaannya.
               </p>
@@ -360,9 +370,9 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
           )}
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 h-2 rounded-full">
+          <div className="w-full bg-gray-200 h-3 rounded-full shadow-inner">
             <div
-              className={`h-2 rounded-full bg-green-600 transition-all duration-300 ${
+              className={`h-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500 shadow-sm ${
                 step === 1 ? "w-1/2" : "w-full"
               }`}
             ></div>
@@ -384,7 +394,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     htmlFor="reporter_name"
                     className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
                   >
-                    <FaUser className="mr-2 text-green-600" />
+                    <FaUser className="mr-2 text-blue-600" />
                     Nama Pelapor <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input
@@ -393,7 +403,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     name="reporter_name"
                     value={formData.reporter_name}
                     onChange={handleChange}
-                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+                    className="w-full p-3 md:p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base text-gray-800 bg-white shadow-sm hover:border-gray-300"
                     required
                   />
                   {errors.reporter_name && (
@@ -409,7 +419,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     htmlFor="reporter_company"
                     className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
                   >
-                    <FaBuilding className="mr-2 text-green-600" />
+                    <FaBuilding className="mr-2 text-blue-600" />
                     Nama Perusahaan BUJP Pelapor{" "}
                     <span className="text-red-500 ml-1">*</span>
                   </label>
@@ -435,7 +445,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     htmlFor="reporter_phone"
                     className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
                   >
-                    <FaPhone className="mr-2 text-green-600" />
+                    <FaPhone className="mr-2 text-blue-600" />
                     No HP Pelapor <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input
@@ -465,7 +475,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     htmlFor="reporter_address"
                     className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
                   >
-                    <FaMapMarkerAlt className="mr-2 text-green-600" />
+                    <FaMapMarkerAlt className="mr-2 text-blue-600" />
                     Alamat Pelapor <span className="text-red-500 ml-1">*</span>
                   </label>
                   <textarea
@@ -489,7 +499,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     htmlFor="complaint_type"
                     className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
                   >
-                    <FaFileAlt className="mr-2 text-green-600" />
+                    <FaFileAlt className="mr-2 text-blue-600" />
                     Jenis Pengaduan <span className="text-red-500 ml-1">*</span>
                   </label>
                   <select
@@ -554,7 +564,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
               <button
                 type="button"
                 onClick={nextStep}
-                className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
               >
                 Next <FaArrowRight className="ml-2" />
               </button>
@@ -562,7 +572,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors shadow-sm text-sm md:text-base flex items-center cursor-pointer"
               >
                 Submit <FaArrowRight className="ml-2" />
               </button>
