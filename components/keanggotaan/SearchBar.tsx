@@ -102,7 +102,7 @@ export default function SearchBar({
                 value={localSearchTerm}
                 onChange={(e) => setLocalSearchTerm(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full pl-9 sm:pl-10 pr-10 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                className="w-full pl-9 sm:pl-10 pr-10 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500 text-sm sm:text-base"
                 disabled={loading || isSearching}
               />
               {localSearchTerm && (
@@ -120,7 +120,7 @@ export default function SearchBar({
             <button
               onClick={handleSearch}
               disabled={loading || isSearching}
-              className="px-4 py-2.5 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 text-sm sm:text-base"
+              className="px-4 py-2.5 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 text-sm sm:text-base"
             >
               {isSearching ? (
                 <FiLoader className="w-4 h-4 animate-spin" />
@@ -140,7 +140,7 @@ export default function SearchBar({
           <div className="text-xs sm:text-sm text-gray-500 flex-1 sm:flex-none">
             {loading ? (
               <span className="flex items-center">
-                <div className="animate-spin rounded-full h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-green-500 mr-1 sm:mr-2"></div>
+                <div className="animate-spin rounded-full h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-blue-500 mr-1 sm:mr-2"></div>
                 <span className="hidden sm:inline">Loading...</span>
               </span>
             ) : (
@@ -153,7 +153,7 @@ export default function SearchBar({
             onClick={() => setShowFilters(!showFilters)}
             className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg font-medium transition-all duration-200 text-xs sm:text-sm ${
               showFilters 
-                ? 'bg-green-100 text-green-700 border border-green-200' 
+                ? 'bg-green-100 text-blue-700 border border-blue-200' 
                 : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100'
             }`}
             disabled={loading}
@@ -165,7 +165,7 @@ export default function SearchBar({
           {(searchTerm || localSearchTerm) && (
             <button
               onClick={onReset}
-              className="text-green-600 hover:text-green-800 font-medium transition-colors text-xs sm:text-sm px-2"
+              className="text-blue-600 hover:text-blue-800 font-medium transition-colors text-xs sm:text-sm px-2"
               disabled={loading}
             >
               Reset
@@ -192,7 +192,7 @@ export default function SearchBar({
                 <select
                   value={sortBy}
                   onChange={(e) => onSortChange(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-900 text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 text-sm"
                   disabled={loading}
                   aria-label="Pilih field untuk sorting"
                 >
@@ -211,7 +211,7 @@ export default function SearchBar({
                 </label>
                 <button
                   onClick={toggleSortOrder}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-900 hover:bg-gray-50 transition-colors text-sm"
+                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 hover:bg-gray-50 transition-colors text-sm"
                   disabled={loading}
                 >
                   <span>{sortOrder === 'asc' ? 'A → Z' : 'Z → A'}</span>
@@ -233,7 +233,7 @@ export default function SearchBar({
                 <select
                   value={pageSize}
                   onChange={(e) => onPageSizeChange(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-900 text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 text-sm"
                   disabled={loading}
                   aria-label="Pilih jumlah data per halaman"
                 >

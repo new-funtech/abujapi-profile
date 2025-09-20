@@ -11,7 +11,7 @@ const slides = [
     title: (
       <>
         Sinergi & Profesionalitas <br />
-        <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+        <span className="font-bold">
           ABUJAPI Jabar
         </span>
       </>
@@ -27,7 +27,7 @@ const slides = [
     title: (
       <>
         Jaringan Pengusaha <br />
-        <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+        <span className="font-bold">
           Jasa Pengamanan
         </span>
       </>
@@ -43,7 +43,7 @@ const slides = [
     title: (
       <>
         Laporan & Pengaduan <br />
-        <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+        <span className="font-bold">
           ABUJAPI Jabar
         </span>
       </>
