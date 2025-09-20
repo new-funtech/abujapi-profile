@@ -10,32 +10,32 @@ const slides = [
     alt: "Sinergi dan Profesionalitas ABUJAPI Jabar",
     title: (
       <>
-        Membangun Sinergi <br /> & Profesionalitas <br />
+        Sinergi & Profesionalitas <br />
         <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
           ABUJAPI Jabar
         </span>
       </>
     ),
     description:
-      "Bersama meningkatkan standar pengamanan melalui pelatihan, sertifikasi, dan kolaborasi.",
+      "Meningkatkan standar pengamanan melalui pelatihan dan sertifikasi profesional.",
     primaryBtn: { text: "Daftar Anggota", link: "/profil/keanggotaan" },
-    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
+    secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
   {
     image: herocarousel2,
     alt: "Jaringan Pengusaha Jasa Pengamanan ABUJAPI Jabar",
     title: (
       <>
-        Jaringan <br /> Pengusaha Jasa Pengamanan <br />
+        Jaringan Pengusaha <br />
         <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
-          ABUJAPI Jabar
+          Jasa Pengamanan
         </span>
       </>
     ),
     description:
-      "Menjadi wadah komunikasi dan koordinasi antar perusahaan jasa pengamanan di Jawa Barat.",
+      "Wadah komunikasi dan koordinasi perusahaan jasa pengamanan di Jawa Barat.",
     primaryBtn: { text: "Gabung Sekarang", link: "/profil/keanggotaan" },
-    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
+    secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
   {
     image: herocarousel3,
@@ -48,9 +48,9 @@ const slides = [
         </span>
       </>
     ),
-    description: "Lihat program kami secara mudah dan cepat.",
+    description: "Layanan laporan dan pengaduan yang mudah dan responsif.",
     primaryBtn: { text: "Lihat Program", link: "/profil/galeri" },
-    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
+    secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
 ];
 

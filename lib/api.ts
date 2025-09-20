@@ -1,8 +1,8 @@
 import {
   ComplaintFormData,
   ApiResponse,
-  BujpPaginatedResponse,
-} from "../types/interface";
+  BujpPaginationData,
+} from "@/types/interface";
 
 /**
  * Submit a complaint
@@ -64,9 +64,10 @@ export async function fetchBujps(
   page: number = 1,
   perPage: number = 10,
   search: string = ""
-): Promise<BujpPaginatedResponse> {
+): Promise<BujpPaginationData> {
   const searchParam = search ? `&search=${encodeURIComponent(search)}` : "";
-  const apiUrl = `http://127.0.0.1:8000/api/bujps?page=${page}&per_page=${perPage}${searchParam}`;
+  // const apiUrl = `http://127.0.0.1:8000/api/api/bujp-list?page=${page}&per_page=${perPage}${searchParam}`;
+  const apiUrl = `https://admin.bpdabujapijabar.or.id/api/bujp-list?page=${page}&per_page=${perPage}${searchParam}`;
 
   try {
     const response = await fetch(apiUrl, {
