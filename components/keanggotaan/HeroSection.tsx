@@ -9,9 +9,9 @@ interface HeroSectionProps {
 export default function HeroSection({ totalActiveMembers }: HeroSectionProps) {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
       className="relative bg-gradient-to-br from-green-900 via-green-800 to-green-900 text-white py-16 sm:py-20 mb-8 overflow-hidden"
     >
       {/* Enhanced Background with SVG Elements */}
@@ -85,45 +85,25 @@ export default function HeroSection({ totalActiveMembers }: HeroSectionProps) {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Simplified Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white/90 border border-white/20 mb-6"
-          >
+          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white/90 border border-white/20 mb-6">
             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
             Database Keanggotaan
-          </motion.div>
+          </div>
 
           {/* Simplified Title */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-          >
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
             BUJP Jawa Barat
-          </motion.h1>
+          </h1>
 
           {/* Simplified Subtitle */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-lg sm:text-xl text-green-100 mb-8 max-w-2xl mx-auto"
-          >
+          <p className="text-lg sm:text-xl text-green-100 mb-8 max-w-2xl mx-auto">
             Sistem pengelolaan data keanggotaan BUJP terintegrasi
-          </motion.p>
+          </p>
 
           {/* Simplified Statistics */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 text-green-100"
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-green-100">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full"></div>
               <span className="text-sm sm:text-base font-medium">
@@ -135,7 +115,7 @@ export default function HeroSection({ totalActiveMembers }: HeroSectionProps) {
               <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
               <span className="text-sm sm:text-base font-medium">Real-time Data</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>

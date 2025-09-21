@@ -77,7 +77,7 @@ export default function StatsCards({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
-      {statsData.map((stat, index) => {
+      {statsData.map((stat) => {
         const IconComponent = stat.icon;
         
         return (

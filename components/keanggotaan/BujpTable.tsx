@@ -134,7 +134,7 @@ export default function BujpTable({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {data.map((item, index) => (
+            {data.map((item) => (
               <tr
                 key={item.id}
                 className="hover:bg-gray-50 transition-colors duration-200"
@@ -202,7 +202,7 @@ export default function BujpTable({
       {/* Mobile Cards */}
       <div className="lg:hidden">
         <div className="divide-y divide-gray-200">
-          {data.map((item, index) => (
+          {data.map((item) => (
             <div
               key={item.id}
               className="p-4 sm:p-6 hover:bg-gray-50 transition-colors duration-200"

@@ -259,7 +259,7 @@ export default function NewsPage() {
                 <div className="mt-6 pt-6 border-t border-slate-200">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-slate-600">
-                      Pencarian: "{searchTerm}"
+                      Pencarian: &ldquo;{searchTerm}&rdquo;
                     </span>
                     <span className="text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
                       {filteredNews.length} artikel ditemukan

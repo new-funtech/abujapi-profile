@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { BsEnvelopeFill, BsPhoneFill, BsGeoAltFill, BsClockFill, BsSendFill, BsWhatsapp, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 
@@ -79,14 +79,6 @@ export default function ContactPageContent() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [alert, setAlert] = useState({ show: false, message: '', type: 'success' });
-  
-  const heroRef = useRef(null);
-  const contactRef = useRef(null);
-  const mapRef = useRef(null);
-  
-  const isHeroInView = useInView(heroRef, { once: true, margin: "-10%" });
-  const isContactInView = useInView(contactRef, { once: true, margin: "-10%" });
-  const isMapInView = useInView(mapRef, { once: true, margin: "-10%" });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -135,55 +127,60 @@ export default function ContactPageContent() {
     <>
       {/* Modern Hero Section */}
       <motion.section
-        ref={heroRef}
-        initial="hidden"
-        animate={isHeroInView ? "visible" : "hidden"}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
         className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 py-16 relative overflow-hidden"
       >
-        {/* Clean background decoration */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 right-10 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-          <div className="absolute bottom-10 left-10 w-64 h-64 bg-slate-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/4 w-1 h-1 bg-white rounded-full opacity-20"></div>
+        {/* Modern Background Pattern with SVG */}
+        <div className="absolute inset-0">
+          <div className="absolute top-5 left-10 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+          <div className="absolute top-10 right-10 w-64 h-64 bg-slate-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-32 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+          
+          {/* SVG Background Elements */}
+          <svg className="absolute top-10 left-10 w-16 h-16 text-blue-400/20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M21 8V7L15 1H9V3H15.5L19 6.5V8H21ZM21 9H19V20C19 21.1 18.1 22 17 22H7C5.9 22 5 21.1 5 20V4C5 2.9 5.9 2 7 2H9V1H7C4.8 1 3 2.8 3 5V20C3 22.2 4.8 24 7 24H17C19.2 24 21 22.2 21 20V9Z"/>
+            <path d="M7 7H17V9H7V7ZM7 11H14V13H7V11ZM7 15H17V17H7V15Z"/>
+          </svg>
+          
+          <svg className="absolute top-20 right-20 w-12 h-12 text-slate-400/15" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+          </svg>
+          
+          <svg className="absolute bottom-16 right-16 w-20 h-20 text-blue-300/10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>
+          </svg>
+          
+          <svg className="absolute bottom-10 left-16 w-14 h-14 text-slate-300/15" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5Z"/>
+          </svg>
+          
+          {/* Additional Contact-related SVG */}
+          <svg className="absolute top-1/4 right-1/4 w-10 h-10 text-blue-200/12" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/>
+          </svg>
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 relative">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6"
-            >
+            <div className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6">
               <BsEnvelopeFill className="w-4 h-4 mr-2" />
               Hubungi Kami
-            </motion.div>
+            </div>
 
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-            >
-              <span className="text-white">Kontak </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">ABUJAPI Jabar</span>
-            </motion.h1>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-white leading-tight">
+              Kontak
+              <span className="block text-white mt-1">
+                ABUJAPI Jabar
+              </span>
+            </h1>
 
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto leading-relaxed"
-            >
+            <p className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto leading-relaxed">
               Hubungi kami untuk informasi dan konsultasi ABUJAPI Jawa Barat
-            </motion.p>
+            </p>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-wrap justify-center gap-6 text-slate-300"
-            >
+            <div className="flex flex-wrap justify-center gap-6 text-slate-300">
               <div className="flex items-center space-x-2">
                 <BsClockFill className="w-4 h-4 text-blue-400" />
                 <span className="text-sm">Respon Cepat</span>
@@ -192,7 +189,7 @@ export default function ContactPageContent() {
                 <BsPhoneFill className="w-4 h-4 text-cyan-400" />
                 <span className="text-sm">24/7 Support</span>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </motion.section>
@@ -381,6 +378,7 @@ export default function ContactPageContent() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      title={`Hubungi kami di ${social.icon.name || 'Social Media'}`}
                       className={`w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center hover:border-transparent transition-all duration-200 ${social.color}`}
                     >
                       <social.icon className="w-6 h-6" />

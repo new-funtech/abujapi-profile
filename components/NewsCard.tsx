@@ -12,7 +12,7 @@ interface NewsCardProps {
   featured?: boolean;
 }
 
-export default function NewsCard({ news, index, featured = false }: NewsCardProps) {
+export default function NewsCard({ news, featured = false }: NewsCardProps) {
   const [isNavigating, setIsNavigating] = useState(false);
 
   const handleLinkClick = () => {

@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { BsImages } from 'react-icons/bs';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { BsImages, BsImageFill, BsCamera, BsCollectionFill } from 'react-icons/bs';
 import Image from 'next/image';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -23,9 +23,6 @@ export default function GalleryPageContent() {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const galleryRef = useRef(null);
-  const isInView = useInView(galleryRef, { once: true, margin: "-10%" });
-
   const handleImageClick = (index: number) => {
     setPhotoIndex(index);
     setIsLoading(true);
@@ -33,103 +30,74 @@ export default function GalleryPageContent() {
     setTimeout(() => setIsLoading(false), 500);
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
-  };
-
   return (
     <>
-      {/* Modern Hero Section */}
+      {/* Hero Section with Simple Motion */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative py-16 flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden"
+        transition={{ duration: 0.8 }}
+        className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden"
       >
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 to-blue-900/90"></div>
-        
-        {/* Clean Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-          <div className="absolute top-20 right-10 w-64 h-64 bg-slate-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-10 left-32 w-64 h-64 bg-cyan-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          {/* Gallery-themed SVG icons */}
+          <div className="absolute top-20 left-16 opacity-10">
+            <BsImageFill className="w-16 h-16 text-blue-300" />
+          </div>
+          <div className="absolute top-32 right-24 opacity-10">
+            <BsCamera className="w-12 h-12 text-cyan-300" />
+          </div>
+          <div className="absolute bottom-20 left-32 opacity-10">
+            <BsCollectionFill className="w-14 h-14 text-slate-300" />
+          </div>
+          <div className="absolute top-40 right-40 opacity-10">
+            <BsImages className="w-10 h-10 text-blue-200" />
+          </div>
+          <div className="absolute bottom-32 right-16 opacity-10">
+            <BsImageFill className="w-8 h-8 text-cyan-200" />
+          </div>
           
-          {/* Minimal dot pattern */}
-          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-20"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-200 rounded-full opacity-30"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-slate-300 rounded-full opacity-20"></div>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/20 to-blue-900/20"></div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 relative">
+        <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6"
-            >
+            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-8">
               <BsImages className="w-4 h-4 mr-2" />
-              Galeri Foto
-            </motion.div>
-
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-            >
+              Galeri Dokumentasi
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               <span className="text-white">Galeri</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"> Dokumentasi</span>
-            </motion.h1>
-
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto leading-relaxed"
-            >
-              Dokumentasi kegiatan dan momen penting ABUJAPI Jawa Barat
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap justify-center gap-6"
-            >
-              <div className="flex items-center text-slate-300">
-                <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                <span className="text-sm">Kegiatan Organisasi</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"> Foto</span>
+            </h1>
+            
+            <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Koleksi dokumentasi kegiatan dan momen bersejarah ABUJAPI Jawa Barat
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-8 text-slate-300">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Kegiatan Resmi</span>
               </div>
-              <div className="flex items-center text-slate-300">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></div>
-                <span className="text-sm">Dokumentasi Resmi</span>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
+                <span>Dokumentasi Acara</span>
               </div>
-            </motion.div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-slate-400 rounded-full mr-3"></div>
+                <span>Momen Bersejarah</span>
+              </div>
+            </div>
           </div>
         </div>
       </motion.section>
 
-      {/* Enhanced Gallery Grid */}
-      <motion.section 
-        ref={galleryRef}
-        initial="hidden"
-        animate={isInView ? "show" : "hidden"}
-        variants={container}
-        className="py-20 bg-gray-50"
-      >
+      {/* Gallery Grid */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-screen-xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -140,18 +108,12 @@ export default function GalleryPageContent() {
               Jelajahi momen-momen berharga dan kegiatan penting yang telah kami lakukan
             </p>
           </div>
-          <motion.div 
-            variants={container}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {galleryImages.map((image, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={item}
                 className="group cursor-pointer relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500"
                 onClick={() => handleImageClick(index)}
-                whileHover={{ y: -8 }}
-                whileTap={{ scale: 0.95 }}
               >
                 <div className="aspect-square relative overflow-hidden bg-gray-200">
                   <Image
@@ -186,11 +148,11 @@ export default function GalleryPageContent() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Enhanced Lightbox */}
       {isOpen && (

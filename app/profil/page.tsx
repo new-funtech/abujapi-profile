@@ -28,67 +28,68 @@ export default function AboutPage() {
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative py-16 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden"
+        transition={{ duration: 0.8 }}
+        className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden"
       >
-        {/* Clean background decoration */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-          <div className="absolute top-20 right-10 w-64 h-64 bg-slate-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-10 left-32 w-64 h-64 bg-cyan-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          {/* Profile-themed SVG icons */}
+          <div className="absolute top-20 left-16 opacity-10">
+            <BsShield className="w-16 h-16 text-blue-300" />
+          </div>
+          <div className="absolute top-32 right-24 opacity-10">
+            <BsPeople className="w-12 h-12 text-cyan-300" />
+          </div>
+          <div className="absolute bottom-20 left-32 opacity-10">
+            <BsBuilding className="w-14 h-14 text-slate-300" />
+          </div>
+          <div className="absolute top-40 right-40 opacity-10">
+            <svg className="w-10 h-10 text-blue-200" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+              <path d="M2 17L12 22L22 17" />
+              <path d="M2 12L12 17L22 12" />
+            </svg>
+          </div>
+          <div className="absolute bottom-32 right-16 opacity-10">
+            <svg className="w-8 h-8 text-cyan-200" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 6H16L14 4H10L8 6H4C2.9 6 2.01 6.9 2.01 8L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6ZM20 18H4V8H20V18ZM12 9C10.9 9 10 9.9 10 11S10.9 13 12 13S14 12.1 14 11S13.1 9 12 9Z"/>
+            </svg>
+          </div>
           
-          {/* Minimal dot pattern */}
-          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-20"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-200 rounded-full opacity-30"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-1 h-1 bg-slate-300 rounded-full opacity-20"></div>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/20 to-blue-900/20"></div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 relative">
+        <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6"
-            >
+            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-8">
               <BsShield className="w-4 h-4 mr-2" />
               Tentang Kami
-            </motion.div>
-
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-            >
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               <span className="text-white">Profil</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"> ABUJAPI Jabar</span>
-            </motion.h1>
-
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto leading-relaxed"
-            >
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"> ABUJAPI</span>
+            </h1>
+            
+            <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto leading-relaxed">
               Mengenal lebih dekat Badan Pengurus Daerah ABUJAPI Jawa Barat
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap justify-center gap-6 text-slate-300"
-            >
-              <div className="flex items-center space-x-2">
-                <BsPeople className="w-4 h-4 text-blue-400" />
-                <span className="text-sm">Organisasi Resmi</span>
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-8 text-slate-300">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Organisasi Resmi</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <BsBuilding className="w-4 h-4 text-cyan-400" />
-                <span className="text-sm">Jasa Pengamanan</span>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
+                <span>Jasa Pengamanan</span>
               </div>
-            </motion.div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-slate-400 rounded-full mr-3"></div>
+                <span>Profesional</span>
+              </div>
+            </div>
           </div>
         </div>
       </motion.section>
