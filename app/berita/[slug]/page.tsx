@@ -208,143 +208,133 @@ export default function NewsDetailPage() {
         </div>
       </section>
 
-      {/* Main Content */}
-      <motion.section
-        ref={contentRef}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="py-16"
-      >
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            {/* Featured Image */}
-            <div className="aspect-video bg-gradient-to-br from-blue-50 to-slate-100">
-              <Image
-                src={article.image || `data:image/svg+xml;base64,${btoa(`
+     {/* Main Content */}
+    <section ref={contentRef} className="py-16">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          
+          {/* Featured Image */}
+          <div className="aspect-video bg-gradient-to-br from-blue-50 to-slate-100 relative">
+            <Image
+              src={article.image || `data:image/svg+xml;base64,${btoa(`
+                <svg width="1024" height="576" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100%" height="100%" fill="#f1f5f9"/>
+                  <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="system-ui" font-size="24" fill="#64748b">
+                    Gambar Berita
+                  </text>
+                </svg>
+              `)}`}
+              alt={article.title}
+              width={1024}
+              height={576}
+              className="w-full h-full object-cover"
+              priority
+              unoptimized
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
+                target.src = `data:image/svg+xml;base64,${btoa(`
                   <svg width="1024" height="576" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100%" height="100%" fill="#f1f5f9"/>
                     <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="system-ui" font-size="24" fill="#64748b">
-                      Gambar Berita
+                      Gambar Tidak Tersedia
                     </text>
                   </svg>
-                `)}`}
-                alt={article.title}
-                width={1024}
-                height={576}
-                className="w-full h-full object-cover"
-                priority
-                unoptimized
-                onError={(e) => {
-                  const target = e.currentTarget as HTMLImageElement;
-                  target.src = `data:image/svg+xml;base64,${btoa(`
-                    <svg width="1024" height="576" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="100%" height="100%" fill="#f1f5f9"/>
-                      <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="system-ui" font-size="24" fill="#64748b">
-                        Gambar Tidak Tersedia
-                      </text>
-                    </svg>
-                  `)}`;
-                }}
-              />
-            </div>
+                `)}`;
+              }}
+            />
+          </div>
 
-            {/* Content */}
-            <div className="p-8 lg:p-12">
-              {/* Article Meta */}
-              <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center">
-                    <BsNewspaper className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-800">Tim Redaksi ABUJAPI</p>
-                    <p className="text-sm text-slate-600">Editor & Publikasi</p>
-                  </div>
+          {/* Content */}
+          <div className="p-8 lg:p-12">
+            {/* Article Meta */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center">
+                  <BsNewspaper className="w-6 h-6 text-white" />
                 </div>
-
-                {/* Share Buttons */}
-                <div className="flex items-center space-x-2">
-                  <BsShare className="w-4 h-4 text-slate-400 mr-2" />
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank')}
-                    className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
-                  >
-                    <BsFacebook className="w-4 h-4" />
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => window.open(`https://twitter.com/intent/tweet?url=${shareUrl}&text=${article.title}`, '_blank')}
-                    className="w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"
-                  >
-                    <BsTwitter className="w-4 h-4" />
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank')}
-                    className="w-8 h-8 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors"
-                  >
-                    <BsLinkedin className="w-4 h-4" />
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => window.open(`https://wa.me/?text=${article.title} ${shareUrl}`, '_blank')}
-                    className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
-                  >
-                    <BsWhatsapp className="w-4 h-4" />
-                  </motion.button>
+                <div>
+                  <p className="font-semibold text-slate-800">Tim Redaksi ABUJAPI</p>
+                  <p className="text-sm text-slate-600">Editor & Publikasi</p>
                 </div>
               </div>
 
+              {/* Share Buttons */}
+              <div className="flex items-center space-x-2">
+                <BsShare className="w-4 h-4 text-slate-400 mr-2" />
+                <button
+                  aria-label='Share on Facebook'
+                  onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank')}
+                  className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-transform transform hover:scale-110 active:scale-90"
+                >
+                  <BsFacebook className="w-4 h-4" />
+                </button>
+                <button
+                  aria-label='Share on Twitter'
+                  onClick={() => window.open(`https://twitter.com/intent/tweet?url=${shareUrl}&text=${article.title}`, '_blank')}
+                  className="w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-transform transform hover:scale-110 active:scale-90"
+                >
+                  <BsTwitter className="w-4 h-4" />
+                </button>
+                <button
+                  aria-label='Share on Linkedin'
+                  onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank')}
+                  className="w-8 h-8 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-90"
+                >
+                  <BsLinkedin className="w-4 h-4" />
+                </button>
+                <button
+                  aria-label='share on Whatsapp'
+                  onClick={() => window.open(`https://wa.me/?text=${article.title} ${shareUrl}`, '_blank')}
+                  className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-transform transform hover:scale-110 active:scale-90"
+                >
+                  <BsWhatsapp className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
             {/* Article Content */}
             <div className="prose prose-lg max-w-none">
-                <p className="text-xl text-slate-700 leading-relaxed mb-8 font-medium">
-                    {article.excerpt}
-                </p>
-                
-                {/* Article Content */}
-                {article.content && (
-                    <div 
-                    className="space-y-6 text-gray-900 leading-relaxed prose prose-lg prose-gray max-w-none
-                        prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4
-                        prose-p:text-gray-800 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base
-                        prose-strong:text-gray-900 prose-strong:font-bold
-                        prose-em:text-gray-700 prose-em:italic
-                        prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-                        prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:p-6 prose-blockquote:rounded-r-lg prose-blockquote:text-gray-800
-                        prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6
-                        prose-li:text-gray-800 prose-li:mb-2 prose-li:leading-relaxed
-                        prose-h2:text-2xl prose-h2:text-gray-900 prose-h2:font-bold prose-h2:mb-4 prose-h2:mt-8
-                        prose-h3:text-xl prose-h3:text-gray-900 prose-h3:font-semibold prose-h3:mb-3 prose-h3:mt-6"
-                    dangerouslySetInnerHTML={{ __html: article.content }}
-                    />
-                )}
-                </div>
+              <p className="text-xl text-slate-700 leading-relaxed mb-8 font-medium">
+                {article.excerpt}
+              </p>
 
+              {article.content && (
+                <div 
+                  className="space-y-6 text-gray-900 leading-relaxed prose prose-lg prose-gray max-w-none
+                            prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4
+                            prose-p:text-gray-800 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base
+                            prose-strong:text-gray-900 prose-strong:font-bold
+                            prose-em:text-gray-700 prose-em:italic
+                            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+                            prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:p-6 prose-blockquote:rounded-r-lg prose-blockquote:text-gray-800
+                            prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6
+                            prose-li:text-gray-800 prose-li:mb-2 prose-li:leading-relaxed
+                            prose-h2:text-2xl prose-h2:text-gray-900 prose-h2:font-bold prose-h2:mb-4 prose-h2:mt-8
+                            prose-h3:text-xl prose-h3:text-gray-900 prose-h3:font-semibold prose-h3:mb-3 prose-h3:mt-6"
+                  dangerouslySetInnerHTML={{ __html: article.content }}
+                />
+              )}
+            </div>
 
-              {/* Tags */}
-              <div className="mt-8 pt-6 border-t border-slate-200">
-                <div className="flex items-center flex-wrap gap-2">
-                  <BsTags className="w-4 h-4 text-slate-400 mr-2" />
-                  {article.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium hover:bg-blue-50 hover:text-blue-700 transition-colors cursor-pointer"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
+            {/* Tags */}
+            <div className="mt-8 pt-6 border-t border-slate-200">
+              <div className="flex items-center flex-wrap gap-2">
+                <BsTags className="w-4 h-4 text-slate-400 mr-2" />
+                {article.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium hover:bg-blue-50 hover:text-blue-700 transition-colors cursor-pointer"
+                  >
+                    #{tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </motion.section>
+      </div>
+    </section>
+
 
       {/* Related Articles */}
       {relatedArticles.length > 0 && (

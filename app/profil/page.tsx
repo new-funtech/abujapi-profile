@@ -133,15 +133,11 @@ export default function AboutPage() {
           {/* Main Content */}
           <div className="flex-1 lg:max-w-4xl">
             <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-3xl font-bold text-slate-800 mb-6 flex items-center"
-              >
+              <h2 className="text-3xl font-bold text-slate-800 mb-6 flex items-center">
                 <BsShield className="w-8 h-8 mr-3 text-blue-600" />
                 Apa itu BPD ABUJAPI Jabar?
-              </motion.h2>
+              </h2>
+
               <div className="prose prose-slate max-w-none">
                 <p className="text-slate-600 leading-relaxed mb-6 text-base">
                   {aboutData.history}
