@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState } from "react";
 import { BsArrowRight, BsShield, BsPeople, BsAward } from "react-icons/bs";
 import ComplaintPage from "@components/ComplaintPage";
 import galleryImage from "@images/heroCarousel3.jpeg";
 
 export default function GallerySection() {
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const features = [
     {
@@ -32,39 +29,28 @@ export default function GallerySection() {
 
   return (
     <section
-      ref={ref}
       id="gallery"
       role="region"
       aria-label="Dokumentasi ABUJAPI Jabar"
       className="relative py-16 bg-gray-50 overflow-hidden"
     >
-      {/* Background Elements - Minimal */}
+      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute top-32 right-16 w-8 h-8 bg-gray-200 rounded-full blur-sm"></div>
         <div className="absolute bottom-32 left-16 w-12 h-12 bg-gray-300 rounded-full blur-sm"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Tentang ABUJAPI Jabar
           </h2>
           <div className="w-20 h-0.5 bg-gray-400 mx-auto mb-6 rounded-full"></div>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Image Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="relative order-2 lg:order-1"
-          >
+          <div className="relative order-2 lg:order-1">
             <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden border border-white/30 group">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-slate-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative h-[350px] md:h-[400px] overflow-hidden">
@@ -75,19 +61,12 @@ export default function GallerySection() {
                   className="object-cover transform transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                
-    
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Content Section */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="order-1 lg:order-2"
-          >
+          <div className="order-1 lg:order-2">
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
@@ -107,11 +86,8 @@ export default function GallerySection() {
               {/* Features */}
               <div className="space-y-3">
                 {features.map((feature, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                     className="flex items-start space-x-3 p-3 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30"
                   >
                     <div className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -121,16 +97,12 @@ export default function GallerySection() {
                       <h4 className="font-semibold text-gray-800 mb-1 text-sm">{feature.title}</h4>
                       <p className="text-gray-600 text-xs">{feature.description}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
               {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.9 }}
-              >
+              <div>
                 <a
                   href="/profil"
                   className="group inline-flex items-center space-x-2 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
@@ -138,9 +110,9 @@ export default function GallerySection() {
                   <span>Pelajari Lebih Lanjut</span>
                   <BsArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

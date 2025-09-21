@@ -131,19 +131,15 @@ export default function GalleryPageContent() {
         className="py-20 bg-gray-50"
       >
         <div className="max-w-screen-xl mx-auto px-6">
-          <motion.div 
-            variants={item}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Koleksi Foto Kami
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-green-600 mx-auto mb-6"></div>
+            <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Jelajahi momen-momen berharga dan kegiatan penting yang telah kami lakukan
             </p>
-          </motion.div>
-
+          </div>
           <motion.div 
             variants={container}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"

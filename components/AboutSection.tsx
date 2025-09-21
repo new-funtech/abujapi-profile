@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { BsShield, BsStar, BsAward } from "react-icons/bs";
 import { FaHandshake } from "react-icons/fa";
 import partner1 from "@/public/images/logo.png";
@@ -13,8 +12,6 @@ import partner5 from "@/public/images/polri-logo.png";
 import partner6 from "@/public/images/kemenkes-logo.png";
 
 export default function AboutSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const partners = [
     { 
@@ -62,7 +59,6 @@ const stats = [
   { icon: BsAward, number: "24/7", label: "Layanan Terpercaya" },
 ];  return (
     <section 
-      ref={ref}
       className="relative py-16 bg-gradient-to-br from-slate-50/50 via-blue-50/30 to-indigo-50/40 overflow-hidden"
     >
       {/* Background SVG Elements */}
@@ -88,7 +84,7 @@ const stats = [
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-12"
         >
@@ -105,7 +101,7 @@ const stats = [
         {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
         >
@@ -113,7 +109,7 @@ const stats = [
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
               className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-all duration-300 border border-white/30"
             >
@@ -129,7 +125,7 @@ const stats = [
         {/* Partners Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="mb-12"
         >
@@ -145,7 +141,7 @@ const stats = [
               <motion.div
                 key={partner.id}
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ 
                   duration: 0.6, 
                   delay: 0.5 + index * 0.1,
@@ -178,7 +174,7 @@ const stats = [
         {/* Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="text-center"
         >

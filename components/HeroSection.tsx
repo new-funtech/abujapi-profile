@@ -6,7 +6,7 @@ import herocarousel3 from "@images/heroCarousel3.jpeg";
 
 const slides = [
   {
-    image: herocarousel1,
+    image: herocarousel3,
     alt: "Sinergi dan Profesionalitas ABUJAPI Jabar",
     title: (
       <>
@@ -38,7 +38,7 @@ const slides = [
     secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
   {
-    image: herocarousel3,
+    image: herocarousel1,
     alt: "Laporan dan Pengaduan ABUJAPI Jabar",
     title: (
       <>

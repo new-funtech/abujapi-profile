@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { BsShield, BsAward, BsPeople, BsArrowRight } from "react-icons/bs";
 
 import serviceImage1 from "@images/heroCarousel2.jpeg";
@@ -11,8 +9,6 @@ import serviceImage2 from "@images/serviceImage1.jpeg";
 import serviceImage3 from "@images/serviceImage2.jpeg";
 
 export default function ServicesSection() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true });
 
   const services = [
     {
@@ -46,7 +42,6 @@ export default function ServicesSection() {
 
   return (
     <section
-      ref={sectionRef}
       id="services"
       aria-label="Layanan BPD ABUJAPI Jabar"
       className="relative bg-white py-16 md:py-20 overflow-hidden"
@@ -59,57 +54,27 @@ export default function ServicesSection() {
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Enhanced Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-700 border border-blue-200 mb-6"
-          >
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-700 border border-blue-200 mb-6">
             <BsShield className="w-4 h-4 mr-2" />
             Layanan Unggulan
-          </motion.div>
+          </div>
 
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight text-gray-900"
-          >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight text-gray-900">
             Layanan Profesional
-          </motion.h2>
+          </h2>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"
-          >
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Temukan berbagai layanan unggulan kami untuk mendukung profesionalisme dan 
             pengembangan industri jasa pengamanan di Jawa Barat.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Services Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <Link key={service.id} href={service.link} className="block">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.2 }}
-                className="group relative bg-white rounded-xl shadow-md overflow-hidden h-[420px] border border-gray-100 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-              >
+              <div className="group relative bg-white rounded-xl shadow-md overflow-hidden h-[420px] border border-gray-100 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 cursor-pointer">
                 {/* Image Section */}
                 <div className="relative w-full h-56 overflow-hidden">
                   <Image
@@ -157,10 +122,10 @@ export default function ServicesSection() {
                     <BsArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </Link>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

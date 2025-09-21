@@ -202,53 +202,33 @@ export default function ContactPageContent() {
         <div className="max-w-screen-xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
-              <motion.a
+              <a
                 key={index}
                 href={info.action}
                 target={info.action.startsWith('http') ? '_blank' : '_self'}
                 rel={info.action.startsWith('http') ? 'noopener noreferrer' : ''}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
-                  y: -8,
-                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                  borderColor: "rgb(59 130 246)"
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="group bg-white p-6 rounded-2xl shadow-md transition-all duration-300 border border-slate-200 cursor-pointer"
+                className="group bg-white p-6 rounded-2xl shadow-md border border-slate-200 cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-blue-500"
               >
                 <div className="flex flex-col items-center text-center">
-                  <motion.div 
-                    className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mb-4 shadow-md"
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: 5,
-                      boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.4)"
-                    }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mb-4 shadow-md transition-transform transform group-hover:scale-110 group-hover:rotate-3">
                     <info.icon className="w-6 h-6 text-white" />
-                  </motion.div>
+                  </div>
                   <h3 className="text-lg font-bold text-slate-800 mb-2">{info.title}</h3>
                   <p className="text-slate-900 font-medium mb-1">{info.value}</p>
                   <p className="text-sm text-slate-500">{info.description}</p>
                 </div>
-              </motion.a>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form & Map */}
-      <motion.section
-        ref={contactRef}
-        initial="hidden"
-        animate={isContactInView ? "visible" : "hidden"}
-        className="bg-slate-50 py-16"
-      >
+
+     {/* Contact Form & Map */}
+      <section className="bg-slate-50 py-16">
         <div className="max-w-screen-xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
             {/* Contact Form */}
             <div className="bg-white p-8 rounded-2xl shadow-md border border-slate-200">
               <div className="mb-8">
@@ -257,9 +237,7 @@ export default function ContactPageContent() {
               </div>
 
               {alert.show && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                <div
                   className={`p-4 rounded-lg mb-6 ${
                     alert.type === 'success' 
                       ? 'bg-green-100 text-green-800 border border-green-200' 
@@ -267,7 +245,7 @@ export default function ContactPageContent() {
                   }`}
                 >
                   {alert.message}
-                </motion.div>
+                </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -352,14 +330,9 @@ export default function ContactPageContent() {
                   />
                 </div>
 
-                <motion.button
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{ 
-                    scale: 1.02,
-                    boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.4)"
-                  }}
-                  whileTap={{ scale: 0.98 }}
                   className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-6 py-4 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-200 transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {isSubmitting ? (
@@ -373,19 +346,15 @@ export default function ContactPageContent() {
                       Kirim Pesan
                     </>
                   )}
-                </motion.button>
+                </button>
               </form>
             </div>
 
             {/* Map & Additional Info */}
             <div className="space-y-8">
+
               {/* Map */}
-              <motion.div
-                ref={mapRef}
-                initial="hidden"
-                animate={isMapInView ? "visible" : "hidden"}
-                className="bg-white p-6 rounded-2xl shadow-md border border-slate-200"
-              >
+              <div className="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
                 <h3 className="text-xl font-bold text-slate-800 mb-4">Lokasi Kami</h3>
                 <div className="aspect-video bg-slate-100 rounded-lg overflow-hidden">
                   <iframe
@@ -399,7 +368,7 @@ export default function ContactPageContent() {
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
-              </motion.div>
+              </div>
 
               {/* Social Media */}
               <div className="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
@@ -407,24 +376,15 @@ export default function ContactPageContent() {
                 <p className="text-slate-600 mb-6">Ikuti kami di media sosial untuk update terbaru</p>
                 <div className="flex space-x-4">
                   {socialMedia.map((social, index) => (
-                    <motion.a
+                    <a
                       key={index}
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      whileHover={{ 
-                        y: -4,
-                        rotate: 10,
-                        boxShadow: "0 8px 15px -3px rgba(0, 0, 0, 0.1)"
-                      }}
-                      whileTap={{ scale: 0.95 }}
                       className={`w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center hover:border-transparent transition-all duration-200 ${social.color}`}
                     >
                       <social.icon className="w-6 h-6" />
-                    </motion.a>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -447,10 +407,12 @@ export default function ContactPageContent() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
+
     </>
   );
 }

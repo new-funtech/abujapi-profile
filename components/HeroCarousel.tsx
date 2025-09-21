@@ -167,22 +167,22 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
       {/* Enhanced Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 backdrop-blur-md text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300 group"
+        className="absolute left-2 sm:left-4 lg:left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 backdrop-blur-md text-white p-2 sm:p-3 lg:p-4 rounded-full hover:bg-white/30 transition-all duration-300 group"
         aria-label="Previous slide"
       >
-        <BsChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-1" />
+        <BsChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 transition-transform group-hover:-translate-x-1" />
       </button>
       
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 backdrop-blur-md text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300 group"
+        className="absolute right-2 sm:right-4 lg:right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 backdrop-blur-md text-white p-2 sm:p-3 lg:p-4 rounded-full hover:bg-white/30 transition-all duration-300 group"
         aria-label="Next slide"
       >
-        <BsChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
+        <BsChevronRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 transition-transform group-hover:translate-x-1" />
       </button>
 
       {/* Enhanced Indicator Dots */}
-      <div className="absolute bottom-8 w-full flex justify-center gap-3 z-30">
+      <div className="absolute bottom-6 sm:bottom-8 w-full flex justify-center gap-2 sm:gap-3 z-30">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -192,8 +192,8 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             aria-current={index === current ? "true" : "false"}
             className={`relative transition-all duration-300 ${
               index === current 
-                ? "w-12 h-3 bg-white rounded-full" 
-                : "w-3 h-3 bg-white/60 rounded-full hover:bg-white/80"
+                ? "w-8 sm:w-12 h-2 sm:h-3 bg-white rounded-full" 
+                : "w-2 sm:w-3 h-2 sm:h-3 bg-white/60 rounded-full hover:bg-white/80"
             }`}
           />
         ))}

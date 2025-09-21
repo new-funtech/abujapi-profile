@@ -1,17 +1,77 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
-import newsData from "@utils/newsData";
+import { useNews } from "@/hooks/useNews";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 export default function NewsSection() {
-  const newsItems = newsData();
+  const { news: newsItems, loading, error } = useNews();
+
+  if (loading) {
+    return (
+      <section
+        id="news"
+        aria-label="Berita dan Informasi BPD Abujapi Jabar"
+        className="bg-white py-16 md:py-20"
+      >
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+              Berita & Informasi
+            </h2>
+            <p className="mt-3 text-gray-600 text-base md:text-base max-w-2xl mx-auto">
+              Ikuti perkembangan terkini, kegiatan, dan informasi penting dari 
+              BPD ABUJAPI Jabar untuk tetap terhubung dengan komunitas profesional keamanan.
+            </p>
+          </div>
+
+          {/* Loading skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+                <div className="w-full h-48 bg-gray-200 animate-pulse"></div>
+                <div className="p-4">
+                  <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded animate-pulse mb-3 w-2/3"></div>
+                  <div className="h-3 bg-gray-200 rounded animate-pulse mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded animate-pulse mb-4 w-4/5"></div>
+                  <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !newsItems) {
+    return (
+      <section
+        id="news"
+        aria-label="Berita dan Informasi BPD Abujapi Jabar"
+        className="bg-white py-16 md:py-20"
+      >
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+              Berita & Informasi
+            </h2>
+            <p className="mt-3 text-gray-600">
+              Maaf, terjadi kesalahan saat memuat berita. Silakan coba lagi nanti.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -47,13 +107,13 @@ export default function NewsSection() {
           }}
           className="relative"
         >
-          {newsItems.map((item) => (
+          {newsItems.slice(0, 6).map((item) => (
             <SwiperSlide key={item.slug}>
               <div className="relative bg-white rounded-xl shadow-sm overflow-hidden flex flex-col h-full border border-gray-100 transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5">
                 {/* Image */}
                 <div className="relative w-full h-48 sm:h-52 md:h-56 overflow-hidden group">
                   <Image
-                    src={item.main_image}
+                    src={item.image}
                     alt={item.title}
                     fill
                     unoptimized
@@ -72,11 +132,11 @@ export default function NewsSection() {
 
                   <div className="flex-1">
                     <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                      {item.highlights.join(" ")}
+                      {item.excerpt}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {item.tags.map((tag) => (
+                      {item.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
                           className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full font-medium border border-gray-200"
@@ -87,10 +147,8 @@ export default function NewsSection() {
                     </div>
                   </div>
 
-                  <a
-                    href={item.source_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href={`/berita/${item.slug}`}
                     className="group inline-flex items-center justify-center gap-2 bg-blue-800 text-white text-xs font-semibold py-2 px-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 w-full"
                   >
                     <span>Detail Berita</span>
@@ -98,7 +156,7 @@ export default function NewsSection() {
                       <FaArrowRight className="absolute inset-0 transition-all duration-300 group-hover:opacity-0 group-hover:translate-x-1" />
                       <FaArrowUpRightFromSquare className="absolute inset-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1" />
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </SwiperSlide>

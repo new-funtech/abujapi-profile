@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FiAlertTriangle, FiRefreshCw, FiHome } from 'react-icons/fi';
 
 interface ErrorStateProps {
@@ -12,27 +11,18 @@ interface ErrorStateProps {
 export default function ErrorState({ error, onRetry, onGoHome }: ErrorStateProps) {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="max-w-md w-full text-center"
       >
         {/* Error Icon */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        <div
           className="w-24 h-24 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center"
         >
           <FiAlertTriangle className="w-12 h-12 text-red-600" />
-        </motion.div>
+        </div>
 
         {/* Error Message */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+        <div
           className="space-y-4 mb-8"
         >
           <h2 className="text-2xl font-bold text-gray-900">Oops! Terjadi Kesalahan</h2>
@@ -42,13 +32,10 @@ export default function ErrorState({ error, onRetry, onGoHome }: ErrorStateProps
           <p className="text-gray-600">
             Mohon maaf atas ketidaknyamanan ini. Silakan coba lagi atau hubungi administrator.
           </p>
-        </motion.div>
+        </div>
 
         {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+        <div
           className="space-y-3"
         >
           {onRetry && (
@@ -70,19 +57,16 @@ export default function ErrorState({ error, onRetry, onGoHome }: ErrorStateProps
               Kembali ke Beranda
             </button>
           )}
-        </motion.div>
+        </div>
 
         {/* Help Text */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
+        <div
           className="mt-8 text-sm text-gray-500"
         >
           <p>Jika masalah berlanjut, silakan hubungi:</p>
           <p className="font-medium">Administrator Sistem ABUJAPI</p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FiUsers, FiShield, FiClock } from 'react-icons/fi';
 import { useMemo } from 'react';
 import { IconType } from 'react-icons';
@@ -82,11 +81,8 @@ export default function StatsCards({
         const IconComponent = stat.icon;
         
         return (
-          <motion.div
+          <div
             key={stat.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 hover:shadow-lg transition-all duration-300 group"
           >
             {/* Header */}
@@ -98,14 +94,11 @@ export default function StatsCards({
 
             {/* Value */}
             <div className="mb-2">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+              <div
                 className={`text-2xl sm:text-3xl font-bold ${stat.color} group-hover:scale-105 transition-transform duration-300`}
               >
                 {stat.value.toLocaleString('id-ID')}
-              </motion.div>
+              </div>
             </div>
 
             {/* Title & Description */}
@@ -117,7 +110,7 @@ export default function StatsCards({
                 {stat.description}
               </p>
             </div>
-          </motion.div>
+          </div>
         );
       })}
     </div>

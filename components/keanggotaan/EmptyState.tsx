@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FiSearch, FiDatabase, FiRefreshCw } from 'react-icons/fi';
 
 interface EmptyStateProps {
@@ -19,17 +18,11 @@ export default function EmptyState({
   showResetButton = true
 }: EmptyStateProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center"
     >
       {/* Empty Icon */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+      <div
         className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center"
       >
         {searchTerm ? (
@@ -37,13 +30,10 @@ export default function EmptyState({
         ) : (
           <FiDatabase className="w-12 h-12 text-gray-400" />
         )}
-      </motion.div>
+      </div>
 
       {/* Title and Description */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+      <div
         className="space-y-4 mb-8"
       >
         <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
@@ -59,13 +49,10 @@ export default function EmptyState({
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
 
       {/* Suggestions */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
+      <div
         className="space-y-4"
       >
         <div className="text-left max-w-md mx-auto">
@@ -80,33 +67,25 @@ export default function EmptyState({
 
         {/* Reset Button */}
         {showResetButton && onReset && (
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             onClick={onReset}
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
           >
             <FiRefreshCw className="w-5 h-5 mr-2" />
             Reset Filter & Pencarian
-          </motion.button>
+          </button>
         )}
-      </motion.div>
+      </div>
 
       {/* Decorative Elements */}
       <div className="mt-8 flex justify-center space-x-2">
         {[...Array(3)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            className="w-2 h-2 bg-gray-300 rounded-full"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: i * 0.3,
-            }}
+            className="w-2 h-2 bg-gray-300 rounded-full animate-pulse"
           />
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }

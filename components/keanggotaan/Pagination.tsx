@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight, FiMoreHorizontal } from 'react-icons/fi';
 
 interface PaginationProps {
@@ -82,10 +81,7 @@ export default function Pagination({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="bg-white rounded-xl shadow-sm border border-gray-100 px-4 sm:px-6 py-4"
     >
       <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-center justify-between gap-4">
@@ -134,12 +130,10 @@ export default function Pagination({
               const isCurrentPage = page === currentPage;
               
               return (
-                <motion.button
+                <button
                   key={page}
                   onClick={() => handlePageClick(page)}
                   disabled={loading}
-                  whileHover={!isCurrentPage && !loading ? { scale: 1.05 } : undefined}
-                  whileTap={!isCurrentPage && !loading ? { scale: 0.95 } : undefined}
                   className={`inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 ${
                     isCurrentPage
                       ? 'text-white bg-blue-600 border border-blue-600 shadow-sm'
@@ -155,7 +149,7 @@ export default function Pagination({
                   ) : (
                     page
                   )}
-                </motion.button>
+                </button>
               );
             })}
           </div>
@@ -250,6 +244,6 @@ export default function Pagination({
           Terakhir
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FiEye, FiMapPin, FiUser, FiCalendar, FiClock } from 'react-icons/fi';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
@@ -91,10 +90,7 @@ export default function BujpTable({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
     >
       {/* Table Header Info */}
@@ -139,11 +135,8 @@ export default function BujpTable({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {data.map((item, index) => (
-              <motion.tr
+              <tr
                 key={item.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="hover:bg-gray-50 transition-colors duration-200"
               >
                 <td className="px-6 py-4">
@@ -200,7 +193,7 @@ export default function BujpTable({
                     Detail
                   </button>
                 </td>
-              </motion.tr>
+              </tr>
             ))}
           </tbody>
         </table>
@@ -210,11 +203,8 @@ export default function BujpTable({
       <div className="lg:hidden">
         <div className="divide-y divide-gray-200">
           {data.map((item, index) => (
-            <motion.div
+            <div
               key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
               className="p-4 sm:p-6 hover:bg-gray-50 transition-colors duration-200"
             >
               {/* Header */}
@@ -270,10 +260,10 @@ export default function BujpTable({
                 <FiEye className="w-4 h-4 mr-2" />
                 Lihat Detail
               </button>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

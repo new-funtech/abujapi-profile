@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FiSearch, FiX, FiFilter, FiLoader } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 
@@ -83,10 +82,7 @@ export default function SearchBar({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 mb-4"
     >
       {/* Main Search Bar */}
@@ -175,10 +171,7 @@ export default function SearchBar({
       </div>
 
       {/* Simplified Filters */}
-      <motion.div
-        initial={false}
-        animate={{ height: showFilters ? 'auto' : 0, opacity: showFilters ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+      <div
         className="overflow-hidden"
       >
         {showFilters && (
@@ -247,7 +240,7 @@ export default function SearchBar({
             </div>
           </div>
         )}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

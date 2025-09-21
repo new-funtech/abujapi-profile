@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiUser, FiMapPin, FiCalendar, FiClock, FiCopy, FiCheckCircle } from 'react-icons/fi';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
@@ -80,26 +79,18 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
   // const statusInfo = getStatusInfo(data.tgl_expired);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
+    <>
+      {isOpen && data && (
         <div className="fixed inset-0 z-[9999] overflow-y-auto">
           {/* Backdrop with blur */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+          <div
             className="fixed inset-0 bg-black/30 backdrop-blur-md"
             onClick={onClose}
           />
 
           {/* Modal */}
           <div className="flex min-h-full items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+            <div
               className="relative bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl max-w-4xl w-full max-h-[85vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
@@ -273,13 +264,14 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
                         )}
                         
                         {data.kode_pos && (
-                          <InfoField
-                            label="Kode Pos"
-                            value={data.kode_pos}
-                            onCopy={() => copyToClipboard(data.kode_pos!, 'kode_pos')}
-                            copied={copiedField === 'kode_pos'}
-                          />
-                        )}
+                        <InfoField
+                          label="Kode Pos"
+                          value={Number(data.kode_pos).toFixed(0)} 
+                          onCopy={() => copyToClipboard(Number(data.kode_pos).toFixed(0), 'kode_pos')}
+                          copied={copiedField === 'kode_pos'}
+                        />
+                      )}
+
                       </div>
                     </div>
                   </div>
@@ -300,11 +292,11 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 
