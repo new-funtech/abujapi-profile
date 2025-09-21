@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Sidebar from "@components/Sidebar";
+import LatestNews from "@components/LatestNews";
+import SearchBar from "@components/SearchBar";
 import { BsBookmarksFill, BsPeople, BsBuilding, BsShield } from "react-icons/bs";
 
 export default function AboutPage() {
@@ -124,13 +126,13 @@ export default function AboutPage() {
 
         {/* Content with Sidebar and Right Column */}
         <main className="flex-grow">
-          <div className="max-w-screen-2xl px-6 py-8 flex flex-col md:flex-row md:items-stretch gap-4 mx-2 md:mx-18">
+          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <Sidebar pathname={pathname} />
 
           {/* Main Content */}
-          <div className="md:w-3/4 md:border-r md:border-gray-300">
-            <section className="mr-4 bg-white rounded-xl shadow-sm p-8">
+          <div className="flex-1 lg:max-w-4xl">
+            <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -231,47 +233,10 @@ export default function AboutPage() {
           </div>
 
           {/* Right Column: Search and News */}
-          <div className="md:w-1/5">
-            <div className="mb-6">
-              <input
-                type="text"
-                placeholder="Cari..."
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 text-sm text-gray-700 transition-all duration-300"
-                aria-label="Pencarian"
-              />
-            </div>
-            <div className="bg-white shadow-lg p-6 rounded-lg border border-gray-200">
-              <h4 className="text-xl font-bold text-gray-800 mb-6 border-b-2 border-green-600 pb-2">
-                Berita Terkini
-              </h4>
-              <div className="space-y-6">
-                <div className="border-l-4 border-green-600 pl-4">
-                  <p className="text-xs text-gray-500 mb-1">Mon, 23/12/2024</p>
-                  <Link
-                    href="/news/abujapi-event-2024"
-                    className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors duration-300"
-                  >
-                    BPD Abujapi Jabar Selenggarakan Acara...
-                  </Link>
-                </div>
-                <div className="border-l-4 border-green-600 pl-4">
-                  <p className="text-xs text-gray-500 mb-1">Tue, 24/12/2024</p>
-                  <Link
-                    href="/news/abujapi-training-2024"
-                    className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors duration-300"
-                  >
-                    Pelatihan Satpam Gada Pratama 2024
-                  </Link>
-                </div>
-              </div>
-              <div className="mt-6">
-                <Link
-                  href="/news"
-                  className="text-sm font-semibold text-green-600 hover:text-green-800 transition-colors duration-300"
-                >
-                  Lihat Semua Berita
-                </Link>
-              </div>
+          <div className="lg:w-80 flex-shrink-0">
+            <div className="sticky top-16 space-y-6">
+              <SearchBar />
+              <LatestNews limit={3} />
             </div>
           </div>
           </div>

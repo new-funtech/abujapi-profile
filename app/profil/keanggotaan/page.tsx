@@ -5,6 +5,8 @@ import { Bujp } from '@/types/interface';
 import { useBujpData } from '@/hooks/useBujpData';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { BsBookmarksFill } from "react-icons/bs";
+import Link from "next/link";
 
 // Import all components
 import HeroSection from '@/components/keanggotaan/HeroSection';
@@ -88,7 +90,45 @@ export default function KeanggotaanPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
       <Navbar />
-      
+ {/* Breadcrumb */}
+      <section className="bg-white border-b border-gray-200 py-4">
+        <div className="max-w-screen-xl mx-auto px-6">
+          <nav
+            className="text-sm text-gray-600 font-medium flex items-center"
+            aria-label="Breadcrumb"
+          >
+            <BsBookmarksFill className="w-4 h-4 mr-2 text-blue-600" />
+            <ol className="flex items-center space-x-2">
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  Beranda
+                </Link>
+              </li>
+              <li className="text-gray-400">/</li>
+              <li>
+                <Link
+                  href="/profil"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  Profil
+                </Link>
+              </li>
+              <li className="text-gray-400">/</li>
+              <li>
+                <span
+                  className="text-blue-600 font-semibold"
+                  aria-current="page"
+                >
+                  Keanggotaan
+                </span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </section>      
       {/* Hero Section */}
       <HeroSection totalActiveMembers={totalActiveMembers} />
 

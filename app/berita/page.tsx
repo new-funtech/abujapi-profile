@@ -5,6 +5,8 @@ import { motion, useInView } from 'framer-motion';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 import NewsCard from '@components/NewsCard';
+import Link from "next/link";
+import { BsBookmarksFill } from "react-icons/bs";
 import { useNews } from '@/hooks/useNews';
 import { BsNewspaper, BsSearch, BsArrowClockwise, BsExclamationTriangle, BsX } from 'react-icons/bs';
 
@@ -57,6 +59,39 @@ export default function NewsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <Navbar />
+
+       {/* Breadcrumb */}
+            <section className="bg-white border-b border-gray-200 py-4">
+              <div className="max-w-screen-xl mx-auto px-6">
+                <nav
+                  className="text-sm text-gray-600 font-medium flex items-center"
+                  aria-label="Breadcrumb"
+                >
+                  <BsBookmarksFill className="w-4 h-4 mr-2 text-blue-600" />
+                  <ol className="flex items-center space-x-2">
+    
+                    <li className="text-gray-400">/</li>
+                    <li>
+                      <Link
+                        href="/profil"
+                        className="hover:text-blue-600 transition-colors"
+                      >
+                        Profil
+                      </Link>
+                    </li>
+                    <li className="text-gray-400">/</li>
+                    <li>
+                      <span
+                        className="text-blue-600 font-semibold"
+                        aria-current="page"
+                      >
+                        Berita
+                      </span>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </section>
       
       {/* Hero Section */}
       <motion.section

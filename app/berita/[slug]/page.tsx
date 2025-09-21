@@ -254,7 +254,7 @@ export default function NewsDetailPage() {
               {/* Article Meta */}
               <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center">
                     <BsNewspaper className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -294,7 +294,7 @@ export default function NewsDetailPage() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => window.open(`https://wa.me/?text=${article.title} ${shareUrl}`, '_blank')}
-                    className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors"
+                    className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
                   >
                     <BsWhatsapp className="w-4 h-4" />
                   </motion.button>
@@ -334,7 +334,7 @@ export default function NewsDetailPage() {
                   {article.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer"
+                      className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium hover:bg-blue-50 hover:text-blue-700 transition-colors cursor-pointer"
                     >
                       #{tag}
                     </span>

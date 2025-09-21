@@ -33,12 +33,12 @@ export default function GalleryPage() {
             className="text-sm text-gray-600 font-medium flex items-center"
             aria-label="Breadcrumb"
           >
-            <BsBookmarksFill className="w-4 h-4 mr-2 text-green-600" />
+            <BsBookmarksFill className="w-4 h-4 mr-2 text-blue-600" />
             <ol className="flex items-center space-x-2">
               <li>
                 <Link
                   href="/"
-                  className="hover:text-green-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors"
                 >
                   Beranda
                 </Link>
@@ -47,7 +47,7 @@ export default function GalleryPage() {
               <li>
                 <Link
                   href="/profil"
-                  className="hover:text-green-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors"
                 >
                   Profil
                 </Link>
@@ -55,7 +55,7 @@ export default function GalleryPage() {
               <li className="text-gray-400">/</li>
               <li>
                 <span
-                  className="text-green-600 font-semibold"
+                  className="text-blue-600 font-semibold"
                   aria-current="page"
                 >
                   Galeri
