@@ -18,7 +18,7 @@ export default function Sidebar({ pathname }: SidebarProps) {
   ];
 
   return (
-    <aside className="w-full md:w-1/3 md:sticky md:top-0 z-10 md:border-r md:border-slate-300">
+    <aside className="w-full md:w-1/5 md:sticky md:top-0 z-10 md:border-r md:border-slate-300">
       {/* Sidebar Menu as Table */}
       <div className="md:px-4 pt-0 text-slate-700 font-medium">
         <table className="w-full border-collapse">
