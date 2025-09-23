@@ -17,6 +17,40 @@ export interface ApiResponse {
   [key: string]: unknown;
 }
 
+export interface Documentation {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  published_at: string;
+  status: string;
+  created_by: number;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DocumentationPaginatedResponse {
+  success: boolean;
+  message: string;
+  data: {
+    current_page: number;
+    data: Documentation[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+  };
+}
+
 export interface Bujp {
   id: number;
   no_kta?: string;
@@ -68,4 +102,69 @@ export interface BujpPaginationData {
   prev_page_url?: string | null;
   to?: number;
   total?: number;
+}
+
+export interface Author {
+  id: number;
+  name: string;
+  email: string;
+  avatar?: string | null;
+}
+
+export interface AuthorData {
+  id: number;
+  name: string;
+  email: string;
+  email_verified_at?: string | null;
+  role?: string;
+  deleted_at?: string | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface NewsTag {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export interface News {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  published_at: string;
+  status: string;
+  created_by: number;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  tags: string[];
+  deleted_at?: string | null;
+  created_at: string;
+  updated_at: string;
+  author_data: Author;
+  formatted_tags: NewsTag[];
+  author: AuthorData;
+}
+
+export interface NewsPaginatedResponse {
+  success: boolean;
+  message: string;
+  data: {
+    current_page: number;
+    data: News[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+  };
 }

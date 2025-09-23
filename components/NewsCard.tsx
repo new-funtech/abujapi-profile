@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BsCalendar3, BsClock, BsTag, BsArrowRight, BsEye, BsArrowClockwise } from 'react-icons/bs';
+import { BsCalendar3, BsTag, BsArrowRight, BsArrowClockwise } from 'react-icons/bs';
 import { NewsItem } from '@/types/news';
 
 interface NewsCardProps {
@@ -99,12 +99,8 @@ export default function NewsCard({ news, featured = false }: NewsCardProps) {
                 {news.date}
               </div>
               <div className="flex items-center">
-                <BsClock className="w-4 h-4 mr-1.5" />
-                {news.readTime}
-              </div>
-              <div className="flex items-center">
-                <BsEye className="w-4 h-4 mr-1.5" />
-                {news.views.toLocaleString()}
+                <span className="text-slate-400">•</span>
+                <span className="ml-2">Oleh {news.author}</span>
               </div>
             </div>
 
@@ -135,12 +131,6 @@ export default function NewsCard({ news, featured = false }: NewsCardProps) {
                 ))}
               </div>
             )}
-
-            {/* Author & Location */}
-            <div className="flex items-center justify-between text-sm text-slate-500 pt-4 border-t border-slate-100">
-              <span className="font-medium">{news.author}</span>
-              <span>{news.location}</span>
-            </div>
 
             {/* Hover Arrow */}
             <div className="flex items-center justify-end mt-4">

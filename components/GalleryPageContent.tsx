@@ -1,27 +1,41 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BsImages, BsImageFill, BsCamera, BsCollectionFill } from 'react-icons/bs';
 import Image from 'next/image';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-
-const galleryImages = [
-  "/images/galleryImage2.jpeg",
-  "/images/galleryImage3.jpeg", 
-  "/images/galleryImage7.jpeg",
-  "/images/galleryImage8.jpeg",
-  "/images/galleryImage9.jpeg",
-  "/images/heroCarousel1.jpeg",
-  "/images/heroCarousel2.jpeg",
-  "/images/heroCarousel3.jpeg"
-];
+import { fetchDocumentations } from '@/lib/api';
+import { Documentation } from '@/types/interface';
 
 export default function GalleryPageContent() {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [documentations, setDocumentations] = useState<Documentation[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadDocumentations = async () => {
+      try {
+        setLoading(true);
+        const response = await fetchDocumentations(1, 50); // Fetch more items for gallery
+        // Filter only published documentations
+        const publishedDocs = response.data.data.filter(doc => doc.status === 'published');
+        setDocumentations(publishedDocs);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load documentations');
+        console.error('Error loading documentations:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDocumentations();
+  }, []);
 
   const handleImageClick = (index: number) => {
     setPhotoIndex(index);
@@ -101,74 +115,140 @@ export default function GalleryPageContent() {
         <div className="max-w-screen-xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Koleksi Foto Kami
+              Koleksi Dokumentasi
             </h2>
             <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Jelajahi momen-momen berharga dan kegiatan penting yang telah kami lakukan
+              Jelajahi dokumentasi resmi dan kegiatan penting ABUJAPI Jawa Barat
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {galleryImages.map((image, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500"
-                onClick={() => handleImageClick(index)}
-              >
-                <div className="aspect-square relative overflow-hidden bg-gray-200">
-                  <Image
-                    src={image}
-                    alt={`Gallery image ${index + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  />
-                  
-                  {/* Enhanced Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex items-center justify-between text-white">
-                        <span className="text-sm font-medium">Foto {index + 1}</span>
-                        <div className="flex items-center space-x-1">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
+
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-20">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+                <svg className="w-8 h-8 text-blue-600 animate-spin" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">Memuat Dokumentasi...</h3>
+              <p className="text-slate-600">Mohon tunggu sebentar</p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && !loading && (
+            <div className="text-center py-20">
+              <div className="bg-red-50 border border-red-200 rounded-xl p-8 max-w-md mx-auto">
+                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                <p className="text-red-700 font-semibold mb-2">Gagal memuat dokumentasi</p>
+                <p className="text-red-600 text-sm">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && documentations.length === 0 && (
+            <div className="text-center py-20">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-8 max-w-md mx-auto">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BsImageFill className="w-8 h-8 text-gray-400" />
+                </div>
+                <p className="text-gray-700 font-semibold mb-2">Belum ada dokumentasi</p>
+                <p className="text-gray-600 text-sm">Dokumentasi akan ditampilkan di sini ketika tersedia</p>
+              </div>
+            </div>
+          )}
+
+          {/* Documentation Grid */}
+          {!loading && !error && documentations.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {documentations.map((doc, index) => (
+                <div
+                  key={doc.id}
+                  className="group cursor-pointer bg-white rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  onClick={() => handleImageClick(index)}
+                >
+                  {/* Image */}
+                  <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+                    <Image
+                      src={doc.image}
+                      alt={doc.title}
+                      fill
+                      className="object-cover transition-all duration-300 group-hover:brightness-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                    />
+                    
+                    {/* Badge */}
+                    <div className="absolute top-3 right-3">
+                      <div className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
+                        <BsImageFill className="w-3 h-3 text-blue-600" />
+                      </div>
+                    </div>
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
+                          <div className="flex items-center text-xs text-gray-700">
+                            <BsCamera className="w-3 h-3 mr-1" />
+                            <span>Klik untuk melihat</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Enhanced Hover Effect */}
-                  <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  {/* Click indicator */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <BsImages className="w-6 h-6 text-blue-600" />
+                  {/* Content */}
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-700 transition-colors text-sm leading-tight">
+                      {doc.title}
+                    </h3>
+                    <p className="text-gray-600 text-xs mb-3 line-clamp-2 leading-relaxed">
+                      {doc.excerpt}
+                    </p>
+                    
+                    {/* Meta */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500">
+                        {new Date(doc.published_at).toLocaleDateString('id-ID', {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric'
+                        })}
+                      </span>
+                      <div className="flex items-center text-xs text-blue-600">
+                        <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-1"></div>
+                        <span className="font-medium">Dokumentasi</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Enhanced Lightbox */}
-      {isOpen && (
+      {isOpen && documentations.length > 0 && (
         <Lightbox
-          mainSrc={galleryImages[photoIndex]}
-          nextSrc={galleryImages[(photoIndex + 1) % galleryImages.length]}
-          prevSrc={galleryImages[(photoIndex + galleryImages.length - 1) % galleryImages.length]}
+          mainSrc={documentations[photoIndex]?.image}
+          nextSrc={documentations[(photoIndex + 1) % documentations.length]?.image}
+          prevSrc={documentations[(photoIndex + documentations.length - 1) % documentations.length]?.image}
           onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
-            setPhotoIndex((photoIndex + galleryImages.length - 1) % galleryImages.length)
+            setPhotoIndex((photoIndex + documentations.length - 1) % documentations.length)
           }
           onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % galleryImages.length)
+            setPhotoIndex((photoIndex + 1) % documentations.length)
           }
-          imageTitle={`Foto ${photoIndex + 1} dari ${galleryImages.length}`}
-          imageCaption="Dokumentasi kegiatan organisasi"
+          imageTitle={documentations[photoIndex]?.title || `Dokumentasi ${photoIndex + 1}`}
+          imageCaption={documentations[photoIndex]?.excerpt || "Dokumentasi kegiatan ABUJAPI"}
           reactModalStyle={{
             overlay: {
               zIndex: 9999

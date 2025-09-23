@@ -403,7 +403,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     name="reporter_name"
                     value={formData.reporter_name}
                     onChange={handleChange}
-                    className="w-full p-3 md:p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base text-gray-800 bg-white shadow-sm hover:border-gray-300"
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
                     required
                   />
                   {errors.reporter_name && (

@@ -8,13 +8,25 @@ import NewsCard from '@components/NewsCard';
 import Link from "next/link";
 import { BsBookmarksFill } from "react-icons/bs";
 import { useNews } from '@/hooks/useNews';
-import { BsNewspaper, BsSearch, BsArrowClockwise, BsExclamationTriangle, BsX } from 'react-icons/bs';
+import { BsNewspaper, BsSearch, BsArrowClockwise, BsExclamationTriangle, BsX, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 export default function NewsPage() {
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-  const { news, loading, error } = useNews();
+  const { 
+    news, 
+    loading, 
+    error, 
+    currentPage, 
+    totalPages, 
+    totalNews, 
+    hasNextPage, 
+    hasPrevPage, 
+    goToPage, 
+    nextPage, 
+    prevPage 
+  } = useNews(1, 10);
 
   // Handle search button click
   const handleSearch = async () => {
@@ -381,6 +393,76 @@ export default function NewsPage() {
                 </div>
               )}
             </>
+          )}
+
+          {/* Pagination - only show if more than 1 page and no search */}
+          {!loading && !error && totalPages > 1 && !searchTerm && (
+            <div className="mt-16 flex justify-center">
+              <nav className="flex items-center space-x-2">
+                {/* Previous Button */}
+                <button
+                  onClick={prevPage}
+                  disabled={!hasPrevPage}
+                  title="Halaman sebelumnya"
+                  className={`px-4 py-2 rounded-lg border transition-colors ${
+                    hasPrevPage
+                      ? 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                      : 'border-slate-200 text-slate-400 cursor-not-allowed'
+                  }`}
+                >
+                  <BsChevronLeft className="w-4 h-4" />
+                </button>
+
+                {/* Page Numbers */}
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) {
+                    pageNum = i + 1;
+                  } else if (currentPage <= 3) {
+                    pageNum = i + 1;
+                  } else if (currentPage >= totalPages - 2) {
+                    pageNum = totalPages - 4 + i;
+                  } else {
+                    pageNum = currentPage - 2 + i;
+                  }
+
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => goToPage(pageNum)}
+                      className={`px-4 py-2 rounded-lg border transition-colors ${
+                        currentPage === pageNum
+                          ? 'bg-blue-600 border-blue-600 text-white'
+                          : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+
+                {/* Next Button */}
+                <button
+                  onClick={nextPage}
+                  disabled={!hasNextPage}
+                  title="Halaman berikutnya"
+                  className={`px-4 py-2 rounded-lg border transition-colors ${
+                    hasNextPage
+                      ? 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                      : 'border-slate-200 text-slate-400 cursor-not-allowed'
+                  }`}
+                >
+                  <BsChevronRight className="w-4 h-4" />
+                </button>
+              </nav>
+
+              {/* Page Info */}
+              <div className="ml-8 flex items-center text-sm text-slate-600">
+                <span>
+                  Halaman {currentPage} dari {totalPages} • Total {totalNews} berita
+                </span>
+              </div>
+            </div>
           )}
 
         </div>

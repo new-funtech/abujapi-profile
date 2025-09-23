@@ -12,9 +12,7 @@ import { useNewsDetail, useNews } from '@/hooks/useNews';
 import { 
   BsCalendar3, 
   BsGeoAlt, 
-  BsEye, 
   BsShare, 
-  BsClock,
   BsArrowLeft,
   BsNewspaper,
   BsTags,
@@ -195,14 +193,6 @@ export default function NewsDetailPage() {
                 <BsGeoAlt className="w-4 h-4 mr-2" />
                 {article.location}
               </div>
-              <div className="flex items-center">
-                <BsClock className="w-4 h-4 mr-2" />
-                {article.readTime}
-              </div>
-              <div className="flex items-center">
-                <BsEye className="w-4 h-4 mr-2" />
-                {article.views.toLocaleString()} views
-              </div>
             </motion.div>
           </div>
         </div>
@@ -253,7 +243,7 @@ export default function NewsDetailPage() {
                   <BsNewspaper className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-slate-800">Tim Redaksi ABUJAPI</p>
+                  <p className="font-semibold text-slate-800">{article.author}</p>
                   <p className="text-sm text-slate-600">Editor & Publikasi</p>
                 </div>
               </div>

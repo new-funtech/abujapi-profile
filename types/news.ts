@@ -11,9 +11,31 @@ export interface ApiNewsItem {
   meta_title: string;
   meta_description: string;
   meta_keywords: string;
+  tags: string[];
   deleted_at: string | null;
   created_at: string;
   updated_at: string;
+  author_data: {
+    id: number;
+    name: string;
+    email: string;
+    avatar?: string | null;
+  };
+  formatted_tags: {
+    id: string;
+    name: string;
+    slug: string;
+  }[];
+  author: {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at?: string | null;
+    role?: string;
+    deleted_at?: string | null;
+    created_at?: string;
+    updated_at?: string;
+  };
 }
 
 export interface NewsApiResponse {
@@ -46,19 +68,9 @@ export function transformApiNews(apiNews: ApiNewsItem): NewsItem {
     });
   };
 
-  const formatReadTime = (content: string) => {
-    const wordCount = content.replace(/<[^>]*>/g, '').split(' ').length;
-    const readTimeMinutes = Math.ceil(wordCount / 200);
-    return `${readTimeMinutes} menit`;
-  };
-
   const extractLocation = (content: string) => {
     const locationMatch = content.match(/^([A-Za-z\s]+),\s*\d+/);
     return locationMatch ? locationMatch[1].trim() : 'ABUJAPI Jabar';
-  };
-
-  const generateTags = (keywords: string) => {
-    return keywords.split(',').map(tag => tag.trim()).slice(0, 5);
   };
 
   return {
@@ -72,14 +84,12 @@ export function transformApiNews(apiNews: ApiNewsItem): NewsItem {
       .replace(/\r\n/g, '\n') // Normalize line endings
       .trim(), // Remove leading/trailing whitespace
     image: apiNews.image,
-    author: 'Tim Redaksi ABUJAPI',
+    author: apiNews.author_data?.name || apiNews.author?.name || 'Tim Redaksi ABUJAPI',
     date: formatDate(apiNews.published_at),
     publishedAt: apiNews.published_at,
     category: 'Berita',
-    tags: generateTags(apiNews.meta_keywords || ''),
-    readTime: formatReadTime(apiNews.content),
+    tags: apiNews.formatted_tags?.map(tag => tag.name) || apiNews.tags || [],
     location: extractLocation(apiNews.content),
-    views: Math.floor(Math.random() * 2000) + 100,
     featured: false
   };
 }
@@ -97,8 +107,6 @@ export interface NewsItem {
   publishedAt: string;
   category: string;
   tags: string[];
-  readTime: string;
   location: string;
-  views: number;
   featured?: boolean;
 }

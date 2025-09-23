@@ -77,7 +77,6 @@ export default function Footer() {
             <h3 className="font-bold text-lg text-slate-800 mb-6">Services</h3>
             <ul className="space-y-4">
               {[
-                "Konsultasi Konstruksi",
                 "Sertifikasi BUJP",
                 "Pelatihan Teknis",
                 "Pengembangan SDM",

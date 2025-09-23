@@ -2,6 +2,8 @@ import {
   ComplaintFormData,
   ApiResponse,
   BujpPaginationData,
+  DocumentationPaginatedResponse,
+  NewsPaginatedResponse,
 } from "@/types/interface";
 
 /**
@@ -23,8 +25,8 @@ export async function submitComplaint(
     }
   }
 
-  // const apiUrl = "https://api.gada86.id/api/complaints";
-  const apiUrl = "http://127.0.0.1:8000/api/complaints"; // Local testing
+  const apiUrl = "https://admin.bpdabujapijabar.or.id/api/complaints";
+  // const apiUrl = "http://127.0.0.1:8000/api/complaints"; // Local testing
 
   try {
     const response = await fetch(apiUrl, {
@@ -84,11 +86,91 @@ export async function fetchBujps(
     }
 
     const result = await response.json();
-    return result.data; // Extract the 'data' object from the response
+    return result.data; 
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(error.message || "Error fetching BUJP data.");
     }
     throw new Error("Unexpected error fetching BUJP data.");
+  }
+}
+
+/**
+ * Fetch documentations with pagination
+ * @param page - page number (default: 1)
+ * @param perPage - items per page (default: 10)
+ */
+export async function fetchDocumentations(
+  page: number = 1,
+  perPage: number = 10
+): Promise<DocumentationPaginatedResponse> {
+  const baseUrl = "https://admin.bpdabujapijabar.or.id/api/documentations-list";
+  const params = new URLSearchParams({
+    page: page.toString(),
+    per_page: perPage.toString(),
+  });
+
+  try {
+    const response = await fetch(`${baseUrl}?${params}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch documentations: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const result: DocumentationPaginatedResponse = await response.json();
+    return result;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "Error fetching documentations.");
+    }
+    throw new Error("Unexpected error fetching documentations.");
+  }
+}
+
+/**
+ * Fetch news with pagination
+ * @param page - page number (default: 1)
+ * @param perPage - items per page (default: 10)
+ */
+export async function fetchNews(
+  page: number = 1,
+  perPage: number = 10
+): Promise<NewsPaginatedResponse> {
+  const baseUrl = "https://admin.bpdabujapijabar.or.id/api/news-list";
+  const params = new URLSearchParams({
+    page: page.toString(),
+    per_page: perPage.toString(),
+  });
+
+  try {
+    const response = await fetch(`${baseUrl}?${params}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch news: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const result: NewsPaginatedResponse = await response.json();
+    return result;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "Error fetching news.");
+    }
+    throw new Error("Unexpected error fetching news.");
   }
 }
