@@ -75,8 +75,6 @@ export default function DetailModal({ isOpen, onClose, data }: DetailModalProps)
 
   if (!data) return null;
 
-  // Removed unused statusInfo variable
-  // const statusInfo = getStatusInfo(data.tgl_expired);
 
   return (
     <>
