@@ -50,6 +50,33 @@ Access in your browser: **http://localhost:3000**
 
 ---
 
+## 🐳 Docker Deployment
+
+### Quick Start with Health Check & Security Monitoring
+
+```bash
+# Quick deploy dengan monitoring
+./scripts/deploy.sh
+
+# Atau manual dengan docker-compose
+docker-compose up -d
+
+# Monitor security
+./scripts/monitor-container.sh monitor
+```
+
+### Security Features
+
+✅ **Health Check Otomatis** - Monitor kesehatan container setiap 30 detik  
+✅ **Resource Monitoring** - Alert CPU & Memory usage > 80%  
+✅ **Security Monitoring** - Deteksi proses mencurigakan & auto-stop  
+✅ **Network Monitoring** - Deteksi koneksi abnormal  
+✅ **Container Hardening** - Resource limits & security options  
+
+📖 **Dokumentasi lengkap:** [DOCKER-SECURITY.md](./DOCKER-SECURITY.md)
+
+---
+
 ## 🛠️ Development Commands
 
 | Command       | Description                     |

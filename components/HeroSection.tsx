@@ -6,51 +6,51 @@ import herocarousel3 from "@images/heroCarousel3.jpeg";
 
 const slides = [
   {
-    image: herocarousel1,
+    image: herocarousel3,
     alt: "Sinergi dan Profesionalitas ABUJAPI Jabar",
     title: (
       <>
-        Membangun Sinergi <br /> & Profesionalitas <br />
-        <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
+        Sinergi & Profesionalitas <br />
+        <span className="font-bold">
           ABUJAPI Jabar
         </span>
       </>
     ),
     description:
-      "Bersama meningkatkan standar pengamanan melalui pelatihan, sertifikasi, dan kolaborasi.",
+      "Meningkatkan standar pengamanan melalui pelatihan dan sertifikasi profesional.",
     primaryBtn: { text: "Daftar Anggota", link: "/profil/keanggotaan" },
-    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
+    secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
   {
     image: herocarousel2,
     alt: "Jaringan Pengusaha Jasa Pengamanan ABUJAPI Jabar",
     title: (
       <>
-        Jaringan <br /> Pengusaha Jasa Pengamanan <br />
-        <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
-          ABUJAPI Jabar
+        Jaringan Pengusaha <br />
+        <span className="font-bold">
+          Jasa Pengamanan
         </span>
       </>
     ),
     description:
-      "Menjadi wadah komunikasi dan koordinasi antar perusahaan jasa pengamanan di Jawa Barat.",
+      "Wadah komunikasi dan koordinasi perusahaan jasa pengamanan di Jawa Barat.",
     primaryBtn: { text: "Gabung Sekarang", link: "/profil/keanggotaan" },
-    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
+    secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
   {
-    image: herocarousel3,
+    image: herocarousel1,
     alt: "Laporan dan Pengaduan ABUJAPI Jabar",
     title: (
       <>
         Laporan & Pengaduan <br />
-        <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
+        <span className="font-bold">
           ABUJAPI Jabar
         </span>
       </>
     ),
-    description: "Lihat program kami secara mudah dan cepat.",
+    description: "Layanan laporan dan pengaduan yang mudah dan responsif.",
     primaryBtn: { text: "Lihat Program", link: "/profil/galeri" },
-    secondaryBtn: { text: "Pelajari Lebih Lanjut", link: "/profil" },
+    secondaryBtn: { text: "Selengkapnya", link: "/profil" },
   },
 ];
 

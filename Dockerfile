@@ -1,48 +1,57 @@
-# Stage 1: Build
-FROM node:18-alpine AS builder
-WORKDIR /app
+# Build stage
+FROM node:20-alpine AS builder
 
-# Copy package.json and lockfile if present
-COPY package*.json pnpm-lock.yaml* ./
-
-# Enable and prepare pnpm
+# Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Install dependencies for building
-RUN if [ -f pnpm-lock.yaml ]; then \
-      pnpm install; \
-    else \
-      pnpm install --no-frozen-lockfile; \
-    fi
+# Set working directory
+WORKDIR /app
 
-# Copy the rest of the application source
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
 COPY . .
 
 # Build the application
-RUN pnpm build
+RUN pnpm run build
 
-# Stage 2: Production
-FROM node:18-alpine
-WORKDIR /app
+# Production stage
+FROM node:20-alpine
 
-# Copy package.json and lockfile if present
-COPY package*.json pnpm-lock.yaml* ./
+# Install dependencies untuk health check dan security monitoring
+RUN apk add --no-cache curl procps
 
-# Enable and prepare pnpm
+# Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Install production dependencies only
-RUN if [ -f pnpm-lock.yaml ]; then \
-      pnpm install --prod --frozen-lockfile; \
-    else \
-      pnpm install --prod --no-frozen-lockfile; \
-    fi
+# Set working directory
+WORKDIR /app
 
-# Copy build output and public assets from builder stage
+# Copy build output from builder
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
 
-# Expose port 3007
-EXPOSE 3007
+# Set environment variable for port
+ENV PORT=8547
+ENV HOST=0.0.0.0
 
+# Expose port 8547
+EXPOSE 8547
+
+# Health check configuration
+# Memeriksa HTTP response, memory usage, dan process health
+# Interval: check setiap 30 detik
+# Timeout: 10 detik untuk response
+# Start period: 60 detik untuk initial startup
+# Retries: 3 kali sebelum mark sebagai unhealthy
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:8547/api/health || exit 1
+
+# Start the server
 CMD ["pnpm", "start"]

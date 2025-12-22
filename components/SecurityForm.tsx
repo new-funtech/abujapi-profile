@@ -78,7 +78,7 @@ export default function SecurityForm({
             htmlFor="complaint_content"
             className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
           >
-            <FaFileAlt className="mr-2 text-green-600" />
+            <FaFileAlt className="mr-2 text-blue-600" />
             Isi Pengaduan <RequiredStar />
           </label>
           <textarea
@@ -103,7 +103,7 @@ export default function SecurityForm({
               htmlFor="reported_personnel_name"
               className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
             >
-              <FaUser className="mr-2 text-green-600" />
+              <FaUser className="mr-2 text-blue-600" />
               {isSecurityPersonnel
                 ? "Nama Satuan Pengamanan"
                 : "Nama Badan Usaha"}{" "}
@@ -115,7 +115,7 @@ export default function SecurityForm({
               name="reported_personnel_name"
               value={formData.reported_personnel_name}
               onChange={handleChange}
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 text-xs md:text-sm text-black"
               required
             />
             {errors.reported_personnel_name && (
@@ -130,7 +130,7 @@ export default function SecurityForm({
               htmlFor="location"
               className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
             >
-              <FaMapMarkerAlt className="mr-2 text-green-600" /> Lokasi{" "}
+              <FaMapMarkerAlt className="mr-2 text-blue-600" /> Lokasi{" "}
               <RequiredStar />
             </label>
             <input
@@ -139,7 +139,7 @@ export default function SecurityForm({
               name="location"
               value={formData.location}
               onChange={handleChange}
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 text-xs md:text-sm text-black"
               required
             />
             {errors.location && (
@@ -154,7 +154,7 @@ export default function SecurityForm({
             htmlFor="related_company"
             className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
           >
-            <FaBuilding className="mr-2 text-green-600" /> Badan Usaha yang
+            <FaBuilding className="mr-2 text-blue-600" /> Badan Usaha yang
             Bersangkutan Bekerja <RequiredStar />
           </label>
           <input
@@ -163,7 +163,7 @@ export default function SecurityForm({
             name="related_company"
             value={formData.related_company}
             onChange={handleChange}
-            className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+            className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 text-xs md:text-sm text-black"
             required
           />
           {errors.related_company && (
@@ -176,7 +176,7 @@ export default function SecurityForm({
         {/* Upload Dokumen */}
         <div>
           <label className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm">
-            <FaPaperclip className="mr-2 text-green-600" /> Upload Dokumen Bukti
+            <FaPaperclip className="mr-2 text-blue-600" /> Upload Dokumen Bukti
             Aduan <RequiredStar />
           </label>
           <p className="text-xs md:text-sm text-gray-600 mb-2">
@@ -186,13 +186,13 @@ export default function SecurityForm({
           <div
             {...getRootProps()}
             className={`border-dashed border-2 ${
-              isDragActive ? "border-green-500 bg-green-50" : "border-gray-300"
+              isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
             } p-3 md:p-4 rounded-lg text-center cursor-pointer hover:border-gray-400 transition-all duration-200`}
           >
             <input {...getInputProps()} />
             <p
               className={`text-xs md:text-sm flex items-center justify-center ${
-                isDragActive ? "text-green-600 font-semibold" : "text-gray-600"
+                isDragActive ? "text-blue-600 font-semibold" : "text-gray-600"
               }`}
             >
               <FaPaperclip className="mr-2" />

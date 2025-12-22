@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Sidebar from "@components/Sidebar";
-import { BsBookmarksFill } from "react-icons/bs";
-// import Header from "@/components/Header";
+import LatestNews from "@components/LatestNews";
+import SearchBar from "@components/SearchBar";
+import { BsBookmarksFill, BsPeople, BsBuilding, BsShield } from "react-icons/bs";
 
 export default function AboutPage() {
   const pathname = usePathname();
@@ -21,186 +22,222 @@ export default function AboutPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Header: Navbar */}
-      {/* <Header /> */}
       <Navbar />
 
-      {/* Main Content */}
-      <main className="flex-grow">
-        {/* Subheader: Breadcrumb Navigation */}
-        <section className="bg-gray-100 py-4">
-          <div className="max-w-screen-2xl mx-auto px-6">
-            <nav
-              className="text-sm text-gray-600 font-medium flex items-center mx-22"
-              aria-label="Breadcrumb"
-            >
-              <span className="text-gray-600 mr-2" aria-label="Bookmark About">
-                <BsBookmarksFill className="w-4 h-4" />
-              </span>
-              <ol className="flex items-center space-x-2">
-                <li>
-                  <Link
-                    href="/"
-                    className="hover:text-green-600 transition-colors duration-300"
-                  >
-                    Beranda
-                  </Link>
-                </li>
-                <li className="text-gray-400">/</li>
-                <li>
-                  <span
-                    className="text-green-600 font-semibold"
-                    aria-current="page"
-                  >
-                    Profil
-                  </span>
-                </li>
-              </ol>
-            </nav>
+      {/* Hero Header Section */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden"
+      >
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          {/* Profile-themed SVG icons */}
+          <div className="absolute top-20 left-16 opacity-10">
+            <BsShield className="w-16 h-16 text-blue-300" />
           </div>
-        </section>
-
-        {/* Content with Sidebar and Right Column */}
-        <div className="max-w-screen-2xl px-6 py-8 flex flex-col md:flex-row md:items-stretch gap-4 mx-2 md:mx-18">
-          {/* Sidebar */}
-          <Sidebar pathname={pathname} />
-
-          {/* Main Content */}
-          <div className="md:w-3/4 md:border-r md:border-gray-300">
-            <section className="mr-4">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-2xl font-bold text-gray-800 mb-4"
-              >
-                Apa itu BPD ABUJAPI Jabar?
-              </motion.h2>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                {aboutData.history}
-              </p>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                BPD ABUJAPI Jabar adalah perpanjangan dari kepengurusan ABUJAPI
-                di tingkat provinsi Jawa Barat. Perannya menghubungkan BUJP di
-                wilayah Jawa Barat dengan BPP ABUJAPI (pusat) serta bersinergi
-                dengan pihak eksternal seperti Polri, pemerintah daerah, dunia
-                usaha, dan lembaga pendidikan/sertifikasi.
-              </p>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                Tujuan BPD ABUJAPI Jabar
-              </h3>
-              <ul className="text-sm text-gray-600 leading-relaxed list-disc list-inside space-y-2 mb-4">
-                <li>
-                  Menghimpun, membina, dan mengembangkan kemampuan, kegiatan,
-                  dan kepentingan Badan Usaha di bidang pengamanan dan
-                  penyelamatan agar menjadi lebih tangguh, profesional, dan
-                  mandiri dalam rangka mewujudkan lingkungan yang aman dan
-                  tertib.
-                </li>
-                <li>
-                  Menciptakan dan mengembangkan iklim yang aman dan tertib di
-                  lingkungan dunia usaha yang memungkinkan keikutsertaan
-                  pengusaha berperan secara efektif dalam pembangunan nasional.
-                </li>
-                <li>
-                  Mengadakan penelitian, pengembangan, dan kerjasama di bidang
-                  teknologi dan pelayanan jasa pengamanan/penyelamatan pada
-                  tingkat nasional maupun internasional.
-                </li>
-              </ul>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                Fungsi BPD ABUJAPI Jabar
-              </h3>
-              <ul className="text-sm text-gray-600 leading-relaxed list-disc list-inside space-y-2 mb-4">
-                <li>Wadah penyalur kegiatan sesuai kepentingan anggota.</li>
-                <li>
-                  Wadah pembinaan dan pengembangan anggota dalam usaha
-                  mewujudkan tujuan organisasi.
-                </li>
-                <li>
-                  Wadah peran serta dalam usaha mensukseskan pembangunan
-                  nasional, khususnya dalam bidang keamanan dan ketertiban
-                  masyarakat.
-                </li>
-                <li>
-                  Sarana penyalur aspirasi anggota dan sebagai sarana komunikasi
-                  sosial timbal balik antar anggota.
-                </li>
-                <li>
-                  Pusat informasi, konsultasi, advokasi, dan fasilitasi
-                  pengusaha jasa pengamanan dan penyelamatan.
-                </li>
-                <li>
-                  Menjembatani kepentingan antara pengguna jasa pengamanan dan
-                  penyelamatan dengan anggota ABUJAPI.
-                </li>
-                <li>
-                  Mitra Pemerintah/Kepolisian Negara Republik Indonesia dalam
-                  menetapkan kualifikasi perusahaan di bidang pengamanan dan
-                  penyelamatan serta pengawasan standar peningkatan mutu.
-                </li>
-                <li>
-                  Melaksanakan sertifikasi bagi perusahaan-perusahaan yang
-                  terkait dengan jasa pengamanan dan penyelamatan.
-                </li>
-              </ul>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                Posisi Strategis
-              </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Karena Jawa Barat memiliki jumlah perusahaan jasa pengamanan dan
-                tenaga satpam yang sangat besar, BPD ABUJAPI Jabar menjadi salah
-                satu BPD yang paling berpengaruh di tingkat nasional.
-              </p>
-            </section>
+          <div className="absolute top-32 right-24 opacity-10">
+            <BsPeople className="w-12 h-12 text-cyan-300" />
           </div>
+          <div className="absolute bottom-20 left-32 opacity-10">
+            <BsBuilding className="w-14 h-14 text-slate-300" />
+          </div>
+          <div className="absolute top-40 right-40 opacity-10">
+            <svg className="w-10 h-10 text-blue-200" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+              <path d="M2 17L12 22L22 17" />
+              <path d="M2 12L12 17L22 12" />
+            </svg>
+          </div>
+          <div className="absolute bottom-32 right-16 opacity-10">
+            <svg className="w-8 h-8 text-cyan-200" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 6H16L14 4H10L8 6H4C2.9 6 2.01 6.9 2.01 8L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6ZM20 18H4V8H20V18ZM12 9C10.9 9 10 9.9 10 11S10.9 13 12 13S14 12.1 14 11S13.1 9 12 9Z"/>
+            </svg>
+          </div>
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/20 to-blue-900/20"></div>
+        </div>
 
-          {/* Right Column: Search and News */}
-          <div className="md:w-1/5">
-            <div className="mb-6">
-              <input
-                type="text"
-                placeholder="Cari..."
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 text-sm text-gray-700 transition-all duration-300"
-                aria-label="Pencarian"
-              />
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="text-center">
+            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-8">
+              <BsShield className="w-4 h-4 mr-2" />
+              Tentang Kami
             </div>
-            <div className="bg-white shadow-lg p-6 rounded-lg border border-gray-200">
-              <h4 className="text-xl font-bold text-gray-800 mb-6 border-b-2 border-green-600 pb-2">
-                Berita Terkini
-              </h4>
-              <div className="space-y-6">
-                <div className="border-l-4 border-green-600 pl-4">
-                  <p className="text-xs text-gray-500 mb-1">Mon, 23/12/2024</p>
-                  <Link
-                    href="/news/abujapi-event-2024"
-                    className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors duration-300"
-                  >
-                    BPD Abujapi Jabar Selenggarakan Acara...
-                  </Link>
-                </div>
-                <div className="border-l-4 border-green-600 pl-4">
-                  <p className="text-xs text-gray-500 mb-1">Tue, 24/12/2024</p>
-                  <Link
-                    href="/news/abujapi-training-2024"
-                    className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors duration-300"
-                  >
-                    Pelatihan Satpam Gada Pratama 2024
-                  </Link>
-                </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <span className="text-white">Profil</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"> ABUJAPI</span>
+            </h1>
+            
+            <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Mengenal lebih dekat Badan Pengurus Daerah ABUJAPI Jawa Barat
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-8 text-slate-300">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Organisasi Resmi</span>
               </div>
-              <div className="mt-6">
-                <Link
-                  href="/news"
-                  className="text-sm font-semibold text-green-600 hover:text-green-800 transition-colors duration-300"
-                >
-                  Lihat Semua Berita
-                </Link>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
+                <span>Jasa Pengamanan</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-slate-400 rounded-full mr-3"></div>
+                <span>Profesional</span>
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </motion.section>
+
+      {/* Breadcrumb */}
+      <section className="bg-white border-b border-gray-200 py-4">
+        <div className="max-w-screen-xl mx-auto px-6">
+          <nav
+            className="text-sm text-gray-600 font-medium flex items-center"
+            aria-label="Breadcrumb"
+          >
+            <BsBookmarksFill className="w-4 h-4 mr-2 text-blue-600" />
+            <ol className="flex items-center space-x-2">
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  Beranda
+                </Link>
+              </li>
+              <li className="text-gray-400">/</li>
+              <li>
+                <span
+                  className="text-blue-600 font-semibold"
+                  aria-current="page"
+                >
+                  Profil
+                </span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+
+        {/* Content with Sidebar and Right Column */}
+        <main className="flex-grow">
+          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8">
+          {/* Sidebar */}
+          <Sidebar pathname={pathname} />
+
+          {/* Main Content */}
+          <div className="flex-1 lg:max-w-4xl">
+            <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+              <h2 className="text-3xl font-bold text-slate-800 mb-6 flex items-center">
+                <BsShield className="w-8 h-8 mr-3 text-blue-600" />
+                Apa itu BPD ABUJAPI Jabar?
+              </h2>
+
+              <div className="prose prose-slate max-w-none">
+                <p className="text-slate-600 leading-relaxed mb-6 text-base">
+                  {aboutData.history}
+                </p>
+                <p className="text-slate-600 leading-relaxed mb-8 text-base">
+                  BPD ABUJAPI Jabar adalah perpanjangan dari kepengurusan ABUJAPI
+                  di tingkat provinsi Jawa Barat. Perannya menghubungkan BUJP di
+                  wilayah Jawa Barat dengan BPP ABUJAPI (pusat) serta bersinergi
+                  dengan pihak eksternal seperti Polri, pemerintah daerah, dunia
+                  usaha, dan lembaga pendidikan/sertifikasi.
+                </p>
+                
+                <div className="bg-blue-50 rounded-lg p-6 mb-8">
+                  <h3 className="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                    <BsPeople className="w-6 h-6 mr-2 text-blue-600" />
+                    Tujuan BPD ABUJAPI Jabar
+                  </h3>
+                  <ul className="text-slate-600 leading-relaxed list-disc list-inside space-y-3">
+                    <li>
+                      Menghimpun, membina, dan mengembangkan kemampuan, kegiatan,
+                      dan kepentingan Badan Usaha di bidang pengamanan dan
+                      penyelamatan agar menjadi lebih tangguh, profesional, dan
+                      mandiri dalam rangka mewujudkan lingkungan yang aman dan
+                      tertib.
+                    </li>
+                    <li>
+                      Menciptakan dan mengembangkan iklim yang aman dan tertib di
+                      lingkungan dunia usaha yang memungkinkan keikutsertaan
+                      pengusaha berperan secara efektif dalam pembangunan nasional.
+                    </li>
+                    <li>
+                      Mengadakan penelitian, pengembangan, dan kerjasama di bidang
+                      teknologi dan pelayanan jasa pengamanan/penyelamatan pada
+                      tingkat nasional maupun internasional.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-slate-50 rounded-lg p-6 mb-8">
+                  <h3 className="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                    <BsBuilding className="w-6 h-6 mr-2 text-slate-600" />
+                    Fungsi BPD ABUJAPI Jabar
+                  </h3>
+                  <ul className="text-slate-600 leading-relaxed list-disc list-inside space-y-3">
+                    <li>Wadah penyalur kegiatan sesuai kepentingan anggota.</li>
+                    <li>
+                      Wadah pembinaan dan pengembangan anggota dalam usaha
+                      mewujudkan tujuan organisasi.
+                    </li>
+                    <li>
+                      Wadah peran serta dalam usaha mensukseskan pembangunan
+                      nasional, khususnya dalam bidang keamanan dan ketertiban
+                      masyarakat.
+                    </li>
+                    <li>
+                      Sarana penyalur aspirasi anggota dan sebagai sarana komunikasi
+                      sosial timbal balik antar anggota.
+                    </li>
+                    <li>
+                      Pusat informasi, konsultasi, advokasi, dan fasilitasi
+                      pengusaha jasa pengamanan dan penyelamatan.
+                    </li>
+                    <li>
+                      Menjembatani kepentingan antara pengguna jasa pengamanan dan
+                      penyelamatan dengan anggota ABUJAPI.
+                    </li>
+                    <li>
+                      Mitra Pemerintah/Kepolisian Negara Republik Indonesia dalam
+                      menetapkan kualifikasi perusahaan di bidang pengamanan dan
+                      penyelamatan serta pengawasan standar peningkatan mutu.
+                    </li>
+                    <li>
+                      Melaksanakan sertifikasi bagi perusahaan-perusahaan yang
+                      terkait dengan jasa pengamanan dan penyelamatan.
+                    </li>
+                  </ul>
+                </div>
+
+                <h3 className="text-xl font-semibold text-slate-800 mb-4">
+                  Posisi Strategis
+                </h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Karena Jawa Barat memiliki jumlah perusahaan jasa pengamanan dan
+                  tenaga satpam yang sangat besar, BPD ABUJAPI Jabar menjadi salah
+                  satu BPD yang paling berpengaruh di tingkat nasional.
+                </p>
+              </div>
+            </section>
+          </div>
+
+          {/* Right Column: Search and News */}
+          <div className="lg:w-80 flex-shrink-0">
+            <div className="sticky top-16 space-y-6">
+              <SearchBar />
+              <LatestNews limit={3} />
+            </div>
+          </div>
+          </div>
+        </main>
 
       {/* Footer */}
       <Footer />

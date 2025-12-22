@@ -4,58 +4,60 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export default function Header() {
   return (
-    <div className="w-full bg-green-700 text-white text-sm border-b border-green-600/40">
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-2">
-        
-        {/* Info Kontak */}
-        <div className="flex flex-wrap items-center gap-6">
-          <a
-            href="tel:+62123456789"
-            className="flex items-center gap-2 hover:text-green-200 transition-colors"
-          >
-            <FiPhone className="text-base" />
-            <span>+62 812-3456-789</span>
-          </a>
-          <a
-            href="mailto:cs@bpdabujapijabar.or.id"
-            className="flex items-center gap-2 hover:text-green-200 transition-colors"
-          >
-            <FiMail className="text-base" />
-            <span>cs@bpdabujapijabar.or.id</span>
-          </a>
-        </div>
+    <header className="w-full bg-blue-700 border-b border-blue-800">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-2 py-2">
+          {/* Contact Info */}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white">
+            <a
+              href="tel:+62123456789"
+              className="flex items-center gap-1 hover:text-blue-200 transition-colors duration-200"
+            >
+              <FiPhone className="text-sm sm:text-base flex-shrink-0" />
+              <span className="hidden sm:inline">+62 812-3456-789</span>
+            </a>
+            <span className="hidden sm:block text-blue-200">|</span>
+            <a
+              href="mailto:cs@bpdabujapijabar.or.id"
+              className="flex items-center gap-1 hover:text-blue-200 transition-colors duration-200"
+            >
+              <FiMail className="text-sm sm:text-base flex-shrink-0" />
+              <span className="hidden sm:inline break-all">cs@bpdabujapijabar.or.id</span>
+            </a>
+          </div>
 
-        {/* Social Media */}
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-200 transition-colors"
-            aria-label="Facebook"
-          >
-            <FaFacebookF />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-200 transition-colors"
-            aria-label="Instagram"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-200 transition-colors"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedinIn />
-          </a>
+          {/* Social Media */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 sm:w-7 sm:h-7 bg-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-200 shadow-sm group"
+              aria-label="Facebook"
+            >
+              <FaFacebookF className="text-xs sm:text-[13px] text-blue-600 group-hover:text-white transition-colors duration-200" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 sm:w-7 sm:h-7 bg-white rounded-full flex items-center justify-center hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-200 shadow-sm group"
+              aria-label="Instagram"
+            >
+              <FaInstagram className="text-xs sm:text-[13px] text-blue-600 group-hover:text-white transition-colors duration-200" />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 sm:w-7 sm:h-7 bg-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-all duration-200 shadow-sm group"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn className="text-xs sm:text-[13px] text-blue-600 group-hover:text-white transition-colors duration-200" />
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
