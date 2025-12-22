@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BsImages, BsImageFill, BsCamera, BsCollectionFill } from 'react-icons/bs';
 import Image from 'next/image';
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 import { fetchDocumentations } from '@/lib/api';
 import { Documentation } from '@/types/interface';
 
@@ -236,27 +236,19 @@ export default function GalleryPageContent() {
       </section>
 
       {/* Enhanced Lightbox */}
-      {isOpen && documentations.length > 0 && (
-        <Lightbox
-          mainSrc={documentations[photoIndex]?.image}
-          nextSrc={documentations[(photoIndex + 1) % documentations.length]?.image}
-          prevSrc={documentations[(photoIndex + documentations.length - 1) % documentations.length]?.image}
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex((photoIndex + documentations.length - 1) % documentations.length)
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % documentations.length)
-          }
-          imageTitle={documentations[photoIndex]?.title || `Dokumentasi ${photoIndex + 1}`}
-          imageCaption={documentations[photoIndex]?.excerpt || "Dokumentasi kegiatan ABUJAPI"}
-          reactModalStyle={{
-            overlay: {
-              zIndex: 9999
-            }
-          }}
-        />
-      )}
+      <Lightbox
+        open={isOpen}
+        close={() => setIsOpen(false)}
+        index={photoIndex}
+        slides={documentations.map(doc => ({
+          src: doc.image,
+          title: doc.title,
+          description: doc.excerpt
+        }))}
+        on={{
+          view: ({ index }: { index: number }) => setPhotoIndex(index)
+        }}
+      />
 
       {/* Loading overlay */}
       {isLoading && (
