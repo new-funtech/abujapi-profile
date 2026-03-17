@@ -9,11 +9,15 @@ import {
   FiArrowRight,
   FiArrowUpRight,
   FiChevronDown,
+  FiLogOut,
+  FiLogIn,
+  FiUser,
 } from "react-icons/fi";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ComplaintPage from "@components/ComplaintPage";
 import Header from "./Header";
 import logoImage from "@images/logo.png";
+import { useAuth } from "@/contexts/AuthContext";
 
 
 
@@ -22,8 +26,11 @@ export default function Navbar() {
   const [hoverHubungi, setHoverHubungi] = useState(false);
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
   const [isProfilDropdownOpen, setIsProfilDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, logout } = useAuth();
 
   const profilMenuItems = [
     { name: "Tentang Kami", href: "/profil" },
@@ -159,7 +166,7 @@ export default function Navbar() {
           </nav>
 
           {/* Compact CTA Button */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-2">
             <button
               onClick={() => setIsComplaintOpen(true)}
               onMouseEnter={() => setHoverHubungi(true)}
@@ -175,6 +182,53 @@ export default function Navbar() {
               )}
             </button>
 
+            {/* User Auth Menu */}
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setIsUserMenuOpen((v) => !v)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-all duration-300 text-sm text-slate-700"
+                  aria-label="Menu pengguna"
+                  aria-expanded={isUserMenuOpen}
+                >
+                  <FiUser className="text-base" />
+                  <span className="max-w-[100px] truncate">{user.name}</span>
+                  <FiChevronDown
+                    className={`text-sm transition-transform duration-300 ${isUserMenuOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {isUserMenuOpen && (
+                  <div className="absolute right-0 top-full mt-1 w-48 bg-white/95 backdrop-blur-sm shadow-xl rounded-xl py-2 z-50 border border-slate-200/50">
+                    <div className="px-4 py-2 border-b border-slate-100">
+                      <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={async () => {
+                        setIsUserMenuOpen(false);
+                        try {
+                          await logout();
+                        } catch {
+                          // logout failed on backend; session is still cleared client-side
+                        }
+                        router.push("/");
+                      }}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
+                    >
+                      <FiLogOut className="text-sm" />
+                      Keluar
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 transition-all duration-300 text-sm text-slate-700"
+              >
+                <FiLogIn className="text-base" />
+                <span>Masuk</span>
+              </Link>
+            )}
           </div>
 
           {/* Compact Mobile Menu Toggle */}
@@ -273,7 +327,7 @@ export default function Navbar() {
             ))}
             
             {/* Enhanced Mobile CTA Button */}
-            <div className="pt-4 sm:pt-6 pb-2">
+            <div className="pt-4 sm:pt-6 pb-2 space-y-3">
               <button
                 onClick={() => {
                   setMenuTerbuka(false);
@@ -285,6 +339,40 @@ export default function Navbar() {
                 <FiArrowUpRight className="text-base sm:text-lg group-hover:rotate-45 transition-transform duration-300" />
               </button>
 
+              {/* Mobile Auth Button */}
+              {user ? (
+                <div className="border border-slate-200 rounded-xl overflow-hidden">
+                  <div className="px-4 py-3 bg-slate-50 border-b border-slate-200">
+                    <p className="text-xs text-slate-500">Masuk sebagai</p>
+                    <p className="text-sm font-semibold text-slate-800 truncate">{user.name}</p>
+                    <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      setMenuTerbuka(false);
+                      try {
+                        await logout();
+                      } catch {
+                        // logout failed on backend; session is still cleared client-side
+                      }
+                      router.push("/");
+                    }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-red-600 hover:bg-red-50 transition-colors duration-200"
+                  >
+                    <FiLogOut className="text-base" />
+                    Keluar
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setMenuTerbuka(false)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all duration-300 font-semibold text-sm"
+                >
+                  <FiLogIn className="text-base" />
+                  Masuk ke Akun
+                </Link>
+              )}
             </div>
           </nav>
         </div>
