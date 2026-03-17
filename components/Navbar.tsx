@@ -9,11 +9,15 @@ import {
   FiArrowRight,
   FiArrowUpRight,
   FiChevronDown,
+  FiLogIn,
+  FiLogOut,
+  FiUser,
 } from "react-icons/fi";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ComplaintPage from "@components/ComplaintPage";
 import Header from "./Header";
 import logoImage from "@images/logo.png";
+import { useAuth } from "@/hooks/useAuth";
 
 
 
@@ -23,7 +27,23 @@ export default function Navbar() {
   const [isComplaintOpen, setIsComplaintOpen] = useState(false);
   const [isProfilDropdownOpen, setIsProfilDropdownOpen] = useState(false);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<string | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  async function handleLogout() {
+    setIsLoggingOut(true);
+    try {
+      await logout();
+      setMenuTerbuka(false);
+      router.push("/login");
+    } finally {
+      setIsLoggingOut(false);
+    }
+  }
+
+  const displayName = user?.name ?? user?.email ?? "";
 
   const profilMenuItems = [
     { name: "Tentang Kami", href: "/profil" },
@@ -159,7 +179,7 @@ export default function Navbar() {
           </nav>
 
           {/* Compact CTA Button */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-2">
             <button
               onClick={() => setIsComplaintOpen(true)}
               onMouseEnter={() => setHoverHubungi(true)}
@@ -175,6 +195,31 @@ export default function Navbar() {
               )}
             </button>
 
+            {isAuthenticated ? (
+              <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 text-sm text-slate-600 px-3 py-2 rounded-lg bg-slate-50 border border-slate-200">
+                  <FiUser className="text-base text-blue-600" />
+                  <span className="max-w-[120px] truncate">{displayName}</span>
+                </span>
+                <button
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="flex items-center gap-1.5 text-sm text-slate-600 px-3 py-2 rounded-lg border border-slate-200 hover:border-red-300 hover:text-red-600 hover:bg-red-50 transition-all duration-300 disabled:opacity-60"
+                  title="Keluar"
+                >
+                  <FiLogOut className="text-base" />
+                  <span>{isLoggingOut ? "Keluar..." : "Keluar"}</span>
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-1.5 text-sm text-slate-600 px-3 py-2 rounded-lg border border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
+              >
+                <FiLogIn className="text-base" />
+                <span>Masuk</span>
+              </Link>
+            )}
           </div>
 
           {/* Compact Mobile Menu Toggle */}
@@ -273,7 +318,7 @@ export default function Navbar() {
             ))}
             
             {/* Enhanced Mobile CTA Button */}
-            <div className="pt-4 sm:pt-6 pb-2">
+            <div className="pt-4 sm:pt-6 pb-2 space-y-3">
               <button
                 onClick={() => {
                   setMenuTerbuka(false);
@@ -285,6 +330,31 @@ export default function Navbar() {
                 <FiArrowUpRight className="text-base sm:text-lg group-hover:rotate-45 transition-transform duration-300" />
               </button>
 
+              {isAuthenticated ? (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-600">
+                    <FiUser className="text-base text-blue-600 flex-shrink-0" />
+                    <span className="truncate font-medium">{displayName}</span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    disabled={isLoggingOut}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:border-red-300 hover:text-red-600 hover:bg-red-50 transition-all duration-300 disabled:opacity-60"
+                  >
+                    <FiLogOut className="text-base" />
+                    <span>{isLoggingOut ? "Keluar..." : "Keluar"}</span>
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
+                  onClick={() => setMenuTerbuka(false)}
+                >
+                  <FiLogIn className="text-base" />
+                  <span>Masuk</span>
+                </Link>
+              )}
             </div>
           </nav>
         </div>
