@@ -2,6 +2,7 @@ export interface ComplaintFormData {
   reporter_name: string;
   reporter_company: string;
   reporter_phone: string;
+  reporter_email: string;
   reporter_address: string;
   complaint_type: string;
   complaint_content: string;

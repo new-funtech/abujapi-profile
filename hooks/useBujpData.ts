@@ -95,7 +95,7 @@ export const useBujpData = ({ initialPageSize = 5 }: UseBujpDataProps = {}): Use
     const now = new Date();
     
     // Apply client-side sorting if needed
-    let sortedData = [...data];
+    const sortedData = [...data];
     if (sortBy && data.length > 0) {
       sortedData.sort((a, b) => {
         let aValue = '';

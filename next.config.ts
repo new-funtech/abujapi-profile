@@ -1,12 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
+
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'storage.ganipedia.xyz',
+        hostname: 'storage.ganipedia.com',
         port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '8000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8000',
         pathname: '/**',
       },
       {
@@ -27,7 +41,7 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
-  // Experimental features untuk Next.js 15
+  // Experimental features untuk form uploads
   experimental: {
     // Disable body size warnings untuk form uploads
     serverActions: {

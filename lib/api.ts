@@ -68,8 +68,8 @@ export async function fetchBujps(
   search: string = ""
 ): Promise<BujpPaginationData> {
   const searchParam = search ? `&search=${encodeURIComponent(search)}` : "";
-  // const apiUrl = `http://127.0.0.1:8000/api/api/bujp-list?page=${page}&per_page=${perPage}${searchParam}`;
   const apiUrl = `https://admin.bpdabujapijabar.or.id/api/bujp-list?page=${page}&per_page=${perPage}${searchParam}`;
+  // const apiUrl = `http://127.0.0.1:8000/api/bujp-list?page=${page}&per_page=${perPage}${searchParam}`;
 
   try {
     const response = await fetch(apiUrl, {
@@ -105,6 +105,7 @@ export async function fetchDocumentations(
   perPage: number = 10
 ): Promise<DocumentationPaginatedResponse> {
   const baseUrl = "https://admin.bpdabujapijabar.or.id/api/documentations-list";
+  // const baseUrl = "http://127.0.0.1:8000/api/documentations-list";
   const params = new URLSearchParams({
     page: page.toString(),
     per_page: perPage.toString(),
@@ -145,6 +146,7 @@ export async function fetchNews(
   perPage: number = 10
 ): Promise<NewsPaginatedResponse> {
   const baseUrl = "https://admin.bpdabujapijabar.or.id/api/news-list";
+  // const baseUrl = "http://127.0.0.1:8000/api/news-list";
   const params = new URLSearchParams({
     page: page.toString(),
     per_page: perPage.toString(),

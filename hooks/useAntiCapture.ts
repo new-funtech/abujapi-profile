@@ -126,8 +126,8 @@ export const useAntiCapture = (options: UseAntiCaptureOptions = {}): UseAntiCapt
     document.addEventListener('selectstart', handleSelectStart);
     document.body.style.userSelect = 'none';
     document.body.style.webkitUserSelect = 'none';
-    (document.body.style as any).mozUserSelect = 'none';
-    (document.body.style as any).msUserSelect = 'none';
+    document.body.style.setProperty('-moz-user-select', 'none');
+    document.body.style.setProperty('-ms-user-select', 'none');
   }, [handleSelectStart]);
 
   // Function to allow text selection
@@ -135,8 +135,8 @@ export const useAntiCapture = (options: UseAntiCaptureOptions = {}): UseAntiCapt
     document.removeEventListener('selectstart', handleSelectStart);
     document.body.style.userSelect = 'auto';
     document.body.style.webkitUserSelect = 'auto';
-    (document.body.style as any).mozUserSelect = 'auto';
-    (document.body.style as any).msUserSelect = 'auto';
+    document.body.style.setProperty('-moz-user-select', 'auto');
+    document.body.style.setProperty('-ms-user-select', 'auto');
   }, [handleSelectStart]);
 
   // Function to block dev tools
@@ -149,7 +149,7 @@ export const useAntiCapture = (options: UseAntiCaptureOptions = {}): UseAntiCapt
     }
 
     // Additional DevTools detection
-    let devtools = {
+    const devtools = {
       open: false,
       orientation: null as string | null
     };

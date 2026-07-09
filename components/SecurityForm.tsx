@@ -37,6 +37,8 @@ interface SecurityFormProps {
   complaintType: string;
 }
 
+const RequiredStar = () => <span className="text-red-500 ml-1">*</span>;
+
 export default function SecurityForm({
   formData,
   handleChange,
@@ -67,8 +69,6 @@ export default function SecurityForm({
     },
   });
 
-  const RequiredStar = () => <span className="text-red-500 ml-1">*</span>;
-
   return (
     <div className="space-y-4">
       <div className="space-y-3">
@@ -86,6 +86,7 @@ export default function SecurityForm({
             name="complaint_content"
             value={formData.complaint_content}
             onChange={handleChange}
+            placeholder="Jelaskan kronologi kejadian secara detail, termasuk tanggal, waktu, dan pihak yang terlibat..."
             className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 h-28 md:h-32 text-xs md:text-sm text-black"
             required
           />
@@ -115,6 +116,7 @@ export default function SecurityForm({
               name="reported_personnel_name"
               value={formData.reported_personnel_name}
               onChange={handleChange}
+              placeholder={isSecurityPersonnel ? "Contoh: Satpam PT Keamanan Sejahtera" : "Contoh: PT Jasa Pengamanan Indonesia"}
               className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 text-xs md:text-sm text-black"
               required
             />
@@ -139,6 +141,7 @@ export default function SecurityForm({
               name="location"
               value={formData.location}
               onChange={handleChange}
+              placeholder="Contoh: Jl. Sudirman No. 10, Kota Bandung"
               className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 text-xs md:text-sm text-black"
               required
             />
@@ -163,6 +166,7 @@ export default function SecurityForm({
             name="related_company"
             value={formData.related_company}
             onChange={handleChange}
+            placeholder="Contoh: PT Pemberi Kerja Security"
             className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-400 focus:border-blue-400 text-xs md:text-sm text-black"
             required
           />

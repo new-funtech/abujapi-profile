@@ -29,6 +29,7 @@ export function useNews(initialPage: number = 1, perPage: number = 10): UseNewsR
     try {
       setLoading(true);
       const response = await fetch(`https://admin.bpdabujapijabar.or.id/api/news-list?page=${page}&per_page=${perPage}`);
+      // const response = await fetch(`http://127.0.0.1:8000/api/news-list?page=${page}&per_page=${perPage}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch news');
@@ -109,7 +110,7 @@ export function useNewsDetail(slug: string) {
     async function fetchNewsDetail() {
       try {
         setLoading(true);
-        const response = await fetch(`https://admin.bpdabujapijabar.or.id/api/show-news/${slug}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/show-news/${slug}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch news detail');

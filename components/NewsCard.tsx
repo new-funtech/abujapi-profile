@@ -35,6 +35,8 @@ export default function NewsCard({ news, featured = false }: NewsCardProps) {
     if (imageUrl.startsWith('/')) return imageUrl;
     if (imageUrl.startsWith('http')) return imageUrl;
     return `https://admin.bpdabujapijabar.or.id${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+    // return `http://127.0.0.1:8000${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+    // return `http://127.0.0.1:8000${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
   };
 
   return (

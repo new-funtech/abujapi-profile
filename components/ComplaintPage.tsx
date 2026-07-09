@@ -25,6 +25,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
     reporter_name: "",
     reporter_company: "",
     reporter_phone: "",
+    reporter_email: "",
     reporter_address: "",
     complaint_type: "",
     complaint_content: "",
@@ -184,6 +185,13 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
         "Nomor telepon harus diawali 0 dan berisi 8-15 angka.";
     }
 
+    // Validasi Email
+    if (!formData.reporter_email) {
+      newErrors.reporter_email = "Email Pelapor wajib diisi.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.reporter_email)) {
+      newErrors.reporter_email = "Format email tidak valid.";
+    }
+
     // Validasi Alamat (min 5 karakter, max 200)
     if (!formData.reporter_address) {
       newErrors.reporter_address = "Alamat Pelapor wajib diisi.";
@@ -295,6 +303,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
           reporter_name: "",
           reporter_company: "",
           reporter_phone: "",
+          reporter_email: "",
           reporter_address: "",
           complaint_type: "",
           complaint_content: "",
@@ -403,6 +412,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     name="reporter_name"
                     value={formData.reporter_name}
                     onChange={handleChange}
+                    placeholder="Contoh: Ahmad Sudrajat"
                     className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
                     required
                   />
@@ -429,6 +439,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     name="reporter_company"
                     value={formData.reporter_company}
                     onChange={handleChange}
+                    placeholder="Contoh: PT Keamanan Sejahtera"
                     className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
                     required
                   />
@@ -440,7 +451,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                 </div>
 
                 {/* Nomor HP */}
-                <div className="md:col-span-2">
+                <div>
                   <label
                     htmlFor="reporter_phone"
                     className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
@@ -469,6 +480,35 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                   </p>
                 </div>
 
+                {/* Email */}
+                <div>
+                  <label
+                    htmlFor="reporter_email"
+                    className="font-medium text-gray-700 mb-1 flex items-center text-xs md:text-sm"
+                  >
+                    <svg className="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    Email Pelapor <span className="text-red-500 ml-1">*</span>
+                  </label>
+                  <input
+                    id="reporter_email"
+                    type="email"
+                    name="reporter_email"
+                    value={formData.reporter_email}
+                    onChange={handleChange}
+                    className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 text-xs md:text-sm text-black"
+                    required
+                    placeholder="email@example.com"
+                  />
+                  {errors.reporter_email && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.reporter_email}
+                    </p>
+                  )}
+                </div>
+
                 {/* Alamat */}
                 <div className="md:col-span-2">
                   <label
@@ -483,6 +523,7 @@ export default function ComplaintPage({ isOpen, onClose }: ComplaintPageProps) {
                     name="reporter_address"
                     value={formData.reporter_address}
                     onChange={handleChange}
+                    placeholder="Contoh: Jl. Soekarno Hatta No. 123, Bandung, Jawa Barat"
                     className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-gray-400 focus:border-gray-400 h-20 md:h-24 text-xs md:text-sm text-black"
                     required
                   />
